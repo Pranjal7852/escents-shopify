@@ -1,27 +1,16 @@
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/IMG_1685-removebg-preview.png",
-    "logo_width": 140,
-    "favicon": "shopify:\/\/shop_images\/ench.png",
-    "colors_solid_button_labels": "#ffffff",
-    "colors_accent_1": "#121212",
-    "gradient_accent_1": "",
-    "colors_accent_2": "#334fb4",
-    "gradient_accent_2": "",
-    "colors_text": "#121212",
-    "colors_outline_button_labels": "#121212",
-    "colors_background_1": "#ffffff",
-    "gradient_background_1": "",
-    "colors_background_2": "#f3f3f3",
-    "gradient_background_2": "",
-    "type_header_font": "inter_n8",
-    "heading_scale": 110,
-    "type_body_font": "inter_n4",
+    "logo_width": 90,
+    "type_header_font": "assistant_n4",
+    "heading_scale": 100,
+    "type_body_font": "assistant_n4",
     "body_scale": 100,
     "page_width": 1200,
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
+    "animations_reveal_on_scroll": true,
+    "animations_hover_elements": "none",
     "buttons_border_thickness": 1,
     "buttons_border_opacity": 100,
     "buttons_radius": 0,
@@ -93,7 +82,7 @@
     "popup_border_thickness": 1,
     "popup_border_opacity": 10,
     "popup_corner_radius": 0,
-    "popup_shadow_opacity": 0,
+    "popup_shadow_opacity": 5,
     "popup_shadow_horizontal_offset": 0,
     "popup_shadow_vertical_offset": 4,
     "popup_shadow_blur": 5,
@@ -107,12 +96,11 @@
     "badge_corner_radius": 40,
     "sale_badge_color_scheme": "accent-2",
     "sold_out_badge_color_scheme": "inverse",
-    "accent_icons": "text",
     "brand_headline": "",
-    "brand_description": "<p>MOST SEARCHED KEYWORDS<\/p><p>Best Perfume for Men<br\/>Perfume for Men Long Lasting Perfume for Men Perfume Gift Set Best Perfume for<br\/>Men Under 500 Luxury Perfume Luxury Perfume for Mens Perfume for Women Unisex<br\/>Perfume Ladies Perfume Best Unisex Fragrances Best Perfume for Women Perfume<br\/>for Girls Perfume Gift Set for Women Long Lasting Perfume for Women Mini<br\/>Perfume Set Women Perfume Gift Set Best Perfume for Women under 500 Mens<br\/>Fragrance Perfume for Him Best Luxury Perfume for Men Luxury Perfume for Men<br\/>Popular Mens Cologne Unisex Scents Best Gender Neutral Fragrances Mini Perfume<br\/>Set Pocket Perfume for Men Pocket Perfume for Women  Gift Set for Women Gift Set for Men Pocket<br\/>Perfume for Men Pocket Perfume for Women Best Perfume for Men Under 500<\/p>",
+    "brand_description": "<p><\/p>",
     "brand_image_width": 100,
-    "social_facebook_link": "https:\/\/www.facebook.com\/profile.php?id=100089192964406",
-    "social_instagram_link": "https:\/\/instagram.com\/escents.in?igshid=YmMyMTA2M2Y=",
+    "social_facebook_link": "",
+    "social_instagram_link": "",
     "social_youtube_link": "",
     "social_tiktok_link": "",
     "social_twitter_link": "",
@@ -128,9 +116,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
-    "checkout_logo_image": "shopify:\/\/shop_images\/IMG_1685-removebg-preview.png",
-    "checkout_logo_position": "center",
-    "checkout_logo_size": "medium",
+    "cart_color_scheme": "background-1",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -145,33 +131,60 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
-    "blocks": {
-      "6530966394998176969": {
-        "type": "shopify:\/\/apps\/dc-pre-orders-preorder-now\/blocks\/preorder-app-embed\/31798c03-8451-4b34-b6bd-53a41ce1a967",
-        "disabled": false,
+    "color_schemes": {
+      "background-1": {
         "settings": {
-          "preorder-button-text": "Pre-order",
-          "preorder-now-button-text": "Pre-order now",
-          "preorder-ended-button-text": "Pre-order ended",
-          "preorder-with-button-text": "Pre-order with",
-          "shipping-policy-date-format": "%B %e, %Y",
-          "shipping-policy-text": "Expected to ship by {ship_date}",
-          "shipping-policy-colour": "#333333"
+          "background": "#FFFFFF",
+          "background_gradient": "",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#FFFFFF",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
         }
       },
-      "15683396631634586217": {
-        "type": "shopify:\/\/apps\/inbox\/blocks\/chat\/841fc607-4181-4ad1-842d-e24d7f8bad6b",
-        "disabled": false,
+      "background-2": {
         "settings": {
-          "button_color": "#202a36",
-          "button_icon": "chat_bubble",
-          "button_text": "no_text",
-          "button_horizontal_position": "bottom_right",
-          "button_vertical_position": "lowest",
-          "greeting_message": "👋 Hi, message us with any questions. We're happy to help!"
+          "background": "#F3F3F3",
+          "background_gradient": "",
+          "text": "#121212",
+          "button": "#121212",
+          "button_label": "#F3F3F3",
+          "secondary_button_label": "#121212",
+          "shadow": "#121212"
+        }
+      },
+      "inverse": {
+        "settings": {
+          "background": "#242833",
+          "background_gradient": "",
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#000000",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#121212"
+        }
+      },
+      "accent-1": {
+        "settings": {
+          "background": "#121212",
+          "background_gradient": "",
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#121212",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#121212"
+        }
+      },
+      "accent-2": {
+        "settings": {
+          "background": "#334FB4",
+          "background_gradient": "",
+          "text": "#FFFFFF",
+          "button": "#FFFFFF",
+          "button_label": "#334FB4",
+          "secondary_button_label": "#FFFFFF",
+          "shadow": "#121212"
         }
       }
     }
@@ -179,17 +192,63 @@
   "presets": {
     "Default": {
       "logo_width": 90,
-      "colors_solid_button_labels": "#ffffff",
-      "colors_accent_1": "#121212",
-      "gradient_accent_1": "",
-      "colors_accent_2": "#334fb4",
-      "gradient_accent_2": "",
-      "colors_text": "#121212",
-      "colors_outline_button_labels": "#121212",
-      "colors_background_1": "#ffffff",
-      "gradient_background_1": "",
-      "colors_background_2": "#f3f3f3",
-      "gradient_background_2": "",
+      "color_schemes": {
+        "background-1": {
+          "settings": {
+            "background": "#FFFFFF",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "background-2": {
+          "settings": {
+            "background": "#F3F3F3",
+            "background_gradient": "",
+            "text": "#121212",
+            "button": "#121212",
+            "button_label": "#F3F3F3",
+            "secondary_button_label": "#121212",
+            "shadow": "#121212"
+          }
+        },
+        "inverse": {
+          "settings": {
+            "background": "#242833",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#000000",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "accent-1": {
+          "settings": {
+            "background": "#121212",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#121212",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        },
+        "accent-2": {
+          "settings": {
+            "background": "#334FB4",
+            "background_gradient": "",
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#334FB4",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#121212"
+          }
+        }
+      },
       "type_header_font": "assistant_n4",
       "heading_scale": 100,
       "type_body_font": "assistant_n4",
@@ -198,6 +257,8 @@
       "spacing_sections": 0,
       "spacing_grid_horizontal": 8,
       "spacing_grid_vertical": 8,
+      "animations_reveal_on_scroll": true,
+      "animations_hover_elements": "none",
       "buttons_border_thickness": 1,
       "buttons_border_opacity": 100,
       "buttons_radius": 0,
@@ -269,7 +330,7 @@
       "popup_border_thickness": 1,
       "popup_border_opacity": 10,
       "popup_corner_radius": 0,
-      "popup_shadow_opacity": 0,
+      "popup_shadow_opacity": 5,
       "popup_shadow_horizontal_offset": 0,
       "popup_shadow_vertical_offset": 4,
       "popup_shadow_blur": 5,
@@ -283,7 +344,6 @@
       "badge_corner_radius": 40,
       "sale_badge_color_scheme": "accent-2",
       "sold_out_badge_color_scheme": "inverse",
-      "accent_icons": "text",
       "brand_headline": "",
       "brand_description": "<p><\/p>",
       "brand_image_width": 100,
@@ -304,6 +364,7 @@
       "show_vendor": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",
+      "cart_color_scheme": "background-1",
       "sections": {
         "main-password-header": {
           "type": "main-password-header",
