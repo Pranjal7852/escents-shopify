@@ -35,6 +35,13 @@
 <div
   class="my-hero-banner"
 >
+  {% comment %} <iframe 
+    class="bg-video"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1&playlist=dQw4w9WgXcQ"
+    frameBorder="0"
+    allowFullScreen
+    allow="autoplay"
+  /> {% endcomment %}
   <div class="hero_banner_inner">
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
@@ -42,12 +49,12 @@
         {%- case block.type -%}
           {%- when 'heading' -%}
             <h2
-              class="banner__heading inline-richtext {{ block.settings.heading_size }}"
+              class="banner__heading inline-richtext {{ block.settings.heading_size }} font-[DM Sans]"
               {{ block.shopify_attributes }}
             >
               Essential scents for your daily needs.
             </h2>
-            <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+            <div class="font-[DM Sans] banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
               <p>Indulge your senses with our curated collection of exquisite perfumes for everyone. Elevate your essence, find your signature Escent.</p>
             </div>
           {%- when 'buttons' -%}
@@ -62,7 +69,7 @@
                   {% else %}
                     href="{{ block.settings.button_link_1 }}"
                   {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
+                  class="font-[DM Sans] bg-white rounded text-black button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
                 >
                   {{- block.settings.button_label_1 | escape -}}
                 </a>
