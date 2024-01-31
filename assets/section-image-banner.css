@@ -482,14 +482,14 @@
 .my-banner{
   width: 100%;
   background-image: url(https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156); 
-  height: 100vh;
+  height: 150vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center
 
 }
 .my-banner-inner{
-  height: 100vh;
+  height: 150vh;
   display: flex;
   
   flex-direction: column;
@@ -539,16 +539,10 @@
 .my-banner-inner-bottom-text{
   color: var(--Grey-200, #E5E7EA);
   text-align: center;
-  leading-trim: both;
-  text-edge: cap;
   font-variant-numeric: lining-nums proportional-nums;
   font-feature-settings: 'dlig' on;
-  font-family: "General Sans";
-  font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 110%; /* 19.8px */
-  letter-spacing: 0.18px;
 }
 .my_shop_now_button{
   display: flex;

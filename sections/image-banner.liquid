@@ -37,7 +37,7 @@
 >
   <div class="hero_banner_inner">
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+    <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
@@ -45,11 +45,10 @@
               class="banner__heading inline-richtext {{ block.settings.heading_size }}"
               {{ block.shopify_attributes }}
             >
-              {{ block.settings.heading }}
+              Essential scents for your daily needs.
             </h2>
-          {%- when 'text' -%}
             <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-              <p>{{ block.settings.text }}</p>
+              <p>Indulge your senses with our curated collection of exquisite perfumes for everyone. Elevate your essence, find your signature Escent.</p>
             </div>
           {%- when 'buttons' -%}
             <div
@@ -87,7 +86,6 @@
   </div>
   </div>
 </div>
-
 <div class="my-banner" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
     {% comment %} <img src="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156"/> {% endcomment %}
   <div class="my-banner-inner">
@@ -95,12 +93,12 @@
           Discover your Escents
       </div>
       <div class="my-banner-inner-bottom">
-        <div class="my-banner-inner-bottom-block">
-          <div class="my-banner-inner-bottom-text">
+        <div class="my-banner-inner-bottom-block ">
+          <div class="my-banner-inner-bottom-text font-['DM Sans'] text-[36px] w-[800px]">
             Explore our exquisite fragrance collection and indulge in a world of captivating scents.
           </div>
           <div>
-            <button class="my_shop_now_button">Shop Now</button>
+            <button class="my_shop_now_button rounded text-black font-['DM Sans']">Shop Now</button>
           </div>
         </div>
         
