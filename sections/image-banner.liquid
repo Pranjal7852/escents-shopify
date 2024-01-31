@@ -42,7 +42,7 @@
     allowFullScreen
     allow="autoplay"
   /> {% endcomment %}
-  <div class="hero_banner_inner">
+  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent">
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
       {%- for block in section.blocks -%}
@@ -93,13 +93,15 @@
   </div>
   </div>
 </div>
-<div class="my-banner" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
+
+<div class="my-banner " background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
     {% comment %} <img src="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156"/> {% endcomment %}
-  <div class="my-banner-inner">
-      <div class="my-banner-inner-top">
+  <div class="my-banner-inner bg-gradient-to-b from-black via-transparent to-black
+                        ">
+      <div class="my-banner-inner-top mt-24">
           Discover your Escents
       </div>
-      <div class="my-banner-inner-bottom">
+      <div class="my-banner-inner-bottom mb-[150px]">
         <div class="my-banner-inner-bottom-block ">
           <div class="my-banner-inner-bottom-text font-['DM Sans'] text-[36px] w-[800px]">
             Explore our exquisite fragrance collection and indulge in a world of captivating scents.
