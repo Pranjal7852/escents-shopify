@@ -49,7 +49,7 @@
                 <p class="text-[16px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone.<br> Elevate your essence, find your signature Escent.</p>
               </div>
             {%- when 'buttons' -%}
-              <div class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+              <div class="lg:mt-[80px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.button_label_1 != blank -%}
                   <a
                     {% if block.settings.button_link_1 == blank %}
@@ -94,7 +94,7 @@
   
 </div>
 
-<div class="bg-black h-[320px] flex justify-center ">
+<div class="bg-black lg:h-[380px] h-[320px] flex justify-center ">
     <div class="flex justify-between align-center w-[80vw] lg:content-end mx-[20px]">
       <div class="text-white flex justify-center flex-col">
         <div class="font-[DM Sans] lg:text-[40px] text-[30px]">
@@ -135,7 +135,7 @@
 
 <div class="my-hero-3 ">
   <div class="flex flex-col h-full justify-between">
-    <div class="m-8 flex justify-between">
+    <div class="m-2 flex justify-between">
       <div class="font-[DM Sans] font-bold text-[18px]">
         Escents Corp. Ltd
       </div>
@@ -151,8 +151,15 @@
         </div>
       </div>
     </div>
-    <div class="lg:w-[324px] lg:ml-[150px] text-white font-[DM Sans] font-bold text-[18px] text-center w-[100%] mt-[220px]">
-      Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
+    <div class="text-allure lg:ml-[50px] mt-[220px] lg:w-[425px] w-[100%]">
+      <div class="lg:w-[324px] text-white font-[DM Sans] font-bold text-[18px] w-[100%] lg:ml-[60px] lg:mt-[20px]">
+        Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
+      </div>
+    </div>
+    <div class="flex justify-center">
+      <div class="mt-[15px]">
+          <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white ">Shop Now</button>
+      </div>
     </div>
     <div class="font-bold text-[18px] text-right m-[20px] font-[DM Sans]">
       All Rights Reserved.

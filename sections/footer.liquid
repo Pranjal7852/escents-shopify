@@ -30,7 +30,7 @@
 <footer class="">
   <div class="flex lg:ml-[150px]">
       <div class="flex flex-col w-[500px] mx-[20px]">
-        <div class="font-[General Sans] text-[24px] lg:text-[36px] text-black">
+        <div class="font-[General Sans] text-[24px] lg:text-[36px] text-black font-bold">
           Sign up to our newsletter. 
         </div>
         <div class="text-black text-[14px] ">
@@ -42,13 +42,13 @@
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="border-4 rounded-[40px] lg:w-[328px] py-[10px] w-[100%] px-[50px]"
+                      class="border-4 rounded-[40px] lg:w-[328px] py-[10px] w-[100%] px-[10px]"
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
                       autocapitalize="off"
                       autocomplete="email"
-                      placeholder="&nbsp; &nbsp; &nbsp; Email"
+                      placeholder="Email"
                       {% if form.errors %}
                         autofocus
                         aria-invalid="true"
@@ -62,15 +62,6 @@
                     <label class="field__label" for="NewsletterForm--{{ section.id }}">
                       {{ 'newsletter.label' | t }}
                     </label>
-                    <button
-                      type="submit"
-                      class="newsletter-form__button field__button"
-                      name="commit"
-                      id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
-                    >
-                      {% render 'icon-arrow' %}
-                    </button>
                   </div>
                   <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0"> Subscribe </button>
                   </div>
@@ -100,7 +91,7 @@
           </div>
           <div class="text-white font-[General Sans] mb-[16px]">
             <div class="flex">
-              <img src={{ 'email_svg.svg' |  asset_url }} class="mx-[4px]"/>&nbsp; shop@escents.in
+              <img src={{ 'email_svg.svg' |  asset_url }} class=""/> shop@escents.in
             </div>
           </div>
         </div>

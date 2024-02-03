@@ -88,7 +88,6 @@
   overflow: hidden;
   /* Fix for Safari border bug on hover */
   z-index: 0;
-  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
 }
 
 .card--card .card__inner .card__media {
@@ -118,6 +117,7 @@
 .card__media {
   margin: var(--image-padding);
   width: calc(100% - 2 * var(--image-padding));
+  height: 329px;
 }
 
 .card--standard .card__media {
@@ -126,6 +126,7 @@
 
 .card__inner {
   width: 100%;
+  height: 329px;
 }
 
 .card--media .card__inner .card__content {

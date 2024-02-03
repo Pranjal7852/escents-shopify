@@ -816,7 +816,7 @@
       }
     },
     "featured-product": {
-      "name": "Featured product",
+      "name": "New Arrivals",
       "blocks": {
         "text": {
           "name": "Text",
