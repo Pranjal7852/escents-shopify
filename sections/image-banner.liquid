@@ -32,6 +32,116 @@
   endif
 -%}
 
+{% comment %} hero button modal  {% endcomment %}
+<!-- Main modal -->
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
+            <!-- Modal header -->
+            <div class="flex justify-center flex-col">
+              <button class="flex justify-end m-8" data-modal-hide="default-modal">{{ 'cross.svg' | asset_url | img_tag }}</button>
+              <div class="font-[General Sans] text-[18px] text-center font-bold ">Find Your Escent</div>
+              
+              <div class="flex my-4">
+
+                <div class="flex flex-col justify-center w-[90%]">
+                  <div class="w-[90%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center">
+                    <div class="h-2.5 rounded-full" ></div>
+                  </div>
+                </div>
+                <div id="progress_selector mr-[10px]" class="">
+                  1/2
+                </div>
+              </div>
+
+              <div id="page_1">
+                <div id="to_hide">
+                  <div id="text_1" class="text-[14px] font-[General Sans] text-[14px] font-bold text-center" >Occasion</div>
+                  <div id="text_2" class="text-[14px] font-[General Sans] text-[14px] text-center">Please select your Occasion</div>
+                  <div id="text_3" class="px-[20px]">
+                    <div id="option_1" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[General Sans] mt-6" >Dailywear</div>
+                    <div id="option_2" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[General Sans] mt-6" >Partywear</div>
+                    <div id="option_3" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[General Sans] mt-6" >Traditional/Occasional</div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%  javascript  %} 
+  let selectedPage1option=null
+  document.getElementById("option_1").addEventListener('click',(e)=>{loadPage2(e)})
+  document.getElementById("option_2").addEventListener('click',(e)=>{loadPage2(e)})
+  document.getElementById("option_3").addEventListener('click',(e)=>{loadPage2(e)})
+  function loadPage2(e){
+    let m={
+      "Dailywear":{
+        "Fresh":[
+          "Crest"
+        ],
+        "Floral":[
+          "Mirage"
+        ],
+        "Woody":[
+          "Eclipse"
+        ]
+
+      },
+      "Partywear":{
+        "Fresh":["Crest","Elixer"],
+        "Floral":["Aura","Elixer"],
+        "Woody":["Tuxedo","Elixer"]
+      },
+      "Traditional/Occasional":{
+        "Fresh":["Serenade","Auram"],
+        "Floral":["Aura","Auram"],
+        "Woody":["Tuxedo","Auram"]
+      }
+    }
+    if(selectedPage1option==null){
+      selectedPage1option = e.srcElement.innerText
+    }
+    console.log("ep1o",selectedPage1option,e)
+    let recomendation_array=null
+
+    if(document.getElementById("option_1").innerHTML=="Dailywear"){//on page 1
+      document.getElementById("option_1").innerHTML="Fresh"
+      document.getElementById("option_2").innerHTML="Floral"
+      document.getElementById("option_3").innerHTML="Woody"
+      document.getElementById("text_1").innerHTML="Vibe"
+      document.getElementById("text_2").innerHTML="Please Select Your Vibe"
+      
+    }else if(selectedPage1option!=null){//page 2 recoment final
+      recomendation_array=m[selectedPage1option][e.srcElement.innerText]
+    }
+
+    if(recomendation_array!=null){
+      t1="Your perfect picks: Aurum and Tuxedo. Take your pick or enjoy both for a personalized scent journey!"
+      t2="Click below to Buy Now!"
+
+      let childarray=document.createElement('div')
+      childarray.classList.add("flex","flex-col")
+      for(let i=0;i<recomendation_array.length;i++){
+        let e = document.createElement('div')
+        e.classList.add("text-[14px]", "text-center")
+        e.innerHTML=recomendation_array[i]
+        childarray.appendChild(e)
+        
+      }
+      document.getElementById("page_1").appendChild(childarray)
+      document.getElementById("to_hide").classList.add("hidden")
+
+    }
+    
+    console.log(recomendation_array)
+  }
+{% endjavascript %} 
+
 <div class="my-hero-banner">
   <video preload="true" muted loop playsinline autoplay>
     <source src="{{ 'hero_bg_escents.mp4' | asset_url }}" type="video/mp4">
@@ -51,16 +161,17 @@
             {%- when 'buttons' -%}
               <div class="lg:mt-[80px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.button_label_1 != blank -%}
-                  <a
+                  <button
+                    data-modal-target="default-modal" data-modal-toggle="default-modal"
+                    type="button"
                     {% if block.settings.button_link_1 == blank %}
                     role="link"
                     aria-disabled="true"
                     {% else %}
-                    href="{{ block.settings.button_link_1 }}"
                     {% endif %}
                     class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] bg-white text-black ">
                     {{- block.settings.button_label_1 | escape -}}
-                  </a>
+                  </button>
                 {%- endif -%}
                 
               </div>
