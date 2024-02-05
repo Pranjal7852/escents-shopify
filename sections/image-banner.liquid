@@ -34,7 +34,7 @@
 
 {% comment %} hero button modal  {% endcomment %}
 <!-- Main modal -->
-<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70">
     <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center">
         <!-- Modal content -->
         <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
@@ -46,11 +46,11 @@
               <div class="flex my-4">
 
                 <div class="flex flex-col justify-center w-[90%]">
-                  <div class="w-[90%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center">
+                  <div id="progress"class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500">
                     <div class="h-2.5 rounded-full" ></div>
                   </div>
                 </div>
-                <div id="progress_selector mr-[10px]" class="">
+                <div id="progress_selector" class="mr-[10px]">
                   1/2
                 </div>
               </div>
@@ -105,6 +105,8 @@
     }
     if(selectedPage1option==null){
       selectedPage1option = e.srcElement.innerText
+      document.getElementById("progress_selector").innerHTML="2/2"
+      document.getElementById("progress").style.width="50%"
     }
     console.log("ep1o",selectedPage1option,e)
     let recomendation_array=null
@@ -118,6 +120,7 @@
       
     }else if(selectedPage1option!=null){//page 2 recoment final
       recomendation_array=m[selectedPage1option][e.srcElement.innerText]
+      document.getElementById("progress").style.width="90%"
     }
 
     if(recomendation_array!=null){
@@ -159,7 +162,7 @@
                 <p class="text-[16px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone.<br> Elevate your essence, find your signature Escent.</p>
               </div>
             {%- when 'buttons' -%}
-              <div class="lg:mt-[80px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+              <div class="lg:mt-[80px] mt-[20px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
                 {%- if block.settings.button_label_1 != blank -%}
                   <button
                     data-modal-target="default-modal" data-modal-toggle="default-modal"
