@@ -155,11 +155,11 @@
         {%- for block in section.blocks -%}
           {%- case block.type -%}
             {%- when 'heading' -%}
-              <h2 class="banner__heading inline-richtext {{ block.settings.heading_size }} font-[DM Sans]" {{ block.shopify_attributes }}>
+              <div class="banner__heading inline-richtext lg:text-[45px] text-[30px] font-[DM Sans] font-bold">
                 Essential scents for your daily needs.
-              </h2>
+              </div>
               <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-                <p class="text-[16px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone.<br> Elevate your essence, find your signature Escent.</p>
+                <p class="lg:text-[22px] text-[12px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone.<br> Elevate your essence, find your signature Escent.</p>
               </div>
             {%- when 'buttons' -%}
               <div class="lg:mt-[80px] mt-[20px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
@@ -172,8 +172,8 @@
                     aria-disabled="true"
                     {% else %}
                     {% endif %}
-                    class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] bg-white text-black ">
-                    {{- block.settings.button_label_1 | escape -}}
+                    class="font-[General Sans] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-white text-black ">
+                    Get Now
                   </button>
                 {%- endif -%}
                 
@@ -186,18 +186,17 @@
 </div>
 
 <div class="my-banner flex flex-col" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
-  {% comment %} <img src="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156"/> {% endcomment %}
   <div class="my-banner-inner bg-gradient-to-b from-black via-transparent to-black
                         ">
-    <div class="my-banner-inner-top mt-24 text-[48px]">
+    <div class="my-banner-inner-top mt-[50px] text-[48px]">
       Discover your Escent.
     </div>
     <div class="my-banner-inner-bottom mb-[40px]">
       <div class="my-banner-inner-bottom-block ">
-        <div class="my-banner-inner-bottom-text font-['General Sans'] text-[20px] lg:w-[800px] mx-[50px]">
+        <div class="my-banner-inner-bottom-text font-['General Sans'] lg:text-[20px] text-[12px] lg:w-[800px] mx-[50px] leading-[19.9px]">
           Explore our exquisite fragrance collection and <br>indulge in a world of captivating scents.
         </div>
-        <div class="mt-[15px]">
+        <div class="mt-[40px]">
           <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white ">Shop Now</button>
         </div>
       </div>
@@ -208,27 +207,22 @@
   
 </div>
 
-<div class="bg-black lg:h-[380px] h-[320px] flex justify-center ">
+<div class="bg-black lg:h-[320px] h-[260px] flex justify-center py-[60px]">
     <div class="flex justify-between align-center w-[80vw] lg:content-end mx-[20px]">
       <div class="text-white flex justify-center flex-col">
-        <div class="font-[DM Sans] lg:text-[40px] text-[30px]">
+        <div class="font-[DM Sans] lg:text-[40px] text-[30px] lg:leading-[33px] leading-[25px]">
 
-          New Month.
-        </div>
-        <div class="font-[DM Sans] lg:text-[40px] text-[30px]">
-          New
-          <span class="font-[DM Sans] lg:text-[40px] text-[30px] font-bold">Escent.</span>
+          New Month.<br>
+          New <span class="font-[DM Sans] lg:text-[40px] text-[30px] font-bold">Escent.</span>
 
         </div>
-        <div class="lg:text-[20px] text-[10px] font-[DM Sans]">
+        <div class="lg:text-[20px] text-[14px] font-[DM Sans] mt-[10px]">
 
           Savor the thrill of discovery as we introduce a new, enchanting scent each month.
         </div>
       </div>
-      <div class="flex justify-center flex-col m-[20px]">
+      <div class="flex flex-col lg:mt-[33px] mt-[5px] w-[50px] h-[50px] lg:w-[60px] lg:h-[60px]">
         <svg
-          width="57"
-          height="56"
           viewBox="0 0 57 56"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">
@@ -248,34 +242,34 @@
   </div>
 
 <div class="my-hero-3 ">
-  <div class="flex flex-col h-full justify-between">
+  <div class="flex flex-col h-[100%]  justify-between pb-[20px]">
     <div class="m-2 flex justify-between">
-      <div class="font-[DM Sans] font-bold text-[18px]">
+      <div class="font-[DM Sans] font-bold lg:text-[18px] text-[12px]">
         Escents Corp. Ltd
       </div>
-      <div class="font-[DM Sans] font-bold text-[18px]">
+      <div class="font-[DM Sans] font-bold lg:text-[18px] text-[12px]">
         ///011
       </div>
       <div class="flex flex-col ">
-        <div class="font-[DM Sans] font-bold text-[18px] text-right">
+        <div class="font-[DM Sans] font-bold lg:text-[18px] text-[12px] text-right">
           Code name: Aurum
         </div>
-        <div class="font-[DM Sans] font-bold text-[18px] text-right">
+        <div class="font-[DM Sans] font-bold lg:text-[18px] text-[12px] text-right">
           Sweet, Intense and Spicy
         </div>
       </div>
     </div>
-    <div class="text-allure lg:ml-[50px] mt-[220px] lg:w-[425px] w-[100%]">
-      <div class="lg:w-[324px] text-white font-[DM Sans] font-bold text-[18px] w-[100%] lg:ml-[60px] lg:mt-[20px]">
+    <div class="text-allure lg:ml-[50px] lg:mt-[220px] mt-[295px] lg:w-[425px]">
+      <div class="lg:w-[324px] h-[108px] text-white font-[DM Sans] font-bold lg:text-[18px] text-[14px] w-[100%] lg:ml-[60px] lg:mt-[20px] lg:text-left text-center">
         Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
       </div>
     </div>
     <div class="flex justify-center">
-      <div class="mt-[15px]">
+      <div class="my-[15px]">
           <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white ">Shop Now</button>
       </div>
     </div>
-    <div class="font-bold text-[18px] text-right m-[20px] font-[DM Sans]">
+    <div class="font-bold text-[18px] text-right m-[20px] font-[DM Sans] invisible lg:visible">
       All Rights Reserved.
     </div>
   </div>
