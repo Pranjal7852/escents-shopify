@@ -40,7 +40,7 @@
         <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
             <!-- Modal header -->
             <div class="flex justify-center flex-col">
-              <button class="flex justify-end m-8" data-modal-hide="default-modal">{{ 'cross.svg' | asset_url | img_tag }}</button>
+              <button id="cross"class="flex justify-end m-8" data-modal-hide="default-modal">{{ 'cross.svg' | asset_url | img_tag }}</button>
               <div class="font-[General Sans] text-[18px] text-center font-bold ">Find Your Escent</div>
               
               <div class="flex my-4">
@@ -78,6 +78,26 @@
   document.getElementById("option_1").addEventListener('click',(e)=>{loadPage2(e)})
   document.getElementById("option_2").addEventListener('click',(e)=>{loadPage2(e)})
   document.getElementById("option_3").addEventListener('click',(e)=>{loadPage2(e)})
+  document.getElementById("cross").addEventListener('click',(e)=>{reset(e)})
+  function reset(e){
+    
+    console.log("reset")
+    document.getElementById("option_1").innerHTML="Dailywear"
+    document.getElementById("option_2").innerHTML="Partywear"
+    document.getElementById("option_3").innerHTML="Traditional/Occasional"
+    document.getElementById("text_1").innerHTML="Occasion"
+    document.getElementById("text_2").innerHTML="Please Select your Occasion"
+    document.getElementById("progress").style.width="5%"
+    document.getElementById("progress_selector").innerHTML="1/2"
+
+    let childarray=document.getElementById("childarray")
+    if(childarray!=null){
+      document.getElementById("page_1").removeChild(childarray)
+
+    }
+    document.getElementById("to_hide").classList.remove("hidden")
+    selectedPage1option=null
+  }
   function loadPage2(e){
     let m={
       "Dailywear":{
@@ -128,6 +148,7 @@
       t2="Click below to Buy Now!"
 
       let childarray=document.createElement('div')
+      childarray.setAttribute("id","childarray");
       childarray.classList.add("flex","flex-col")
       for(let i=0;i<recomendation_array.length;i++){
         let e = document.createElement('div')
