@@ -167,10 +167,11 @@
 {% endjavascript %} 
 
 <div class="my-hero-banner">
-  <video preload="true" muted loop playsinline autoplay>
+  <div class="bg-gradient-to-t from-black via-transparent to-transparent h-[100%] w-[100%] absolute z-10">&nbsp;</div>
+  <video preload="true" muted loop playsinline autoplay class="z-0">
     <source src="{{ 'hero_bg_escents.mp4' | asset_url }}" type="video/mp4">
   </video> 
-  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent">
+  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent z-20 relative">
     <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
         {%- for block in section.blocks -%}
@@ -286,7 +287,7 @@
       </div>
     </div>
     <div class="flex justify-center">
-      <div class="lg:mt-[80px]">
+      <div class="lg:mt-[150px]">
           <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white ">Shop Now</button>
       </div>
     </div>
