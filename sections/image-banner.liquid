@@ -167,11 +167,10 @@
 {% endjavascript %} 
 
 <div class="my-hero-banner">
-  <div class="bg-gradient-to-t from-black via-transparent to-transparent h-[100%] w-[100%] absolute z-10">&nbsp;</div>
   <video preload="true" muted loop playsinline autoplay class="z-0">
     <source src="{{ 'hero_bg_escents.mp4' | asset_url }}" type="video/mp4">
   </video> 
-  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent z-20 relative">
+  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent relative">
     <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
         {%- for block in section.blocks -%}
@@ -181,7 +180,7 @@
                 Essential scents for your daily needs.
               </div>
               <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-                <p class="lg:text-[22px] text-[12px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone.<br> Elevate your essence, find your signature Escent.</p>
+                <p class="lg:text-[22px] text-[14px] font-[General Sans]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone. Elevate your essence, find your signature Escent.</p>
               </div>
             {%- when 'buttons' -%}
               <div class="lg:mt-[80px] mt-[20px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
@@ -289,7 +288,7 @@
     <div class="flex flex-col ">
       <div class="flex justify-center">
         <div class="">
-            <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white ">Shop Now</button>
+            <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-black bg-white mb-[8px]">Shop Now</button>
         </div>
       </div>
       <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] invisible lg:visible mr-[200px] ">
