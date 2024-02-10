@@ -26,14 +26,21 @@
     }
   }
 {%- endstyle -%}
+{% javascript  %}  
+  
+  let classes = document.getElementsByClassName("shopify-section")
+  for(let i=0;i<classes.length;i++){
+    classes[i].classList.add("bg-[#FEF5EA]")
+  }
+{% endjavascript %}
 
-<footer class="mt-[100px]">
+<footer class="mt-[100px] bg-[#FEF5EA]">
   <div class="flex lg:ml-[150px]">
       <div class="flex flex-col w-[500px] mx-[20px]">
-        <div class="font-[General Sans] text-[24px] lg:text-[36px] text-black font-bold">
+        <div class="font-[Manrope] text-[24px] lg:text-[36px] text-black font-bold">
           Sign up to our newsletter. 
         </div>
-        <div class="text-black text-[14px] ">
+        <div class="text-black text-[14px] font-[Manrope]">
           Stay in the loop with our newsletter – your passport to the latest scents, exclusive deals, captivating stories, and a sneak peek into what's cooking behind the scenes. Join our fragrance community and embark on a sensory journey with each email.
         </div>
         <div class="flex mt-[40px] mb-[60px] lg:flex-row flex-col">
@@ -42,7 +49,7 @@
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="border-1 rounded-[40px] lg:w-[328px] py-[10px] w-[100%] px-[10px]"
+                      class="border-1 rounded-[40px] lg:w-[328px] py-[10px] w-[100%] px-[10px] text-[14px] lg:text-[18px] font-[Manrope]"
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
@@ -63,58 +70,58 @@
                       {{ 'newsletter.label' | t }}
                     </label>
                   </div>
-                  <button class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0"> Subscribe </button>
+                  <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0"> Subscribe </button>
                   </div>
                   </div>
                   </div>
-    <div class="bg-black h-[600px]">
+    <div class="bg-black h-[640px]">
       <div class="flex flex-col items-center justify-between h-[100%] py-[30px]">
-        <div class="font-[General Sans] text-[48px] text-white font-bold mt-[30px]" >
+        <div class="font-[Manrope] text-[48px] text-white font-bold mt-[30px]" >
           ESCENTS
         </div>
         <div>
           <div class="flex lg:flex-row flex-col text-center my-[10px]">
             <!-- Footer menu -->
             {% for link in linklists['main-menu'].links -%}
-              <div class="text-white lg:mx-[20px] lg:my-[60px] mb-[10px]">
+              <div class="text-white lg:mx-[40px] lg:my-[60px] mb-[10px] font-[Manrope]">
                 {{ link.title | link_to: link.url }}
               </div>
             {%- endfor %}
           </div>
         </div>
         <div class="flex flex-col items-center ">
-          <div class="text-white underline font-[General Sans] mb-[16px]">
+          <div class="text-white underline font-[Manrope] mb-[16px] text-[12px]">
             Escents LLP, Anant Apartments, Pune, MH - 411038
           </div>
           <div class="flex mb-6">
-            <a class="text-white m-2" href="https://instagram.com/escents.in?igshid=YmMyMTA2M2Y=" target="_blank">
+            <a class="text-white m-2 pr-[25px]" href="https://instagram.com/escents.in?igshid=YmMyMTA2M2Y=" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
-<g clip-path="url(#clip0_474_310)">
-<path d="M22.967 0H10.033C4.77647 0 0.5 4.27647 0.5 9.53297V22.467C0.5 27.7235 4.77647 32 10.033 32H22.967C28.2235 32 32.5 27.7235 32.5 22.467V9.53297C32.4999 4.27647 28.2235 0 22.967 0ZM29.2808 22.467C29.2808 25.954 26.454 28.7808 22.967 28.7808H10.033C6.546 28.7808 3.7192 25.954 3.7192 22.467V9.53297C3.7192 6.04594 6.546 3.2192 10.033 3.2192H22.967C26.454 3.2192 29.2808 6.04594 29.2808 9.53297V22.467Z" fill="#D9D9D9"/>
-<path d="M16.5 7.72363C11.9364 7.72363 8.22363 11.4364 8.22363 15.9999C8.22363 20.5634 11.9364 24.2763 16.5 24.2763C21.0636 24.2763 24.7763 20.5635 24.7763 15.9999C24.7763 11.4363 21.0636 7.72363 16.5 7.72363ZM16.5 21.0571C13.707 21.0571 11.4428 18.793 11.4428 16C11.4428 13.207 13.707 10.9428 16.5 10.9428C19.293 10.9428 21.5571 13.207 21.5571 16C21.5571 18.7929 19.2929 21.0571 16.5 21.0571Z" fill="white"/>
-<path d="M24.7923 9.7691C25.8875 9.7691 26.7754 8.8812 26.7754 7.78592C26.7754 6.69064 25.8875 5.80273 24.7923 5.80273C23.697 5.80273 22.8091 6.69064 22.8091 7.78592C22.8091 8.8812 23.697 9.7691 24.7923 9.7691Z" fill="white"/>
-</g>
-<defs>
-<clipPath id="clip0_474_310">
-<rect width="32" height="32" fill="white" transform="translate(0.5)"/>
-</clipPath>
-</defs>
-</svg>
+              <g clip-path="url(#clip0_474_310)">
+              <path d="M22.967 0H10.033C4.77647 0 0.5 4.27647 0.5 9.53297V22.467C0.5 27.7235 4.77647 32 10.033 32H22.967C28.2235 32 32.5 27.7235 32.5 22.467V9.53297C32.4999 4.27647 28.2235 0 22.967 0ZM29.2808 22.467C29.2808 25.954 26.454 28.7808 22.967 28.7808H10.033C6.546 28.7808 3.7192 25.954 3.7192 22.467V9.53297C3.7192 6.04594 6.546 3.2192 10.033 3.2192H22.967C26.454 3.2192 29.2808 6.04594 29.2808 9.53297V22.467Z" fill="#D9D9D9"/>
+              <path d="M16.5 7.72363C11.9364 7.72363 8.22363 11.4364 8.22363 15.9999C8.22363 20.5634 11.9364 24.2763 16.5 24.2763C21.0636 24.2763 24.7763 20.5635 24.7763 15.9999C24.7763 11.4363 21.0636 7.72363 16.5 7.72363ZM16.5 21.0571C13.707 21.0571 11.4428 18.793 11.4428 16C11.4428 13.207 13.707 10.9428 16.5 10.9428C19.293 10.9428 21.5571 13.207 21.5571 16C21.5571 18.7929 19.2929 21.0571 16.5 21.0571Z" fill="white"/>
+              <path d="M24.7923 9.7691C25.8875 9.7691 26.7754 8.8812 26.7754 7.78592C26.7754 6.69064 25.8875 5.80273 24.7923 5.80273C23.697 5.80273 22.8091 6.69064 22.8091 7.78592C22.8091 8.8812 23.697 9.7691 24.7923 9.7691Z" fill="white"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_474_310">
+              <rect width="32" height="32" fill="white" transform="translate(0.5)"/>
+              </clipPath>
+              </defs>
+              </svg>
             </a>
-            <a class="text-white m-2"  target="_blank" href="https://www.facebook.com/profile.php?id=100089192964406">
+            <a class="text-white m-2 pr-[25px]"  target="_blank" href="https://www.facebook.com/profile.php?id=100089192964406">
               <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
-            <g clip-path="url(#clip0_474_315)">
-            <path d="M28.5 0H4.5C2.294 0 0.5 1.794 0.5 4V28C0.5 30.206 2.294 32 4.5 32H28.5C30.706 32 32.5 30.206 32.5 28V4C32.5 1.794 30.706 0 28.5 0Z" fill="white"/>
-            <path d="M27.5 16H22.5V12C22.5 10.896 23.396 11 24.5 11H26.5V6H22.5C19.186 6 16.5 8.686 16.5 12V16H12.5V21H16.5V32H22.5V21H25.5L27.5 16Z" fill="black"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_474_315">
-            <rect width="32" height="32" fill="white" transform="translate(0.5)"/>
-            </clipPath>
-            </defs>
-            </svg>
-            </a>
-            <a class="text-white m-2" href="https://www.linkedin.com/company/escents-india/?miniCompanyUrn=urn%3Ali%3Afs_miniCompany%3A92849067&lipi=urn%3Ali%3Apage%3Ad_flagship3_company_admin%3BnO5%2BImGmQ1WqgVobLnj4lg%3D%3D" target="_blank">
+              <g clip-path="url(#clip0_474_315)">
+              <path d="M28.5 0H4.5C2.294 0 0.5 1.794 0.5 4V28C0.5 30.206 2.294 32 4.5 32H28.5C30.706 32 32.5 30.206 32.5 28V4C32.5 1.794 30.706 0 28.5 0Z" fill="white"/>
+              <path d="M27.5 16H22.5V12C22.5 10.896 23.396 11 24.5 11H26.5V6H22.5C19.186 6 16.5 8.686 16.5 12V16H12.5V21H16.5V32H22.5V21H25.5L27.5 16Z" fill="black"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_474_315">
+              <rect width="32" height="32" fill="white" transform="translate(0.5)"/>
+              </clipPath>
+              </defs>
+              </svg>
+              </a>
+            <a class="text-white m-2 pr-[25px]" href="https://www.linkedin.com/company/escents-india/?miniCompanyUrn=urn%3Ali%3Afs_miniCompany%3A92849067&lipi=urn%3Ali%3Apage%3Ad_flagship3_company_admin%3BnO5%2BImGmQ1WqgVobLnj4lg%3D%3D" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
               <g clip-path="url(#clip0_474_319)">
               <path d="M28.1364 0H4.86364C2.45367 0 0.5 1.95367 0.5 4.36364V27.6364C0.5 30.0463 2.45367 32 4.86364 32H28.1364C30.5463 32 32.5 30.0463 32.5 27.6364V4.36364C32.5 1.95367 30.5463 0 28.1364 0Z" fill="white"/>
@@ -127,27 +134,27 @@
               </defs>
               </svg>
             </a>
-            <a class="text-white flex flex-col justify-center m-2" href="https://www.youtube.com/channel/UCZ_owEMVuFdGFizTftCjqaA" target="_blank">
+            <a class="text-white flex flex-col justify-center m-2 pr-[25px]" href="https://www.youtube.com/channel/UCZ_owEMVuFdGFizTftCjqaA" target="_blank">
               {% comment %} youtube {% endcomment %}
               <svg xmlns="http://www.w3.org/2000/svg" width="33" height="24" viewBox="0 0 33 24" fill="none">
               <path d="M25.854 0.678223H7.14599C3.47551 0.678223 0.5 3.65373 0.5 7.32421V16.6762C0.5 20.3467 3.47551 23.3222 7.14599 23.3222H25.854C29.5245 23.3222 32.5 20.3467 32.5 16.6762V7.32421C32.5 3.65373 29.5245 0.678223 25.854 0.678223ZM21.3594 12.4552L12.609 16.6286C12.3759 16.7398 12.1065 16.5698 12.1065 16.3115V7.70391C12.1065 7.44194 12.3829 7.27215 12.6166 7.39057L21.3669 11.8248C21.6271 11.9566 21.6226 12.3297 21.3594 12.4552Z" fill="white"/>
               </svg>
             </a>
           </div>
-          <div class="text-white font-[General Sans] mb-[16px]">
+          <div class="text-white font-[Manrope] mb-[16px] mt-[24px]">
             <div class="flex">
             <img src={{ 'phone_svg.svg' |  asset_url }} class="mx-[6px]"/>+91 9307189847
             </div>
           </div>
-          <div class="text-white font-[General Sans] mb-[16px]">
+          <div class="text-white font-[Manrope] mb-[24px]">
             <div class="flex">
-              <img src={{ 'email_svg.svg' |  asset_url }} class=""/> shop@escents.in
+              <img src={{ 'email_svg.svg' |  asset_url }} class=""/> &nbsp; shop@escents.in
             </div>
           </div>
         </div>
-        <div class="flex items-center flex-col">
-          <div class="text-[#596066]">© Copyright 2024. Escents.</div>
-          <div class="text-[#596066]">All Rights Reserved.</div>
+        <div class="flex items-center flex-col my-[40px]">
+          <div class="text-[#596066] font-[Manrope]">© Copyright 2024. Escents.</div>
+          <div class="text-[#596066] font-[Manrope]">All Rights Reserved.</div>
         </div>
       </div>
     </div>

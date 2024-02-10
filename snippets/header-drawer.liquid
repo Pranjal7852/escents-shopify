@@ -27,7 +27,7 @@
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
-                        class="font-[General Sans] text-[12px] text-right menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                        class="font-[Manrope] text-[12px] text-right menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
                       >
                         {{ link.title | escape }}
                         {% render 'icon-arrow' %}
@@ -50,7 +50,7 @@
                                   <a
                                     id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                     href="{{ childlink.url }}"
-                                    class="font-[General Sans] text-[12px] menu-drawer__menu-item link link--text list-menu__item focus-inset {% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
+                                    class="font-[Manrope] text-[12px] menu-drawer__menu-item link link--text list-menu__item focus-inset {% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                                     {% if childlink.current %}
                                       aria-current="page"
                                     {% endif %}

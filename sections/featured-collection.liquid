@@ -43,8 +43,8 @@
   endif
 -%}
 
-<slider-component class=" flex justify-center flex-col  mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
-  <div class="text-[24px] font-[General Sans] font-bold mb-4 ml-[8px] lg:ml-0">
+<slider-component class=" flex justify-center flex-col ml-[10px] lg:mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
+  <div class="text-[24px] font-[Manrope] font-bold mb-4  lg:ml-0">
 
     New Arrivals
     </div>
@@ -120,10 +120,10 @@
       </button>
     </div>
   {%- endif -%}</slider-component>
-<div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+<div class="center py-[36px] collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   <a
     href="{{ section.settings.collection.url }}"
-    class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]"
+    class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]"
     aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}">
     {{ 'sections.featured_collection.view_all' | t }}
   </a>
@@ -131,8 +131,8 @@
 
 
 
-<slider-component class=" flex justify-center flex-col  mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
-  <div class="text-[24px] font-[General Sans] font-bold mb-4 ml-[8px] lg:ml-0">
+<slider-component class=" flex justify-center flex-col ml-[10px] lg:mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
+  <div class="text-[24px] font-[Manrope] font-bold mb-4 lg:ml-0">
   Top Selling</div>
   <ul
     id="Slider-{{ section.id }}"
@@ -203,10 +203,11 @@
         {% render 'icon-caret' %}
       </button>
     </div>
-  {%- endif -%}</slider-component><div class="center collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  {%- endif -%}</slider-component>
+  <div class="center collection__view-all py-[36px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
   <a
     href="{{ section.settings.collection.url }}"
-    class="font-[General Sans] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]"
+    class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]"
     aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}">
     {{ 'sections.featured_collection.view_all' | t }}
   </a>
