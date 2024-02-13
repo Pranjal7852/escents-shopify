@@ -49,7 +49,7 @@
                       id="NewsletterForm--{{ section.id }}"
                       type="email"
                       name="contact[email]"
-                      class="border-1 rounded-[40px] lg:w-[328px] py-[10px] w-[100%] px-[10px] text-[14px] lg:text-[18px] font-[Manrope]"
+                      class="border-1 rounded-[40px] lg:w-[328px] py-[12px] w-[100%] px-[10px] text-[14px] font-[Manrope] "
                       value="{{ form.email }}"
                       aria-required="true"
                       autocorrect="off"
@@ -70,27 +70,27 @@
                       {{ 'newsletter.label' | t }}
                     </label>
                   </div>
-                  <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0"> Subscribe </button>
+                  <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0  text-[14px]"> Subscribe </button>
                   </div>
                   </div>
                   </div>
-    <div class="bg-black h-[640px]">
+    <div class="bg-black h-[690px]">
       <div class="flex flex-col items-center justify-between h-[100%] py-[30px]">
-        <div class="font-[Manrope] text-[48px] text-white font-bold mt-[30px]" >
+        <div class="font-[Manrope] lg:text-[48px] text-[24px] text-white font-bold mt-[30px] mb-[24px] lg:mb-[0px]" >
           ESCENTS
         </div>
         <div>
-          <div class="flex lg:flex-row flex-col text-center my-[10px]">
+          <div class="flex lg:flex-row flex-col text-center lg:my-[10px]">
             <!-- Footer menu -->
             {% for link in linklists['main-menu'].links -%}
-              <div class="text-white lg:mx-[40px] lg:my-[60px] mb-[10px] font-[Manrope]">
+              <div class="text-white lg:mx-[40px] lg:my-[60px] my-[20px] lg:mb-[10px] font-[Manrope] uppercase text-[14px]">
                 {{ link.title | link_to: link.url }}
               </div>
             {%- endfor %}
           </div>
         </div>
         <div class="flex flex-col items-center ">
-          <div class="text-white underline font-[Manrope] mb-[16px] text-[12px]">
+          <div class="text-white underline font-[Manrope] mb-[28px] text-[14px] my-[28px]">
             Escents LLP, Anant Apartments, Pune, MH - 411038
           </div>
           <div class="flex mb-6">
@@ -141,20 +141,20 @@
               </svg>
             </a>
           </div>
-          <div class="text-white font-[Manrope] mb-[16px] mt-[24px]">
+          <div class="text-white font-[Manrope] mb-[16px] mt-[24px] text-[14px]">
             <div class="flex">
             <img src={{ 'phone_svg.svg' |  asset_url }} class="mx-[6px]"/>+91 9307189847
             </div>
           </div>
-          <div class="text-white font-[Manrope] mb-[24px]">
+          <div class="text-white font-[Manrope] mb-[24px] font-[14px]">
             <div class="flex">
               <img src={{ 'email_svg.svg' |  asset_url }} class=""/> &nbsp; shop@escents.in
             </div>
           </div>
         </div>
-        <div class="flex items-center flex-col my-[40px]">
-          <div class="text-[#596066] font-[Manrope]">© Copyright 2024. Escents.</div>
-          <div class="text-[#596066] font-[Manrope]">All Rights Reserved.</div>
+        <div class="flex items-center flex-col my-[30px]">
+          <div class="text-[#596066] font-[Manrope] text-[14px]">© Copyright 2024. Escents.</div>
+          <div class="text-[#596066] font-[Manrope] text-[14px]">All Rights Reserved.</div>
         </div>
       </div>
     </div>

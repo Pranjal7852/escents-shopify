@@ -55,7 +55,7 @@
                 </div>
               </div>
 
-              <div id="page_1">
+              <div id="page_1" class=" flex flex-col">
                 <div id="to_hide">
                   <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center" >Occasion</div>
                   <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">Please select your Occasion</div>
@@ -79,8 +79,8 @@
   document.getElementById("option_2").addEventListener('click',(e)=>{loadPage2(e)})
   document.getElementById("option_3").addEventListener('click',(e)=>{loadPage2(e)})
   document.getElementById("cross").addEventListener('click',(e)=>{reset(e)})
+
   function reset(e){
-    
     console.log("reset")
     document.getElementById("option_1").innerHTML="Dailywear"
     document.getElementById("option_2").innerHTML="Partywear"
@@ -89,6 +89,18 @@
     document.getElementById("text_2").innerHTML="Please Select your Occasion"
     document.getElementById("progress").style.width="5%"
     document.getElementById("progress_selector").innerHTML="1/2"
+    document.getElementById("progress").classList.remove("hidden")
+    document.getElementById("progress_selector").classList.remove("hidden")
+
+    if(document.getElementById("buy_now_button")!=null){
+      document.getElementById("buy_now_button").remove()
+    }
+    if(document.getElementById("image_container")!=null){
+      document.getElementById("image_container").remove()
+    }
+    if(document.getElementById("text_prompt")!=null){
+      document.getElementById("text_prompt").remove()
+    }
 
     let childarray=document.getElementById("childarray")
     if(childarray!=null){
@@ -98,29 +110,31 @@
     document.getElementById("to_hide").classList.remove("hidden")
     selectedPage1option=null
   }
+  
   function loadPage2(e){
+    //name,image_url,product page
     let m={
       "Dailywear":{
         "Fresh":[
-          "Crest"
+          ["Crest","https://source.unsplash.com/random","https://source.unsplash.com/random"]
         ],
         "Floral":[
-          "Mirage"
+          ["Mirage","https://source.unsplash.com/random",""]
         ],
         "Woody":[
-          "Eclipse"
+          ["Eclipse","https://source.unsplash.com/random",""]
         ]
 
       },
       "Partywear":{
-        "Fresh":["Crest","Elixer"],
-        "Floral":["Aura","Elixer"],
-        "Woody":["Tuxedo","Elixer"]
+        "Fresh":[["Crest","https://source.unsplash.com/random",""],["Elixer","",""]],
+        "Floral":[["Aura","https://source.unsplash.com/random",""],["Elixer","",""]],
+        "Woody":[["Tuxedo","https://source.unsplash.com/random",""],["Elixer","",""]]
       },
       "Traditional/Occasional":{
-        "Fresh":["Serenade","Auram"],
-        "Floral":["Aura","Auram"],
-        "Woody":["Tuxedo","Auram"]
+        "Fresh":[["Serenade","",""],["Auram","",""]],
+        "Floral":[["Aura","",""],["Auram","",""]],
+        "Woody":[["Tuxedo","https://source.unsplash.com/random",""],["Auram","https://source.unsplash.com/random",""]]
       }
     }
     if(selectedPage1option==null){
@@ -128,7 +142,6 @@
       document.getElementById("progress_selector").innerHTML="2/2"
       document.getElementById("progress").style.width="50%"
     }
-    console.log("ep1o",selectedPage1option,e)
     let recomendation_array=null
 
     if(document.getElementById("option_1").innerHTML=="Dailywear"){//on page 1
@@ -144,25 +157,158 @@
     }
 
     if(recomendation_array!=null){
-      t1="Your perfect picks: Aurum and Tuxedo. Take your pick or enjoy both for a personalized scent journey!"
-      t2="Click below to Buy Now!"
 
-      let childarray=document.createElement('div')
-      childarray.setAttribute("id","childarray");
-      childarray.classList.add("flex","flex-col")
-      for(let i=0;i<recomendation_array.length;i++){
-        let e = document.createElement('div')
-        e.classList.add("text-[14px]", "text-center")
-        e.innerHTML=recomendation_array[i]
-        childarray.appendChild(e)
+        console.log(recomendation_array)
+        //global login
+        document.getElementById("progress").classList.add("hidden")
+        document.getElementById("progress_selector").classList.add("hidden")
+        document.getElementById("to_hide").classList.add("hidden")
         
+
+
+      //logic if one or two products are present in end 
+      if(recomendation_array.length==1){
+        let name = recomendation_array[0][0]
+        let product_url=recomendation_array[0][2]
+        let image_url=recomendation_array[0][1]
+        let t="Kudos for selecting "+ selectedPage1option+" perfume, "+name+"! Your scent journey just got a golden touch. 🌲✨"
+
+        let child=document.createElement('div')
+        child.id="text_prompt"
+        child.innerHTML=t
+        child.classList.add("text-center")
+        child.classList.add("text-black")
+        child.classList.add("font-[Manrope]")
+        child.classList.add("text-[14px]")
+        child.classList.add("mx-[8px]")
+        document.getElementById("page_1").appendChild(child)
+
+        let image_container=document.createElement('img')
+        image_container.src=product_url
+        image_container.id="image_container"
+        image_container.classList.add("w-[200px]")
+        image_container.classList.add("h-[200px]")
+        image_container.classList.add("object-fit")
+        image_container.classList.add("mx-auto")
+        image_container.classList.add("rounded-[16px]")
+        image_container.classList.add("m-[6px]")
+        document.getElementById("page_1").appendChild(image_container)
+
+        let buy_button=document.createElement('button')
+        buy_button.textContent="Buy Now"
+        buy_button.id="buy_now_button"
+        buy_button.classList.add("font-[Manrope]")
+        buy_button.classList.add("text-[14px]")
+        buy_button.classList.add("rounded-[40px]")
+        buy_button.classList.add("py-[12px]")
+        buy_button.classList.add("px-[14px]")
+        buy_button.classList.add("text-center")
+        buy_button.classList.add("text-white")
+        buy_button.classList.add("bg-black")
+        buy_button.classList.add("w-[154px]")
+        buy_button.classList.add("mx-auto")
+        document.getElementById("page_1").appendChild(buy_button)
+        buy_button.addEventListener("click",()=>{
+          window.open(product_url)
+        })
+
+
+
+
+      }else{
+        let name_one = recomendation_array[0][0]
+        let product_url_one=recomendation_array[0][2]
+        let image_url_one=recomendation_array[0][1]
+
+        let name_two = recomendation_array[1][0]
+        let product_url_two=recomendation_array[1][2]
+        let image_url_two=recomendation_array[1][1]
+
+        let t="Kudos for selecting "+ selectedPage1option+" perfume, "+name_one + " and "+ name_two+"! Your scent journey just got a golden touch. 🌲✨"
+  
+        let child=document.createElement('div')
+        child.id="text_prompt"
+        child.innerHTML=t
+        child.classList.add("text-center")
+        child.classList.add("text-black")
+        child.classList.add("font-[Manrope]")
+        child.classList.add("text-[14px]")
+        child.classList.add("mx-[8px]")
+        document.getElementById("page_1").appendChild(child)
+
+        let childarray=document.createElement('div')
+        childarray.id="childarray"
+        childarray.classList.add("flex","flex-col","justify-center")
+  
+        //one perfume logic
+        let perfume_one = document.createElement('div')
+        perfume_one.classList.add("text-[14px]", "text-center","flex","justify-between","rounded-[16px]","border","border-black","p-6","m-4")
+        p_image_one=document.createElement("img");
+        p_image_one.src=image_url_one
+        p_image_one.id="p_image_one"
+        p_image_one.classList.add("h-[77px]","w-[77px]","rounded-[16px]")
+        perfume_one.appendChild(p_image_one)
+        let text_one_container=document.createElement("div")
+        text_one_container.innerHTML=name_one
+        text_one_container.classList.add("flex","items-center")
+        perfume_one.appendChild(text_one_container)
+        perfume_one.addEventListener("click",()=>{
+          window.open(product_url_one)
+        })
+
+        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath = document.createElementNS(
+                        'http://www.w3.org/2000/svg',
+                        'path'
+                              );
+                              iconPath.setAttribute(
+                        'd',
+                        "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z"
+                      );
+        iconSvg.setAttribute('viewBox', '0 0 10 17')
+        iconSvg.appendChild(iconPath)
+        iconSvg.classList.add("w-[20px]","h-[20px]","flex","items-center","my-auto")
+        perfume_one.appendChild(iconSvg)
+        childarray.appendChild(perfume_one)
+
+        //perfume 2
+        let perfume_two = document.createElement('div')
+        perfume_two.classList.add("text-[14px]", "text-center","flex","justify-between","rounded-[16px]","border","border-black","p-6","m-4")
+        p_image_two=document.createElement("img");
+        p_image_two.src=image_url_two
+        p_image_two.id="p_image_two"
+        p_image_two.classList.add("h-[77px]","w-[77px]","rounded-[16px]")
+        perfume_two.appendChild(p_image_two)
+        let text_two_container=document.createElement("div")
+        text_two_container.innerHTML=name_two
+        text_two_container.classList.add("flex","items-center")
+        perfume_two.appendChild(text_two_container)
+        perfume_two.addEventListener("click",()=>{
+          window.open(product_url_two)
+        })
+
+        const iconSvg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        const iconPath1 = document.createElementNS(
+                        'http://www.w3.org/2000/svg',
+                        'path'
+                              );
+                              iconPath1.setAttribute(
+                        'd',
+                        "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z"
+                      );
+        iconSvg1.setAttribute('viewBox', '0 0 10 17')
+        iconSvg1.appendChild(iconPath1)
+        iconSvg1.classList.add("w-[20px]","h-[20px]","flex","items-center","my-auto")
+        perfume_two.appendChild(iconSvg1)
+        childarray.appendChild(perfume_two)
+
+
+        
+        document.getElementById("page_1").appendChild(childarray)
+
       }
-      document.getElementById("page_1").appendChild(childarray)
-      document.getElementById("to_hide").classList.add("hidden")
 
     }
-    
-    console.log(recomendation_array)
   }
 {% endjavascript %} 
 
@@ -209,13 +355,13 @@
 <div class="my-banner flex flex-col" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
   <div class="my-banner-inner bg-gradient-to-b from-black via-transparent to-black
                         ">
-    <div class="my-banner-inner-top mt-[50px] text-[48px]">
+    <div class="my-banner-inner-top mt-[50px] text-[30px] lg:text-[48px]">
       Discover your Escent.
     </div>
     <div class="my-banner-inner-bottom mb-[40px]">
       <div class="my-banner-inner-bottom-block ">
-        <div class="my-banner-inner-bottom-text font-['Manrope'] lg:text-[20px] text-[12px] lg:w-[800px] mx-[40px] leading-[19.9px]">
-          Explore our exquisite fragrance collection and <br>indulge in a world of captivating scents.
+        <div class="my-banner-inner-bottom-text font-['Manrope'] lg:text-[20px] text-[14px] lg:w-[800px] mx-[40px] leading-[19.9px]">
+          Explore our exquisite fragrance collection and indulge in a world of captivating scents.
         </div>
         <div class="mt-[40px]">
           <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white text-[14px]">Shop Now</button>
@@ -237,7 +383,7 @@
           New <span class="font-[Manrope] lg:text-[40px] text-[30px] font-bold">ESCENT.</span>
 
         </div>
-        <div class="lg:text-[18px] text-[12px] font-[Manrope] mt-[10px] w-[230px] lg:w-[454px]">
+        <div class="lg:text-[18px] text-[14px] font-[Manrope] mt-[10px] w-[230px] lg:w-[454px] leading-[19.9px]">
 
           Savor the thrill of discovery as we introduce a new, enchanting scent each month.
         </div>
@@ -264,7 +410,7 @@
 
 <div class="my-hero-3 ">
   <div class="flex flex-col h-[95%]  justify-between">
-    <div class="m-2 flex justify-between">
+    <div class="lg:mx-[24px] mx-[16px] flex justify-between">
       <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px]">
         Escents Corp. Ltd
       </div>
@@ -280,8 +426,8 @@
         </div>
       </div>
     </div>
-    <div class="text-allure lg:h-[265px] lg:ml-[50px] lg:mt-[220px] mt-[295px] lg:w-[425px]">
-      <div class="lg:w-[384px] h-[108px] text-white font-[Manrope] font-bold lg:text-[18px] text-[12px] w-[100%] lg:ml-[60px] lg:mt-[20px] lg:text-left text-center">
+    <div class="text-allure lg:h-[280px] lg:ml-[50px] lg:mt-[220px] mt-[295px] lg:w-[440px]">
+      <div class="lg:w-[420px] h-[108px] text-white font-[Manrope] font-bold lg:text-[18px] text-[12px] w-[100%] lg:ml-[60px] lg:mt-[20px] lg:text-left text-center">
         Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
       </div>
     </div>
