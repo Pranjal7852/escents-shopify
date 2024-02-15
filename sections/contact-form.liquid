@@ -14,15 +14,16 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
+<div class="color-{{ section.settings.color_scheme }} gradient  lg:mt-[150px] mt-[100px] flex page-width flex flex-col lg:flex-row">
+  <div class="contact  page-width--narrow section-{{ section.id }}-padding ">
+    <div class="mb-[50px]">
       <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
+        Contact Us
       </h2>
-    {%- else -%}
+      <div class="font-bold">Have a question or just want to say hello? </div>
+      Drop us a message. We'll get back to you shortly, ensuring your queries are addressed with care. We look forward to connecting with you!
+    </div>
       <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
-    {%- endif -%}
     {%- liquid
       assign contact_form_class = 'isolate'
       if settings.animations_reveal_on_scroll
@@ -125,11 +126,26 @@
         </label>
       </div>
       <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
+        <button type="submit" class="button bg-black ">
+          Send Message
         </button>
       </div>
     {%- endform -%}
+  </div>
+  <div class="lg:ml-[50px] mx-auto">
+          <div class="text-[18px] my-[40px]">
+            You can also call us or send us an Email.
+          </div>
+          <div class="text-black font-[Manrope] mb-[16px] mt-[24px] text-[14px]">
+            <div class="flex">
+            <img src={{ 'phone_svg.svg' |  asset_url }} class="mx-[6px]"/>+91 9307189847
+            </div>
+          </div>
+          <div class="text-black font-[Manrope] mb-[24px] font-[14px]">
+            <div class="flex">
+              <img src={{ 'email_svg.svg' |  asset_url }} class=""/> &nbsp; shop@escents.in
+            </div>
+          </div>
   </div>
 </div>
 

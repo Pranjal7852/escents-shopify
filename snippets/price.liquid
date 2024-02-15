@@ -73,12 +73,12 @@
           {%- endunless -%}
         {%- endif -%}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-        <span class="price-item price-item--regular">
+        <span class="price-item price-item--regular text-[14px] text-right">
           {{- 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max -}}
         </span>
       {%- else -%}
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
-        <span class="price-item price-item--regular">
+        <span class="price-item price-item--regular text-[14px] text-right">
           {{ money_price }}
         </span>
       {%- endif -%}
@@ -97,7 +97,7 @@
         </span> {% endcomment %}
       {%- endunless -%}
       <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
-      <span class="price-item price-item--sale price-item--last font-[Manrope] font-bold">
+      <span class="price-item price-item--sale price-item--last font-[Manrope] font-bold text-[14px] text-right">
         {{ money_price }}
       </span>
     </div>

@@ -34,353 +34,500 @@
 
 {% comment %} hero button modal  {% endcomment %}
 <!-- Main modal -->
-<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70">
-    <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
-            <!-- Modal header -->
-            <div class="flex justify-center flex-col">
-              <button id="cross"class="flex justify-end m-8" data-modal-hide="default-modal">{{ 'cross.svg' | asset_url | img_tag }}</button>
-              <div class="font-[Manrope] text-[18px] text-center font-bold ">Find Your Escent</div>
-              
-              <div class="flex my-4">
+<div
+  id="default-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70">
+  <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
+      <!-- Modal header -->
+      <div class="flex justify-center flex-col">
+        <button
+          id="cross"
+          class="flex justify-end m-8"
+          data-modal-hide="default-modal">{{ 'cross.svg' | asset_url | img_tag }}</button>
+        <div class="font-[Manrope] text-[18px] text-center font-bold ">Find Your Escent</div>
 
-                <div class="flex flex-col justify-center w-[90%]">
-                  <div id="progress"class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500">
-                    <div class="h-2.5 rounded-full" ></div>
-                  </div>
-                </div>
-                <div id="progress_selector" class="mr-[10px]">
-                  1/2
-                </div>
-              </div>
+        <div class="flex my-4">
 
-              <div id="page_1" class=" flex flex-col">
-                <div id="to_hide">
-                  <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center" >Occasion</div>
-                  <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">Please select your Occasion</div>
-                  <div id="text_3" class="px-[20px]">
-                    <div id="option_1" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6" >Dailywear</div>
-                    <div id="option_2" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6" >Partywear</div>
-                    <div id="option_3" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6" >Traditional/Occasional</div>
-                  </div>
-                </div>
-              </div>
-              
+          <div class="flex flex-col justify-center w-[90%]">
+            <div id="progress" class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500">
+              <div class="h-2.5 rounded-full"></div>
             </div>
+          </div>
+          <div id="progress_selector" class="mr-[10px]">
+            1/2
+          </div>
         </div>
+
+        <div id="page_1" class=" flex flex-col">
+          <div id="to_hide">
+            <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Occasion</div>
+            <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">Please select your Occasion</div>
+            <div id="text_3" class="px-[20px]">
+              <div id="option_1" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6">Dailywear</div>
+              <div id="option_2" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6">Partywear</div>
+              <div id="option_3" class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6">Traditional/Occasional</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
 
 
-{%  javascript  %} 
-  let selectedPage1option=null
-  document.getElementById("option_1").addEventListener('click',(e)=>{loadPage2(e)})
-  document.getElementById("option_2").addEventListener('click',(e)=>{loadPage2(e)})
-  document.getElementById("option_3").addEventListener('click',(e)=>{loadPage2(e)})
-  document.getElementById("cross").addEventListener('click',(e)=>{reset(e)})
+{% javascript %}
+  let selectedPage1option = null
+  document
+    .getElementById("option_1")
+    .addEventListener('click', (e) => {
+      loadPage2(e)
+    })
+    document
+    .getElementById("option_2")
+    .addEventListener('click', (e) => {
+      loadPage2(e)
+    })
+  document
+  .getElementById("option_3")
+  .addEventListener('click', (e) => {
+    loadPage2(e)
+  })
+document
+.getElementById("cross")
+.addEventListener('click', (e) => {
+  reset(e)
+})
 
-  function reset(e){
-    console.log("reset")
-    document.getElementById("option_1").innerHTML="Dailywear"
-    document.getElementById("option_2").innerHTML="Partywear"
-    document.getElementById("option_3").innerHTML="Traditional/Occasional"
-    document.getElementById("text_1").innerHTML="Occasion"
-    document.getElementById("text_2").innerHTML="Please Select your Occasion"
-    document.getElementById("progress").style.width="5%"
-    document.getElementById("progress_selector").innerHTML="1/2"
-    document.getElementById("progress").classList.remove("hidden")
-    document.getElementById("progress_selector").classList.remove("hidden")
+function reset(e) {
+  console.log("reset")
+  document.getElementById("option_1").innerHTML = "Dailywear"
+  document.getElementById("option_2").innerHTML = "Partywear"
+  document.getElementById("option_3").innerHTML = "Traditional/Occasional"
+  document.getElementById("text_1").innerHTML = "Occasion"
+  document.getElementById("text_2").innerHTML = "Please Select your Occasion"
+  document.getElementById("progress").style.width = "5%"
+  document.getElementById("progress_selector").innerHTML = "1/2"
+  document
+    .getElementById("progress")
+    .classList
+    .remove("hidden")
+    document
+    .getElementById("progress_selector")
+    .classList
+    .remove("hidden")
 
-    if(document.getElementById("buy_now_button")!=null){
-      document.getElementById("buy_now_button").remove()
-    }
-    if(document.getElementById("image_container")!=null){
-      document.getElementById("image_container").remove()
-    }
-    if(document.getElementById("text_prompt")!=null){
-      document.getElementById("text_prompt").remove()
-    }
+  if (document.getElementById("buy_now_button") != null) {
+    document.getElementById("buy_now_button").remove()
+  }
+  if (document.getElementById("image_container") != null) {
+    document.getElementById("image_container").remove()
+  }
+  if (document.getElementById("text_prompt") != null) {
+    document.getElementById("text_prompt").remove()
+  }
 
-    let childarray=document.getElementById("childarray")
-    if(childarray!=null){
+  let childarray = document
+    .getElementById("childarray")
+    if (childarray != null) {
       document.getElementById("page_1").removeChild(childarray)
 
     }
-    document.getElementById("to_hide").classList.remove("hidden")
-    selectedPage1option=null
-  }
-  
-  function loadPage2(e){
-    //name,image_url,product page
-    let m={
-      "Dailywear":{
-        "Fresh":[
-          ["Crest","https://source.unsplash.com/random","https://source.unsplash.com/random"]
-        ],
-        "Floral":[
-          ["Mirage","https://source.unsplash.com/random",""]
-        ],
-        "Woody":[
-          ["Eclipse","https://source.unsplash.com/random",""]
+    document
+    .getElementById("to_hide")
+    .classList
+    .remove("hidden")
+  selectedPage1option = null
+}
+
+function loadPage2(e) {
+
+// name,image_url,product page
+  let m = {
+    "Dailywear": {
+      "Fresh": [
+        ["Crest", "https://source.unsplash.com/random", "https://source.unsplash.com/random"]
+      ],
+      "Floral": [
+        ["Mirage", "https://source.unsplash.com/random", ""]
+      ],
+      "Woody": [
+        ["Eclipse", "https://source.unsplash.com/random", ""]
+      ]
+
+    },
+    "Partywear": {
+      "Fresh": [
+        ["Crest", "https://source.unsplash.com/random", ""],
+        [
+          "Elixer", "", ""
         ]
-
-      },
-      "Partywear":{
-        "Fresh":[["Crest","https://source.unsplash.com/random",""],["Elixer","",""]],
-        "Floral":[["Aura","https://source.unsplash.com/random",""],["Elixer","",""]],
-        "Woody":[["Tuxedo","https://source.unsplash.com/random",""],["Elixer","",""]]
-      },
-      "Traditional/Occasional":{
-        "Fresh":[["Serenade","",""],["Auram","",""]],
-        "Floral":[["Aura","",""],["Auram","",""]],
-        "Woody":[["Tuxedo","https://source.unsplash.com/random",""],["Auram","https://source.unsplash.com/random",""]]
-      }
-    }
-    if(selectedPage1option==null){
-      selectedPage1option = e.srcElement.innerText
-      document.getElementById("progress_selector").innerHTML="2/2"
-      document.getElementById("progress").style.width="50%"
-    }
-    let recomendation_array=null
-
-    if(document.getElementById("option_1").innerHTML=="Dailywear"){//on page 1
-      document.getElementById("option_1").innerHTML="Fresh"
-      document.getElementById("option_2").innerHTML="Floral"
-      document.getElementById("option_3").innerHTML="Woody"
-      document.getElementById("text_1").innerHTML="Vibe"
-      document.getElementById("text_2").innerHTML="Please Select Your Vibe"
-      
-    }else if(selectedPage1option!=null){//page 2 recoment final
-      recomendation_array=m[selectedPage1option][e.srcElement.innerText]
-      document.getElementById("progress").style.width="90%"
-    }
-
-    if(recomendation_array!=null){
-
-        console.log(recomendation_array)
-        //global login
-        document.getElementById("progress").classList.add("hidden")
-        document.getElementById("progress_selector").classList.add("hidden")
-        document.getElementById("to_hide").classList.add("hidden")
-        
-
-
-      //logic if one or two products are present in end 
-      if(recomendation_array.length==1){
-        let name = recomendation_array[0][0]
-        let product_url=recomendation_array[0][2]
-        let image_url=recomendation_array[0][1]
-        let t="Kudos for selecting "+ selectedPage1option+" perfume, "+name+"! Your scent journey just got a golden touch. 🌲✨"
-
-        let child=document.createElement('div')
-        child.id="text_prompt"
-        child.innerHTML=t
-        child.classList.add("text-center")
-        child.classList.add("text-black")
-        child.classList.add("font-[Manrope]")
-        child.classList.add("text-[14px]")
-        child.classList.add("mx-[8px]")
-        document.getElementById("page_1").appendChild(child)
-
-        let image_container=document.createElement('img')
-        image_container.src=product_url
-        image_container.id="image_container"
-        image_container.classList.add("w-[200px]")
-        image_container.classList.add("h-[200px]")
-        image_container.classList.add("object-fit")
-        image_container.classList.add("mx-auto")
-        image_container.classList.add("rounded-[16px]")
-        image_container.classList.add("m-[6px]")
-        document.getElementById("page_1").appendChild(image_container)
-
-        let buy_button=document.createElement('button')
-        buy_button.textContent="Buy Now"
-        buy_button.id="buy_now_button"
-        buy_button.classList.add("font-[Manrope]")
-        buy_button.classList.add("text-[14px]")
-        buy_button.classList.add("rounded-[40px]")
-        buy_button.classList.add("py-[12px]")
-        buy_button.classList.add("px-[14px]")
-        buy_button.classList.add("text-center")
-        buy_button.classList.add("text-white")
-        buy_button.classList.add("bg-black")
-        buy_button.classList.add("w-[154px]")
-        buy_button.classList.add("mx-auto")
-        document.getElementById("page_1").appendChild(buy_button)
-        buy_button.addEventListener("click",()=>{
-          window.open(product_url)
-        })
-
-
-
-
-      }else{
-        let name_one = recomendation_array[0][0]
-        let product_url_one=recomendation_array[0][2]
-        let image_url_one=recomendation_array[0][1]
-
-        let name_two = recomendation_array[1][0]
-        let product_url_two=recomendation_array[1][2]
-        let image_url_two=recomendation_array[1][1]
-
-        let t="Kudos for selecting "+ selectedPage1option+" perfume, "+name_one + " and "+ name_two+"! Your scent journey just got a golden touch. 🌲✨"
-  
-        let child=document.createElement('div')
-        child.id="text_prompt"
-        child.innerHTML=t
-        child.classList.add("text-center")
-        child.classList.add("text-black")
-        child.classList.add("font-[Manrope]")
-        child.classList.add("text-[14px]")
-        child.classList.add("mx-[8px]")
-        document.getElementById("page_1").appendChild(child)
-
-        let childarray=document.createElement('div')
-        childarray.id="childarray"
-        childarray.classList.add("flex","flex-col","justify-center")
-  
-        //one perfume logic
-        let perfume_one = document.createElement('div')
-        perfume_one.classList.add("text-[14px]", "text-center","flex","justify-between","rounded-[16px]","border","border-black","p-6","m-4")
-        p_image_one=document.createElement("img");
-        p_image_one.src=image_url_one
-        p_image_one.id="p_image_one"
-        p_image_one.classList.add("h-[77px]","w-[77px]","rounded-[16px]")
-        perfume_one.appendChild(p_image_one)
-        let text_one_container=document.createElement("div")
-        text_one_container.innerHTML=name_one
-        text_one_container.classList.add("flex","items-center")
-        perfume_one.appendChild(text_one_container)
-        perfume_one.addEventListener("click",()=>{
-          window.open(product_url_one)
-        })
-
-        const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const iconPath = document.createElementNS(
-                        'http://www.w3.org/2000/svg',
-                        'path'
-                              );
-                              iconPath.setAttribute(
-                        'd',
-                        "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z"
-                      );
-        iconSvg.setAttribute('viewBox', '0 0 10 17')
-        iconSvg.appendChild(iconPath)
-        iconSvg.classList.add("w-[20px]","h-[20px]","flex","items-center","my-auto")
-        perfume_one.appendChild(iconSvg)
-        childarray.appendChild(perfume_one)
-
-        //perfume 2
-        let perfume_two = document.createElement('div')
-        perfume_two.classList.add("text-[14px]", "text-center","flex","justify-between","rounded-[16px]","border","border-black","p-6","m-4")
-        p_image_two=document.createElement("img");
-        p_image_two.src=image_url_two
-        p_image_two.id="p_image_two"
-        p_image_two.classList.add("h-[77px]","w-[77px]","rounded-[16px]")
-        perfume_two.appendChild(p_image_two)
-        let text_two_container=document.createElement("div")
-        text_two_container.innerHTML=name_two
-        text_two_container.classList.add("flex","items-center")
-        perfume_two.appendChild(text_two_container)
-        perfume_two.addEventListener("click",()=>{
-          window.open(product_url_two)
-        })
-
-        const iconSvg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const iconPath1 = document.createElementNS(
-                        'http://www.w3.org/2000/svg',
-                        'path'
-                              );
-                              iconPath1.setAttribute(
-                        'd',
-                        "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z"
-                      );
-        iconSvg1.setAttribute('viewBox', '0 0 10 17')
-        iconSvg1.appendChild(iconPath1)
-        iconSvg1.classList.add("w-[20px]","h-[20px]","flex","items-center","my-auto")
-        perfume_two.appendChild(iconSvg1)
-        childarray.appendChild(perfume_two)
-
-
-        
-        document.getElementById("page_1").appendChild(childarray)
-
-      }
-
+      ],
+      "Floral": [
+        ["Aura", "https://source.unsplash.com/random", ""],
+        [
+          "Elixer", "", ""
+        ]
+      ],
+      "Woody": [
+        ["Tuxedo", "https://source.unsplash.com/random", ""],
+        [
+          "Elixer", "", ""
+        ]
+      ]
+    },
+    "Traditional/Occasional": {
+      "Fresh": [
+        ["Serenade", "", ""],
+        [
+          "Auram", "", ""
+        ]
+      ],
+      "Floral": [
+        ["Aura", "", ""],
+        [
+          "Auram", "", ""
+        ]
+      ],
+      "Woody": [
+        ["Tuxedo", "https://source.unsplash.com/random", ""],
+        [
+          "Auram", "https://source.unsplash.com/random", ""
+        ]
+      ]
     }
   }
-{% endjavascript %} 
+  if (selectedPage1option == null) {
+    selectedPage1option = e
+      .srcElement
+      .innerText
+      document
+      .getElementById("progress_selector")
+      .innerHTML = "2/2"
+    document.getElementById("progress").style.width = "50%"
+  }
+  let recomendation_array = null
 
-<div class="my-hero-banner">
-  <video preload="true" muted loop playsinline autoplay class="z-0">
-    <source src="{{ 'hero_bg_escents.mp4' | asset_url }}" type="video/mp4">
-  </video> 
-  <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent relative">
-    <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-      <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'heading' -%}
-              <div class="banner__heading inline-richtext lg:text-[45px] text-[30px] font-[Manrope] font-bold">
-                Essential scents for your daily needs.
-              </div>
-              <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
-                <p class="lg:text-[22px] text-[14px] font-[Manrope]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone. Elevate your essence, find your signature Escent.</p>
-              </div>
-            {%- when 'buttons' -%}
-              <div class="lg:mt-[80px] mt-[20px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-                {%- if block.settings.button_label_1 != blank -%}
-                  <button
-                    data-modal-target="default-modal" data-modal-toggle="default-modal"
-                    type="button"
-                    {% if block.settings.button_link_1 == blank %}
-                    role="link"
-                    aria-disabled="true"
-                    {% else %}
-                    {% endif %}
-                    class="font-[Manrope] text-[14px] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-white text-black w-[154px]">
-                    Find my Escent
-                  </button>
-                {%- endif -%}
-                
-              </div>
-          {%- endcase -%}
-        {%- endfor -%}
+  if (document.getElementById("option_1").innerHTML == "Dailywear") { // on page 1
+    document.getElementById("option_1").innerHTML = "Fresh"
+    document.getElementById("option_2").innerHTML = "Floral"
+    document.getElementById("option_3").innerHTML = "Woody"
+    document.getElementById("text_1").innerHTML = "Vibe"
+    document.getElementById("text_2").innerHTML = "Please Select Your Vibe"
+
+  } else if (selectedPage1option != null) { // page 2 recoment final
+    recomendation_array = m[selectedPage1option][e.srcElement.innerText]
+    document.getElementById("progress").style.width = "90%"
+  }
+
+  if (recomendation_array != null) {
+
+    console
+      .log(recomendation_array)
+
+  // global login
+      document
+      .getElementById("progress")
+      .classList
+      .add("hidden")
+    document
+    .getElementById("progress_selector")
+    .classList
+    .add("hidden")
+  document
+  .getElementById("to_hide")
+  .classList
+  .add("hidden")
+
+
+// logic if one or two products are present in end
+if (recomendation_array.length == 1) {
+  let name = recomendation_array[0][0]
+  let product_url = recomendation_array[0][2]
+  let image_url = recomendation_array[0][1]
+  let t = "Kudos for selecting " + selectedPage1option + " perfume, " + name + "! Your scent journey just got a golden touch. 🌲✨"
+
+  let child = document.createElement('div')
+  child.id = "text_prompt"
+  child.innerHTML = t
+  child
+    .classList
+    .add("text-center")
+    child
+    .classList
+    .add("text-black")
+  child
+  .classList
+  .add("font-[Manrope]")
+child
+.classList
+.add("text-[14px]")
+child
+.classList
+.add("mx-[8px]")
+document
+.getElementById("page_1")
+.appendChild(child)
+
+let image_container = document.createElement('img')
+image_container.src = product_url
+image_container.id = "image_container"
+image_container
+  .classList
+  .add("w-[200px]")
+  image_container
+  .classList
+  .add("h-[200px]")
+image_container
+.classList
+.add("object-fit")
+image_container
+.classList
+.add("mx-auto")
+image_container
+.classList
+.add("rounded-[16px]")
+image_container
+.classList
+.add("m-[6px]")
+document
+.getElementById("page_1")
+.appendChild(image_container)
+
+let buy_button = document.createElement('button')
+buy_button.textContent = "Buy Now"
+buy_button.id = "buy_now_button"
+buy_button
+  .classList
+  .add("font-[Manrope]")
+  buy_button
+  .classList
+  .add("text-[14px]")
+buy_button
+.classList
+.add("rounded-[40px]")
+buy_button
+.classList
+.add("py-[12px]")
+buy_button
+.classList
+.add("px-[14px]")
+buy_button
+.classList
+.add("text-center")
+buy_button
+.classList
+.add("text-white")
+buy_button
+.classList
+.add("bg-black")
+buy_button
+.classList
+.add("w-[154px]")
+buy_button
+.classList
+.add("mx-auto")
+document
+.getElementById("page_1")
+.appendChild(buy_button)
+buy_button
+.addEventListener("click", () => {
+  window.open(product_url)
+})} else {
+let name_one = recomendation_array[0][0]
+let product_url_one = recomendation_array[0][2]
+let image_url_one = recomendation_array[0][1]
+
+let name_two = recomendation_array[1][0]
+let product_url_two = recomendation_array[1][2]
+let image_url_two = recomendation_array[1][1]
+
+let t = "Kudos for selecting " + selectedPage1option + " perfume, " + name_one + " and " + name_two + "! Your scent journey just got a golden touch. 🌲✨"
+
+let child = document.createElement('div')
+child.id = "text_prompt"
+child.innerHTML = t
+child
+  .classList
+  .add("text-center")
+  child
+  .classList
+  .add("text-black")
+child
+.classList
+.add("font-[Manrope]")
+child
+.classList
+.add("text-[14px]")
+child
+.classList
+.add("mx-[8px]")
+document
+.getElementById("page_1")
+.appendChild(child)
+
+let childarray = document.createElement('div')
+childarray.id = "childarray"
+childarray.classList.add("flex", "flex-col", "justify-center")
+
+// one perfume logic
+let perfume_one = document.createElement('div')
+perfume_one.classList.add("text-[14px]", "text-center", "flex", "justify-between", "rounded-[16px]", "border", "border-black", "p-6", "m-4")
+p_image_one = document.createElement("img");
+p_image_one.src = image_url_one
+p_image_one.id = "p_image_one"
+p_image_one.classList.add("h-[77px]", "w-[77px]", "rounded-[16px]")
+perfume_one.appendChild(p_image_one)
+let text_one_container = document.createElement("div")
+text_one_container.innerHTML = name_one
+text_one_container
+  .classList
+  .add("flex", "items-center")
+  perfume_one
+  .appendChild(text_one_container)
+  perfume_one
+  .addEventListener("click", () => {
+    window.open(product_url_one)
+  })
+
+const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+iconPath.setAttribute('d', "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z");
+iconSvg
+  .setAttribute('viewBox', '0 0 10 17')
+  iconSvg
+  .appendChild(iconPath)
+  iconSvg
+  .classList
+  .add("w-[20px]", "h-[20px]", "flex", "items-center", "my-auto")
+perfume_one
+.appendChild(iconSvg)
+childarray
+.appendChild(perfume_one)
+
+// perfume 2
+let perfume_two = document.createElement('div')
+perfume_two.classList.add("text-[14px]", "text-center", "flex", "justify-between", "rounded-[16px]", "border", "border-black", "p-6", "m-4")
+p_image_two = document.createElement("img");
+p_image_two.src = image_url_two
+p_image_two.id = "p_image_two"
+p_image_two.classList.add("h-[77px]", "w-[77px]", "rounded-[16px]")
+perfume_two.appendChild(p_image_two)
+let text_two_container = document.createElement("div")
+text_two_container.innerHTML = name_two
+text_two_container
+  .classList
+  .add("flex", "items-center")
+  perfume_two
+  .appendChild(text_two_container)
+  perfume_two
+  .addEventListener("click", () => {
+    window.open(product_url_two)
+  })
+
+const iconSvg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+const iconPath1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+iconPath1.setAttribute('d', "M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z");
+iconSvg1
+  .setAttribute('viewBox', '0 0 10 17')
+  iconSvg1
+  .appendChild(iconPath1)
+  iconSvg1
+  .classList
+  .add("w-[20px]", "h-[20px]", "flex", "items-center", "my-auto")
+perfume_two
+.appendChild(iconSvg1)
+childarray
+.appendChild(perfume_two)
+
+
+document
+.getElementById("page_1")
+.appendChild(childarray)}}}
+{% endjavascript %}
+
+<div>
+  <div class="my-hero-banner">
+    <video
+      preload="true"
+      muted
+      loop
+      playsinline
+      autoplay
+      class="z-0">
+      <source src="{{ 'hero_bg_escents.mp4' | asset_url }}" type="video/mp4">
+    </video>
+    <div class="hero_banner_inner bg-gradient-to-t from-black via-transparent to-transparent relative">
+      <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="banner__box bg-transparent content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'heading' -%}
+                <div class="banner__heading inline-richtext lg:text-[45px] text-[30px] font-[Manrope] font-bold">
+                  Essential scents for your daily needs.
+                </div>
+                <div class="banner__text rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>
+                  <p class="lg:text-[22px] text-[14px] font-[Manrope]  ">Indulge your senses with our curated collection of exquisite perfumes for everyone. Elevate your essence, find your signature Escent.</p>
+                </div>
+              {%- when 'buttons' -%}
+                <div class="lg:mt-[80px] mt-[20px] banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+                  {%- if block.settings.button_label_1 != blank -%}
+                    <button
+                      data-modal-target="default-modal"
+                      data-modal-toggle="default-modal"
+                      type="button"
+                      {% if block.settings.button_link_1 == blank %}
+                      role="link"
+                      aria-disabled="true"
+                      {% else %}
+                      {% endif %}
+                      class="font-[Manrope] text-[14px] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-white text-black w-[154px]">
+                      Find my Escent
+                    </button>
+                  {%- endif -%}
+
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="my-banner flex flex-col" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
-  <div class="my-banner-inner bg-gradient-to-b from-black via-transparent to-black
-                        ">
-    <div class="my-banner-inner-top mt-[50px] text-[30px] lg:text-[48px]">
-      Discover your Escent.
-    </div>
-    <div class="my-banner-inner-bottom mb-[40px]">
-      <div class="my-banner-inner-bottom-block ">
-        <div class="my-banner-inner-bottom-text font-['Manrope'] lg:text-[20px] text-[14px] lg:w-[800px] mx-[40px] leading-[19.9px]">
-          Explore our exquisite fragrance collection and indulge in a world of captivating scents.
-        </div>
-        <div class="mt-[40px]">
-          <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white text-[14px]">Shop Now</button>
-        </div>
+  <div class="my-banner flex flex-col" background="https://cdn.shopify.com/s/files/1/0859/0491/6785/files/hero_2.png?v=1706632156">
+    <div class="my-banner-inner bg-gradient-to-b from-black via-transparent to-black
+                          ">
+      <div class="my-banner-inner-top mt-[50px] text-[30px] lg:text-[48px]">
+        Discover your Escent.
       </div>
+      <div class="my-banner-inner-bottom mb-[40px]">
+        <div class="my-banner-inner-bottom-block ">
+          <div class="my-banner-inner-bottom-text font-['Manrope'] lg:text-[20px] text-[14px] lg:w-[800px] mx-[40px] leading-[19.9px]">
+            Explore our exquisite fragrance collection and indulge in a world of captivating scents.
+          </div>
+          <div class="mt-[40px]">
+            <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white text-[14px]">Shop Now</button>
+          </div>
+        </div>
 
 
+      </div>
     </div>
-  </div>
-  
-</div>
 
-<div class="bg-black lg:h-[320px] h-[260px] flex justify-center py-[60px]">
+  </div>
+
+  <div class="bg-black lg:h-[320px] h-[260px] flex justify-center py-[60px]">
     <div class="flex justify-between align-center w-[80vw] lg:content-end mx-[10px]">
       <div class="text-white flex justify-center flex-col">
         <div class="font-[Manrope] lg:text-[48px] text-[30px] lg:leading-[4rem] leading-[28px]">
 
           New Month.<br>
-          New <span class="font-[Manrope] lg:text-[40px] text-[30px] font-bold">ESCENT.</span>
+          New
+          <span class="font-[Manrope] lg:text-[40px] text-[30px] font-bold">ESCENT.</span>
 
         </div>
         <div class="lg:text-[18px] text-[14px] font-[Manrope] mt-[10px] w-[230px] lg:w-[454px] leading-[19.9px]">
@@ -408,335 +555,334 @@
     </div>
   </div>
 
-<div class="my-hero-3 ">
-  <div class="flex flex-col h-[95%]  justify-between">
-    <div class="lg:mx-[24px] mx-[16px] flex justify-between">
-      <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px]">
-        Escents Corp. Ltd
+  <div class="my-hero-3 ">
+    <div class="flex flex-col h-[95%]  justify-between">
+      <div class="lg:mx-[24px] mx-[16px] flex justify-between">
+        <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px]">
+          Escents Corp. Ltd
+        </div>
+        <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px]">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///011
+        </div>
+        <div class="flex flex-col ">
+          <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] text-right">
+            Code name: Aurum
+          </div>
+          <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] text-right">
+            Sweet, Intense and Spicy
+          </div>
+        </div>
       </div>
-      <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px]">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;///011
+      <div class="text-allure lg:h-[280px] lg:ml-[50px] lg:mt-[220px] mt-[295px] lg:w-[440px]">
+        <div class="lg:w-[420px] h-[108px] text-white font-[Manrope] font-bold lg:text-[18px] text-[12px] w-[100%] lg:ml-[60px] lg:mt-[20px] lg:text-left text-center">
+          Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
+        </div>
       </div>
       <div class="flex flex-col ">
-        <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] text-right">
-          Code name: Aurum
-        </div>
-        <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] text-right">
-          Sweet, Intense and Spicy
-        </div>
-      </div>
-    </div>
-    <div class="text-allure lg:h-[280px] lg:ml-[50px] lg:mt-[220px] mt-[295px] lg:w-[440px]">
-      <div class="lg:w-[420px] h-[108px] text-white font-[Manrope] font-bold lg:text-[18px] text-[12px] w-[100%] lg:ml-[60px] lg:mt-[20px] lg:text-left text-center">
-        Experience the allure of our signature fragrance, a captivating blend of sweet and spicy notes harmoniously woven into an intense olfactory masterpiece. Indulge in the enchanting richness of Aurum, where sweetness meets intensity for an unforgettable sensory journey.
-      </div>
-    </div>
-    <div class="flex flex-col ">
-      <div class="flex justify-center">
-        <div class="">
+        <div class="flex justify-center">
+          <div class="">
             <button class="font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white mb-[8px] text-[14px]">Shop Now</button>
+          </div>
         </div>
-      </div>
-      <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px] ">
-        All Rights Reserved.
+        <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px] ">
+          All Rights Reserved.
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-
 {% schema %}
-  {
-    "name": "t:sections.image-banner.name",
-    "tag": "section",
-    "class": "section",
-    "disabled_on": {
-      "groups": ["header", "footer"]
+{
+  "name": "t:sections.image-banner.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.image-banner.settings.image.label"
     },
-    "settings": [
-      {
-        "type": "image_picker",
-        "id": "image",
-        "label": "t:sections.image-banner.settings.image.label"
-      },
-      {
-        "type": "image_picker",
-        "id": "image_2",
-        "label": "t:sections.image-banner.settings.image_2.label"
-      },
-      {
-        "type": "image_picker",
-        "id": "hero",
-        "label": "t:sections.image-banner.settings.hero.label"
-      },
-      {
-        "type": "image_picker",
-        "id": "hero_2",
-        "label": "t:sections.image-banner.settings.hero_2.label"
-      }, {
-        "type": "range",
-        "id": "image_overlay_opacity",
-        "min": 0,
-        "max": 100,
-        "step": 10,
-        "unit": "%",
-        "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
-        "default": 0
-      }, {
-        "type": "select",
-        "id": "image_height",
-        "options": [
-          {
-            "value": "adapt",
-            "label": "t:sections.image-banner.settings.image_height.options__1.label"
-          }, {
-            "value": "small",
-            "label": "t:sections.image-banner.settings.image_height.options__2.label"
-          }, {
-            "value": "medium",
-            "label": "t:sections.image-banner.settings.image_height.options__3.label"
-          }, {
-            "value": "large",
-            "label": "t:sections.image-banner.settings.image_height.options__4.label"
-          }
-        ],
-        "default": "medium",
-        "label": "t:sections.image-banner.settings.image_height.label",
-        "info": "t:sections.image-banner.settings.image_height.info"
-      }, {
-        "type": "select",
-        "id": "desktop_content_position",
-        "options": [
-          {
-            "value": "top-left",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__1.label"
-          },
-          {
-            "value": "top-center",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__2.label"
-          },
-          {
-            "value": "top-right",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__3.label"
-          },
-          {
-            "value": "middle-left",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__4.label"
-          }, {
-            "value": "middle-center",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__5.label"
-          }, {
-            "value": "middle-right",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__6.label"
-          }, {
-            "value": "bottom-left",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__7.label"
-          }, {
-            "value": "bottom-center",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__8.label"
-          }, {
-            "value": "bottom-right",
-            "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
-          }
-        ],
-        "default": "middle-center",
-        "label": "t:sections.image-banner.settings.desktop_content_position.label"
-      }, {
-        "type": "checkbox",
-        "id": "show_text_box",
-        "default": true,
-        "label": "t:sections.image-banner.settings.show_text_box.label"
-      }, {
-        "type": "select",
-        "id": "desktop_content_alignment",
-        "options": [
-          {
-            "value": "left",
-            "label": "t:sections.image-banner.settings.desktop_content_alignment.options__1.label"
-          }, {
-            "value": "center",
-            "label": "t:sections.image-banner.settings.desktop_content_alignment.options__2.label"
-          }, {
-            "value": "right",
-            "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
-          }
-        ],
-        "default": "center",
-        "label": "t:sections.image-banner.settings.desktop_content_alignment.label"
-      }, {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "background-1"
-      }, {
-        "type": "header",
-        "content": "t:sections.all.animation.content"
-      }, {
-        "type": "select",
-        "id": "image_behavior",
-        "options": [
-          {
-            "value": "none",
-            "label": "t:sections.all.animation.image_behavior.options__1.label"
-          }, {
-            "value": "ambient",
-            "label": "t:sections.all.animation.image_behavior.options__2.label"
-          }, {
-            "value": "fixed",
-            "label": "t:sections.all.animation.image_behavior.options__3.label"
-          }, {
-            "value": "zoom-in",
-            "label": "t:sections.all.animation.image_behavior.options__4.label"
-          }
-        ],
-        "default": "none",
-        "label": "t:sections.all.animation.image_behavior.label"
-      }, {
-        "type": "header",
-        "content": "t:sections.image-banner.settings.mobile.content"
-      }, {
-        "type": "select",
-        "id": "mobile_content_alignment",
-        "options": [
-          {
-            "value": "left",
-            "label": "t:sections.image-banner.settings.mobile_content_alignment.options__1.label"
-          }, {
-            "value": "center",
-            "label": "t:sections.image-banner.settings.mobile_content_alignment.options__2.label"
-          }, {
-            "value": "right",
-            "label": "t:sections.image-banner.settings.mobile_content_alignment.options__3.label"
-          }
-        ],
-        "default": "center",
-        "label": "t:sections.image-banner.settings.mobile_content_alignment.label"
-      }, {
-        "type": "checkbox",
-        "id": "stack_images_on_mobile",
-        "default": true,
-        "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
-      }, {
-        "type": "checkbox",
-        "id": "show_text_below",
-        "default": true,
-        "label": "t:sections.image-banner.settings.show_text_below.label"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "heading",
-        "name": "t:sections.image-banner.blocks.heading.name",
-        "limit": 1,
-        "settings": [
-          {
-            "type": "inline_richtext",
-            "id": "heading",
-            "default": "Image banner",
-            "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
-          }, {
-            "type": "select",
-            "id": "heading_size",
-            "options": [
-              {
-                "value": "h2",
-                "label": "t:sections.all.heading_size.options__1.label"
-              }, {
-                "value": "h1",
-                "label": "t:sections.all.heading_size.options__2.label"
-              }, {
-                "value": "h0",
-                "label": "t:sections.all.heading_size.options__3.label"
-              }
-            ],
-            "default": "h1",
-            "label": "t:sections.all.heading_size.label"
-          }
-        ]
-      }, {
-        "type": "text",
-        "name": "t:sections.image-banner.blocks.text.name",
-        "limit": 1,
-        "settings": [
-          {
-            "type": "inline_richtext",
-            "id": "text",
-            "default": "Give customers details about the banner image(s) or content on the template.",
-            "label": "t:sections.image-banner.blocks.text.settings.text.label"
-          }, {
-            "type": "select",
-            "id": "text_style",
-            "options": [
-              {
-                "value": "body",
-                "label": "t:sections.image-banner.blocks.text.settings.text_style.options__1.label"
-              }, {
-                "value": "subtitle",
-                "label": "t:sections.image-banner.blocks.text.settings.text_style.options__2.label"
-              }, {
-                "value": "caption-with-letter-spacing",
-                "label": "t:sections.image-banner.blocks.text.settings.text_style.options__3.label"
-              }
-            ],
-            "default": "body",
-            "label": "t:sections.image-banner.blocks.text.settings.text_style.label"
-          }
-        ]
-      }, {
-        "type": "buttons",
-        "name": "t:sections.image-banner.blocks.buttons.name",
-        "limit": 1,
-        "settings": [
-          {
-            "type": "text",
-            "id": "button_label_1",
-            "default": "Button label",
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
-            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
-          },
-          {
-            "type": "url",
-            "id": "button_link_1",
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
-          },
-          {
-            "type": "checkbox",
-            "id": "button_style_secondary_1",
-            "default": false,
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
-          },
-          {
-            "type": "text",
-            "id": "button_label_2",
-            "default": "Button label",
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
-            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
-          }, {
-            "type": "url",
-            "id": "button_link_2",
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
-          }, {
-            "type": "checkbox",
-            "id": "button_style_secondary_2",
-            "default": false,
-            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "t:sections.image-banner.presets.name",
-        "blocks": [
-          {
-            "type": "heading"
-          }, {
-            "type": "text"
-          }, {
-            "type": "buttons"
-          }
-        ]
-      }
-    ]
-  }
-{% endschema %}
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero",
+      "label": "t:sections.image-banner.settings.hero.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_2",
+      "label": "t:sections.image-banner.settings.hero_2.label"
+    }, {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+      "default": 0
+    }, {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.image-banner.settings.image_height.options__1.label"
+        }, {
+          "value": "small",
+          "label": "t:sections.image-banner.settings.image_height.options__2.label"
+        }, {
+          "value": "medium",
+          "label": "t:sections.image-banner.settings.image_height.options__3.label"
+        }, {
+          "value": "large",
+          "label": "t:sections.image-banner.settings.image_height.options__4.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.image-banner.settings.image_height.label",
+      "info": "t:sections.image-banner.settings.image_height.info"
+    }, {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__4.label"
+        }, {
+          "value": "middle-center",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__5.label"
+        }, {
+          "value": "middle-right",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__6.label"
+        }, {
+          "value": "bottom-left",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__7.label"
+        }, {
+          "value": "bottom-center",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__8.label"
+        }, {
+          "value": "bottom-right",
+          "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
+        }
+      ],
+      "default": "middle-center",
+      "label": "t:sections.image-banner.settings.desktop_content_position.label"
+    }, {
+      "type": "checkbox",
+      "id": "show_text_box",
+      "default": true,
+      "label": "t:sections.image-banner.settings.show_text_box.label"
+    }, {
+      "type": "select",
+      "id": "desktop_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__1.label"
+        }, {
+          "value": "center",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__2.label"
+        }, {
+          "value": "right",
+          "label": "t:sections.image-banner.settings.desktop_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.image-banner.settings.desktop_content_alignment.label"
+    }, {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "background-1"
+    }, {
+      "type": "header",
+      "content": "t:sections.all.animation.content"
+    }, {
+      "type": "select",
+      "id": "image_behavior",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.all.animation.image_behavior.options__1.label"
+        }, {
+          "value": "ambient",
+          "label": "t:sections.all.animation.image_behavior.options__2.label"
+        }, {
+          "value": "fixed",
+          "label": "t:sections.all.animation.image_behavior.options__3.label"
+        }, {
+          "value": "zoom-in",
+          "label": "t:sections.all.animation.image_behavior.options__4.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.all.animation.image_behavior.label"
+    }, {
+      "type": "header",
+      "content": "t:sections.image-banner.settings.mobile.content"
+    }, {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__1.label"
+        }, {
+          "value": "center",
+          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__2.label"
+        }, {
+          "value": "right",
+          "label": "t:sections.image-banner.settings.mobile_content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.image-banner.settings.mobile_content_alignment.label"
+    }, {
+      "type": "checkbox",
+      "id": "stack_images_on_mobile",
+      "default": true,
+      "label": "t:sections.image-banner.settings.stack_images_on_mobile.label"
+    }, {
+      "type": "checkbox",
+      "id": "show_text_below",
+      "default": true,
+      "label": "t:sections.image-banner.settings.show_text_below.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "t:sections.image-banner.blocks.heading.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Image banner",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        }, {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            }, {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            }, {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        }
+      ]
+    }, {
+      "type": "text",
+      "name": "t:sections.image-banner.blocks.text.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Give customers details about the banner image(s) or content on the template.",
+          "label": "t:sections.image-banner.blocks.text.settings.text.label"
+        }, {
+          "type": "select",
+          "id": "text_style",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__1.label"
+            }, {
+              "value": "subtitle",
+              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__2.label"
+            }, {
+              "value": "caption-with-letter-spacing",
+              "label": "t:sections.image-banner.blocks.text.settings.text_style.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.image-banner.blocks.text.settings.text_style.label"
+        }
+      ]
+    }, {
+      "type": "buttons",
+      "name": "t:sections.image-banner.blocks.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label_1",
+          "default": "Button label",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_1",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_1",
+          "default": false,
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "default": "Button label",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
+        }, {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
+        }, {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.image-banner.presets.name",
+      "blocks": [
+        {
+          "type": "heading"
+        }, {
+          "type": "text"
+        }, {
+          "type": "buttons"
+        }
+      ]
+    }
+  ]
+}{% endschema %}

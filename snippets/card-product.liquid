@@ -38,7 +38,7 @@
   -%}
   <div class="card-wrapper mr-[24px] product-card-wrapper underline-links-hover ">
     <div
-      class="
+      class="w-[160px] lg:w-[100%]
         card card--{{ settings.card_style }}
         {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
         {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
@@ -59,7 +59,7 @@
                 
                 src="{{ card_product.featured_media | image_url }}"
                 alt="{{ card_product.featured_media.alt | escape }}"
-                class="motion-reduce object-cover rounded-[16px]  lg:h-[329px] h-[270px] lg:w-[264px] w-[241px]"
+                class="motion-reduce object-cover rounded-[16px]  lg:h-[329px] h-[200px] lg:w-[264px] w-[160px]"
                 {% unless lazy_load == false %}
                   loading="lazy"
                 {% endunless %}
@@ -90,7 +90,7 @@
         {%- endif -%}
         
       </div>
-      <div class="card__content">
+      <div class="card__content lg:w-[264px]">
         <div class="card__information flex justify-between">
           <h3
             class="font-[Manrope] card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}"
@@ -101,7 +101,7 @@
             <a
               href="{{ card_product.url }}"
               id="CardLink-{{ section_id }}-{{ card_product.id }}"
-              class="full-unstyled-link font-[Manrope] text-[18px] font-bold"
+              class="full-unstyled-link font-[Manrope] text-[18px] font-bold text-[14px]"
               aria-labelledby="CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}"
             >
               {{ card_product.title | escape }}

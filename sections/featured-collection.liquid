@@ -52,7 +52,7 @@
   </div>
   <ul
     id="Slider-{{ section.id }}"
-    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto"
+    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto overflow-y-hidden"
     role="list"
     aria-label="{{ 'general.slider.name' | t }}">
     {%- for product in collections["new-arrivals"].products limit: section.settings.products_to_show -%}
@@ -136,7 +136,7 @@
   Top Selling</div>
   <ul
     id="Slider-{{ section.id }}"
-    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto"
+    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto overflow-y-hidden"
     role="list"
     aria-label="{{ 'general.slider.name' | t }}">
     {%- for product in collections["top-selling"].products limit: section.settings.products_to_show -%}
@@ -212,6 +212,45 @@
     {{ 'sections.featured_collection.view_all' | t }}
   </a>
 </div>
+
+<div class="flex flex-col w-[600px] lg:ml-[140px] ml-[20px]">
+    <div class="font-[Manrope] text-[24px] lg:text-[36px] text-black font-bold">
+      Sign up to our newsletter.
+    </div>
+    <div class="text-black text-[14px] font-[Manrope]">
+      Stay in the loop with our newsletter – your passport to the latest scents, exclusive deals, captivating stories, and a sneak peek into what's cooking behind the scenes. Join our fragrance community and embark on a sensory journey with each email.
+    </div>
+    <div class="flex mt-[40px] mb-[60px] lg:flex-row flex-col">
+      <div class="mr-4">
+        <input
+          id="NewsletterForm--{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="border-1 rounded-[40px] lg:w-[328px] py-[12px] w-[100%] px-[10px] text-[14px] font-[Manrope] "
+          value="{{ form.email }}"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          placeholder="Email"
+          {% if form.errors %}
+          autofocus
+          aria-invalid="true"
+          aria-describedby="ContactFooter-error"
+          {% elsif form.posted_successfully? %}
+          aria-describedby="ContactFooter-success"
+          {% endif %}
+          placeholder="{{ 'newsletter.label' | t }}"
+          required>
+        <label class="field__label" for="NewsletterForm--{{ section.id }}">
+          {{ 'newsletter.label' | t }}
+        </label>
+      </div>
+      <button class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] bg-black text-white my-[40px] lg:my-0  text-[14px]">
+        Subscribe
+      </button>
+    </div>
+  </div>
 
 {% if section.settings.image_shape == 'arch' %}
 

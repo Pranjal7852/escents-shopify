@@ -48,6 +48,11 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "rating_PmiEFG": {
+          "type": "rating",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -58,15 +63,16 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "share"
+        "share",
+        "rating_PmiEFG"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "background-1",
         "media_size": "large",
         "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "gallery_layout": "stacked",
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail",
         "media_position": "left",
         "image_zoom": "lightbox",
         "mobile_thumbnails": "hide",
