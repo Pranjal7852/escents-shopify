@@ -14,9 +14,9 @@
   }
 {%- endstyle -%}
 
-<div class="flex page-width [100px] mt-[100px]">
-  <div class="section-{{ section.id }}-padding mt- ">
-    <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+<div class="flex page-width [100px] mt-[100px] lg:w-[1000px] mx-[6px] lg:mx-auto">
+  <div class="section-{{ section.id }}-padding ">
+    <h1 class="mb-[36px] main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ page.title | escape }}
     </h1>
     <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -27,7 +27,7 @@
       Join us on an aromatic journey where luxury meets affordability, and each fragrance embodies a commitment to simplicity and environmental stewardship.<br><br>
       
     </div>
-    {{ 'about_us_image.png' | asset_url | img_tag }}
+    <img src={{ 'about_us_image.png' | asset_url  }} class="w-[100%] object-fit rounded-[40px]"/>
     <h1 class="mt-[50px] h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       WHAT WE BELIEVE 
     </h1>
