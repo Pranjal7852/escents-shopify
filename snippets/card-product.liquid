@@ -16,6 +16,7 @@
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
   - content: {String} Description of the product
+  - isHomePage:{Boolean} if home page then size diff (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -38,8 +39,10 @@
   -%}
   <div class="card-wrapper mx-[12px] product-card-wrapper underline-links-hover ">
     <div
-      class="w-[160px] lg:w-[264px] 
+      class="
+        lg:w-[264px] 
         card card--{{ settings.card_style }}
+        {% if isHomePage %} w-[264px] {%else%} w-[160px] {%endif%}
         {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
         {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }} gradient{% endif %}
         {% if image_shape and image_shape != 'default' %} card--shape{% endif %}
@@ -59,7 +62,9 @@
                 
                 src="{{ card_product.featured_media | image_url }}"
                 alt="{{ card_product.featured_media.alt | escape }}"
-                class="motion-reduce object-cover rounded-[16px]  lg:h-[329px] h-[200px] lg:w-[264px] w-[160px]"
+                class="motion-reduce object-cover rounded-[16px]  lg:h-[329px] h-[200px] lg:w-[264px] 
+                      {%if isHomePage %} w-[264px] {%else%} w-[160px] {%endif%}
+                      {%if isHomePage %} h-[329px] {%else%} w-[160px] {%endif%}"
                 {% unless lazy_load == false %}
                   loading="lazy"
                 {% endunless %}
