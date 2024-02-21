@@ -58,7 +58,7 @@
     }
   },
   "newsletter": {
-    "label": "Email",
+    "label": "",
     "success": "Terima kasih sudah berlangganan",
     "button_label": "Berlangganan"
   },
@@ -91,7 +91,7 @@
       "moderated": "Ingat, komentar perlu disetujui sebelum dipublikasikan.",
       "comment_form_title": "Tulis komentar",
       "name": "Nama",
-      "email": "Email",
+      "email": "",
       "message": "Komentar",
       "post": "Posting komentar",
       "back_to_blog": "Kembali ke blog",
@@ -246,7 +246,7 @@
     "contact": {
       "form": {
         "name": "Nama",
-        "email": "Email",
+        "email": "",
         "phone": "Nomor telepon",
         "comment": "Komentar",
         "send": "Kirim",
@@ -411,7 +411,7 @@
     "login_page": {
       "cancel": "Batal",
       "create_account": "Buat Akun",
-      "email": "Email",
+      "email": "",
       "forgot_password": "Lupa sandi?",
       "guest_continue": "Lanjutkan",
       "guest_title": "Lanjutkan sebagai tamu",
@@ -439,7 +439,7 @@
       "title": "Buat Akun",
       "first_name": "Nama depan",
       "last_name": "Nama belakang",
-      "email": "Email",
+      "email": "",
       "password": "Sandi",
       "submit": "Buat"
     },
@@ -496,7 +496,7 @@
     "form": {
       "checkbox": "Saya ingin mengirim ini sebagai hadiah",
       "email_label": "Email penerima",
-      "email": "Email",
+      "email": "",
       "name_label": "Nama penerima (opsional)",
       "name": "Nama",
       "message_label": "Pesan (opsional)",

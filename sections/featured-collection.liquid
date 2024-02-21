@@ -44,36 +44,117 @@
 -%}
 
 <slider-component class=" flex justify-center flex-col ml-[10px] lg:mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
-  <div class="text-[24px] font-[Manrope] font-bold mb-4  lg:ml-0">
-
-    New Arrivals
+  <div class="text-[24px] font-[Manrope] font-bold mb-4  lg:ml-0">New Arrivals</div>
+  <ul
+    id="Slider-{{ section.id }}"
+    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto overflow-y-hidden"
+    role="list"
+    aria-label="{{ 'general.slider.name' | t }}"
+  >
+    {%- for product in collections['new-arrivals'].products limit: section.settings.products_to_show -%}
+      <li
+        id="Slide-{{ section.id }}-{{ forloop.index }}"
+        class="rounded-[16px] grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        {% if settings.animations_reveal_on_scroll %}
+          data-cascade
+          style="--animation-order: {{ forloop.index }};"
+        {% endif %}
+      >
+        {% render 'card-product',
+          card_product: product,
+          media_aspect_ratio: section.settings.image_ratio,
+          image_shape: section.settings.image_shape,
+          show_secondary_image: section.settings.show_secondary_image,
+          show_vendor: section.settings.show_vendor,
+          show_rating: section.settings.show_rating,
+          show_quick_add: section.settings.enable_quick_add,
+          section_id: section.id,
+          content: product.content,
+          isHomePage: true
+        %}
+      </li>
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <li
+          class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+          {% if settings.animations_reveal_on_scroll %}
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
+          {%- assign placeholder_image = 'product-apparel-' | append: forloop.rindex -%}
+          {% render 'card-product', show_vendor: section.settings.show_vendor, placeholder_image: placeholder_image %}
+        </li>
+      {%- endfor -%}
+    {%- endfor -%}
+  </ul>
+  {%- if show_mobile_slider or show_desktop_slider -%}
+    <div class="slider-buttons no-js-hidden">
+      <button
+        type="button"
+        class="slider-button slider-button--prev"
+        name="previous"
+        aria-label="{{ 'general.slider.previous_slide' | t }}"
+        aria-controls="Slider-{{ section.id }}"
+      >
+        {% render 'icon-caret' %}
+      </button>
+      <div class="slider-counter caption">
+        <span class="slider-counter--current">1</span>
+        <span aria-hidden="true"> / </span>
+        <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+        <span class="slider-counter--total">{{ products_to_display }}</span>
+      </div>
+      <button
+        type="button"
+        class="slider-button slider-button--next"
+        name="next"
+        aria-label="{{ 'general.slider.next_slide' | t }}"
+        aria-controls="Slider-{{ section.id }}"
+      >
+        {% render 'icon-caret' %}
+      </button>
     </div>
-
+  {%- endif -%}
+  <div class="center py-[36px] collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    <a
+      href="{{ section.settings.collection.url }}"
+      class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]  text-[14px] block mx-auto"
+      aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}"
+    >
+      {{ 'sections.featured_collection.view_all' | t }}
+    </a>
   </div>
+</slider-component>
+
+<slider-component class=" flex justify-center flex-col ml-[10px] lg:mx-auto my-[50px] ovverflow-y-hidden max-w-fit ">
+  <div class="text-[24px] font-[Manrope] font-bold mb-4 lg:ml-0">Top Selling</div>
   <ul
     id="Slider-{{ section.id }}"
     class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto overflow-y-hidden"
     role="list"
-    aria-label="{{ 'general.slider.name' | t }}">
-    {%- for product in collections["new-arrivals"].products limit: section.settings.products_to_show -%}
+    aria-label="{{ 'general.slider.name' | t }}"
+  >
+    {%- for product in collections['top-selling'].products limit: section.settings.products_to_show -%}
       <li
         id="Slide-{{ section.id }}-{{ forloop.index }}"
         class="rounded-[16px] grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
         {% if settings.animations_reveal_on_scroll %}
-        data-cascade
-        style="--animation-order: {{ forloop.index }};"
-        {% endif %}>
-        {% render 'card-product'
-          , card_product: product
-          , media_aspect_ratio: section.settings.image_ratio
-          , image_shape: section.settings.image_shape
-          , show_secondary_image: section.settings.show_secondary_image
-          , show_vendor: section.settings.show_vendor
-          , show_rating: section.settings.show_rating
-          , show_quick_add: section.settings.enable_quick_add
-          , section_id: section.id
-          , content: product.content
-          , isHomePage: true
+          data-cascade
+          style="--animation-order: {{ forloop.index }};"
+        {% endif %}
+      >
+        {% render 'card-product',
+          card_product: product,
+          media_aspect_ratio: section.settings.image_ratio,
+          image_shape: section.settings.image_shape,
+          show_secondary_image: section.settings.show_secondary_image,
+          show_vendor: section.settings.show_vendor,
+          show_rating: section.settings.show_rating,
+          show_quick_add: section.settings.enable_quick_add,
+          section_id: section.id,
+          content: product.content,
+          isHomePage: true
         %}
       </li>
     {%- else -%}
@@ -81,18 +162,17 @@
         <li
           class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           {% if settings.animations_reveal_on_scroll %}
-          data-cascade
-          style="--animation-order: {{ forloop.index }};"
-          {% endif %}>
+            data-cascade
+            style="--animation-order: {{ forloop.index }};"
+          {% endif %}
+        >
           {%- assign placeholder_image = 'product-apparel-' | append: forloop.rindex -%}
-          {% render 'card-product'
-            , show_vendor: section.settings.show_vendor
-            , placeholder_image: placeholder_image
-          %}
+          {% render 'card-product', show_vendor: section.settings.show_vendor, placeholder_image: placeholder_image %}
         </li>
       {%- endfor -%}
     {%- endfor -%}
   </ul>
+  
   {%- if show_mobile_slider or show_desktop_slider -%}
     <div class="slider-buttons no-js-hidden">
       <button
@@ -100,14 +180,13 @@
         class="slider-button slider-button--prev"
         name="previous"
         aria-label="{{ 'general.slider.previous_slide' | t }}"
-        aria-controls="Slider-{{ section.id }}">
+        aria-controls="Slider-{{ section.id }}"
+      >
         {% render 'icon-caret' %}
       </button>
       <div class="slider-counter caption">
         <span class="slider-counter--current">1</span>
-        <span aria-hidden="true">
-          /
-        </span>
+        <span aria-hidden="true"> / </span>
         <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
         <span class="slider-counter--total">{{ products_to_display }}</span>
       </div>
@@ -116,111 +195,28 @@
         class="slider-button slider-button--next"
         name="next"
         aria-label="{{ 'general.slider.next_slide' | t }}"
-        aria-controls="Slider-{{ section.id }}">
+        aria-controls="Slider-{{ section.id }}"
+      >
         {% render 'icon-caret' %}
       </button>
     </div>
-  {%- endif -%}</slider-component>
-<div class="center py-[36px] collection__view-all{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-  <a
-    href="{{ section.settings.collection.url }}"
-    class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px]  text-[14px] block mx-auto"
-    aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}">
-    {{ 'sections.featured_collection.view_all' | t }}
-  </a>
-</div>
-
-
-
-<slider-component class=" flex justify-center flex-col ml-[10px] lg:mx-auto my-[50px] ovverflow-y-hidden max-w-fit">
-  <div class="text-[24px] font-[Manrope] font-bold mb-4 lg:ml-0">
-  Top Selling</div>
-  <ul
-    id="Slider-{{ section.id }}"
-    class="flex overflow-x-auto lg:overflow-x-hidden mt-4 lg:size-fit lg:mx-auto overflow-y-hidden"
-    role="list"
-    aria-label="{{ 'general.slider.name' | t }}">
-    {%- for product in collections["top-selling"].products limit: section.settings.products_to_show -%}
-      <li
-        id="Slide-{{ section.id }}-{{ forloop.index }}"
-        class="rounded-[16px] grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        {% if settings.animations_reveal_on_scroll %}
-        data-cascade
-        style="--animation-order: {{ forloop.index }};"
-        {% endif %}>
-        {% render 'card-product'
-          , card_product: product
-          , media_aspect_ratio: section.settings.image_ratio
-          , image_shape: section.settings.image_shape
-          , show_secondary_image: section.settings.show_secondary_image
-          , show_vendor: section.settings.show_vendor
-          , show_rating: section.settings.show_rating
-          , show_quick_add: section.settings.enable_quick_add
-          , section_id: section.id
-          , content: product.content
-          , isHomePage: true
-        %}
-      </li>
-    {%- else -%}
-      {%- for i in (1..4) -%}
-        <li
-          class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-          data-cascade
-          style="--animation-order: {{ forloop.index }};"
-          {% endif %}>
-          {%- assign placeholder_image = 'product-apparel-' | append: forloop.rindex -%}
-          {% render 'card-product'
-            , show_vendor: section.settings.show_vendor
-            , placeholder_image: placeholder_image
-          %}
-        </li>
-      {%- endfor -%}
-    {%- endfor -%}
-  </ul>
-  {%- if show_mobile_slider or show_desktop_slider -%}
-    <div class="slider-buttons no-js-hidden">
-      <button
-        type="button"
-        class="slider-button slider-button--prev"
-        name="previous"
-        aria-label="{{ 'general.slider.previous_slide' | t }}"
-        aria-controls="Slider-{{ section.id }}">
-        {% render 'icon-caret' %}
-      </button>
-      <div class="slider-counter caption">
-        <span class="slider-counter--current">1</span>
-        <span aria-hidden="true">
-          /
-        </span>
-        <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-        <span class="slider-counter--total">{{ products_to_display }}</span>
-      </div>
-      <button
-        type="button"
-        class="slider-button slider-button--next"
-        name="next"
-        aria-label="{{ 'general.slider.next_slide' | t }}"
-        aria-controls="Slider-{{ section.id }}">
-        {% render 'icon-caret' %}
-      </button>
-    </div>
-  {%- endif -%}</slider-component>
+  {%- endif -%}
   <div class="center collection__view-all py-[36px] {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-  <a
-    href="{{ section.settings.collection.url }}"
-    class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px] text-[14px] block mx-auto"
-    aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}">
-    {{ 'sections.featured_collection.view_all' | t }}
-  </a>
-</div>
+    <a
+      href="{{ section.settings.collection.url }}"
+      class="font-[Manrope] font-bold rounded-[40px] py-[10px] px-[14px] w-[154px] text-white bg-black rounded-[16px] py-[14px] px-[40px] text-[14px] block mx-auto"
+      aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}"
+    >
+      {{ 'sections.featured_collection.view_all' | t }}
+    </a>
+  </div>
 
-<div class="flex flex-col lg:w-[600px] w-[100%] lg:ml-[140px] ml-[6px]">
-    <div class="font-[Manrope] text-[24px] lg:text-[36px] text-black font-bold">
-      Sign up to our newsletter.
-    </div>
+  <div class="flex flex-col lg:w-[600px] w-[100%] lg:ml-0 ml-[6px] mt-[100px]">
+    <div class="font-[Manrope] text-[24px] lg:text-[36px] text-black font-bold">Sign up to our newsletter.</div>
     <div class="text-black text-[14px] font-[Manrope]">
-      Stay in the loop with our newsletter – your passport to the latest scents, exclusive deals, captivating stories, and a sneak peek into what's cooking behind the scenes. Join our fragrance community and embark on a sensory journey with each email.
+      Stay in the loop with our newsletter – your passport to the latest scents, exclusive deals, captivating stories, and
+      a sneak peek into what's cooking behind the scenes. Join our fragrance community and embark on a sensory journey
+      with each email.
     </div>
     <div class="flex mt-[40px] mb-[60px] lg:flex-row flex-col">
       <div class="mr-4">
@@ -234,16 +230,16 @@
           autocorrect="off"
           autocapitalize="off"
           autocomplete="email"
-          placeholder="Email"
           {% if form.errors %}
-          autofocus
-          aria-invalid="true"
-          aria-describedby="ContactFooter-error"
+            autofocus
+            aria-invalid="true"
+            aria-describedby="ContactFooter-error"
           {% elsif form.posted_successfully? %}
-          aria-describedby="ContactFooter-success"
+            aria-describedby="ContactFooter-success"
           {% endif %}
           placeholder="{{ 'newsletter.label' | t }}"
-          required>
+          required
+        >
         <label class="field__label" for="NewsletterForm--{{ section.id }}">
           {{ 'newsletter.label' | t }}
         </label>
@@ -253,11 +249,14 @@
       </button>
     </div>
   </div>
+</slider-component>
+
+
 
 {% if section.settings.image_shape == 'arch' %}
-
-
-{% render 'mask-arch' %}{%- endif -%}</div>{% schema %}
+  {% render 'mask-arch' %}
+{%- endif -%}
+{% schema %}
 {
   "name": "t:sections.featured-collection.name",
   "tag": "section",
@@ -279,10 +278,12 @@
         {
           "value": "h2",
           "label": "t:sections.all.heading_size.options__1.label"
-        }, {
+        },
+        {
           "value": "h1",
           "label": "t:sections.all.heading_size.options__2.label"
-        }, {
+        },
+        {
           "value": "h0",
           "label": "t:sections.all.heading_size.options__3.label"
         }
@@ -300,7 +301,8 @@
       "id": "show_description",
       "label": "t:sections.featured-collection.settings.show_description.label",
       "default": false
-    }, {
+    },
+    {
       "type": "select",
       "id": "description_style",
       "label": "t:sections.featured-collection.settings.description_style.label",
@@ -308,20 +310,24 @@
         {
           "value": "body",
           "label": "t:sections.featured-collection.settings.description_style.options__1.label"
-        }, {
+        },
+        {
           "value": "subtitle",
           "label": "t:sections.featured-collection.settings.description_style.options__2.label"
-        }, {
+        },
+        {
           "value": "uppercase",
           "label": "t:sections.featured-collection.settings.description_style.options__3.label"
         }
       ],
       "default": "body"
-    }, {
+    },
+    {
       "type": "collection",
       "id": "collection",
       "label": "t:sections.featured-collection.settings.collection.label"
-    }, {
+    },
+    {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
@@ -329,7 +335,8 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.featured-collection.settings.products_to_show.label"
-    }, {
+    },
+    {
       "type": "range",
       "id": "columns_desktop",
       "min": 1,
@@ -337,17 +344,20 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.featured-collection.settings.columns_desktop.label"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "full_width",
       "label": "t:sections.featured-collection.settings.full_width.label",
       "default": false
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "show_view_all",
       "default": true,
       "label": "t:sections.featured-collection.settings.show_view_all.label"
-    }, {
+    },
+    {
       "type": "select",
       "id": "view_all_style",
       "label": "t:sections.featured-collection.settings.view_all_style.label",
@@ -355,47 +365,56 @@
         {
           "value": "link",
           "label": "t:sections.featured-collection.settings.view_all_style.options__1.label"
-        }, {
+        },
+        {
           "value": "outline",
           "label": "t:sections.featured-collection.settings.view_all_style.options__2.label"
-        }, {
+        },
+        {
           "value": "solid",
           "label": "t:sections.featured-collection.settings.view_all_style.options__3.label"
         }
       ],
       "default": "solid"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "enable_desktop_slider",
       "label": "t:sections.featured-collection.settings.enable_desktop_slider.label",
       "default": false
-    }, {
+    },
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "info": "t:sections.all.colors.has_cards_info",
       "default": "background-1"
-    }, {
+    },
+    {
       "type": "header",
       "content": "t:sections.featured-collection.settings.header.content"
-    }, {
+    },
+    {
       "type": "select",
       "id": "image_ratio",
       "options": [
         {
           "value": "adapt",
           "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
-        }, {
+        },
+        {
           "value": "portrait",
           "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
-        }, {
+        },
+        {
           "value": "square",
           "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
         }
       ],
       "default": "adapt",
       "label": "t:sections.featured-collection.settings.image_ratio.label"
-    }, {
+    },
+    {
       "type": "select",
       "id": "image_shape",
       "options": [
@@ -414,16 +433,20 @@
         {
           "value": "chevronleft",
           "label": "t:sections.all.image_shape.options__4.label"
-        }, {
+        },
+        {
           "value": "chevronright",
           "label": "t:sections.all.image_shape.options__5.label"
-        }, {
+        },
+        {
           "value": "diamond",
           "label": "t:sections.all.image_shape.options__6.label"
-        }, {
+        },
+        {
           "value": "parallelogram",
           "label": "t:sections.all.image_shape.options__7.label"
-        }, {
+        },
+        {
           "value": "round",
           "label": "t:sections.all.image_shape.options__8.label"
         }
@@ -431,31 +454,37 @@
       "default": "default",
       "label": "t:sections.all.image_shape.label",
       "info": "t:sections.all.image_shape.info"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "show_secondary_image",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_secondary_image.label"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "show_vendor",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_vendor.label"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "show_rating",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_rating.label",
       "info": "t:sections.featured-collection.settings.show_rating.info"
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "enable_quick_add",
       "default": false,
       "label": "t:sections.featured-collection.settings.enable_quick_buy.label"
-    }, {
+    },
+    {
       "type": "header",
       "content": "t:sections.featured-collection.settings.header_mobile.content"
-    }, {
+    },
+    {
       "type": "select",
       "id": "columns_mobile",
       "default": "2",
@@ -464,20 +493,24 @@
         {
           "value": "1",
           "label": "t:sections.featured-collection.settings.columns_mobile.options__1.label"
-        }, {
+        },
+        {
           "value": "2",
           "label": "t:sections.featured-collection.settings.columns_mobile.options__2.label"
         }
       ]
-    }, {
+    },
+    {
       "type": "checkbox",
       "id": "swipe_on_mobile",
       "default": false,
       "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
-    }, {
+    },
+    {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
-    }, {
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -486,7 +519,8 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
       "default": 36
-    }, {
+    },
+    {
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
@@ -502,4 +536,5 @@
       "name": "t:sections.featured-collection.presets.name"
     }
   ]
-}{% endschema %}
+}
+{% endschema %}

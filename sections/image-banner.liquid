@@ -62,7 +62,7 @@
         </div>
         <div class="font-[Manrope] text-[18px] text-center font-bold ">Find Your Escent</div>
 
-        <div class="flex my-4">
+        <div class="flex my-4 mr-[11px] ml-[8px]">
           <div class="flex flex-col justify-center w-[90%]">
             <div
               id="progress"
@@ -71,11 +71,11 @@
               <div class="h-2.5 rounded-full"></div>
             </div>
           </div>
-          <div id="progress_selector" class="mr-[10px]">1/2</div>
+          <div id="progress_selector" class="">1/2</div>
         </div>
 
-        <div id="page_1" class=" flex flex-col">
-          <div id="to_hide">
+        <div id="page_1" class=" flex flex-col mt-[2px]">
+          <div id="to_hide" class=" pt-[16px]">
             <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Occasion</div>
             <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">
               Please select your Occasion
@@ -83,19 +83,19 @@
             <div id="text_3" class="px-[20px]">
               <div
                 id="option_1"
-                class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Dailywear
               </div>
               <div
                 id="option_2"
-                class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Partywear
               </div>
               <div
                 id="option_3"
-                class="px-[10px] py-[18px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Traditional/Occasional
               </div>
@@ -139,6 +139,8 @@
   document.getElementById('text_2').innerHTML = 'Please Select Your Occasion';
   document.getElementById('progress').style.width = '5%';
   document.getElementById('back_modal').classList.add('invisible')
+    document.getElementById('progress_selector').innerHTML = '0/2';
+
   state=PAGE_1
 
   }
@@ -183,7 +185,7 @@
   document.getElementById('text_1').innerHTML = 'Occasion';
   document.getElementById('text_2').innerHTML = 'Please Select your Occasion';
   document.getElementById('progress').style.width = '5%';
-  document.getElementById('progress_selector').innerHTML = '1/2';
+  document.getElementById('progress_selector').innerHTML = '0/2';
   document.getElementById('progress').classList.remove('hidden');
   document.getElementById('progress_selector').classList.remove('hidden');
   document.getElementById('back_modal').classList.add('invisible')
@@ -257,7 +259,7 @@
   document.getElementById('option_3').innerHTML = 'Woody';
   document.getElementById('text_1').innerHTML = 'Vibe';
   document.getElementById('text_2').innerHTML = 'Please Select Your Vibe';
-  document.getElementById('progress_selector').innerHTML = '2/2';
+  document.getElementById('progress_selector').innerHTML = '1/2';
   document.getElementById('progress').style.width = '50%';
   document.getElementById("back_modal").classList.remove("invisible")
   state=PAGE_2
@@ -507,6 +509,7 @@ state=PAGE_3
           <div class="mt-[40px]">
             <button
               class="font-[Manrope] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white text-[14px]"
+              onclick= "location.href='collections/all'"
             >
               Shop Now
             </button>
@@ -560,6 +563,8 @@ state=PAGE_3
           <div class="">
             <button
               class="font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white mb-[8px] text-[14px]"
+              onclick= "location.href='collections/all'"
+              
             >
               Shop Now
             </button>
