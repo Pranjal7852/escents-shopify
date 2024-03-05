@@ -14,7 +14,7 @@
   }
 {%- endstyle -%}
 
-<div class="mx-[6px] lg:mx-auto color-{{ section.settings.color_scheme }} gradient mt-[100px] flex page-width flex flex-col lg:flex-row">
+<div class="mx-[6px] lg:mx-auto color-{{ section.settings.color_scheme }} gradient mt-[130px] flex page-width flex flex-col lg:flex-row">
   <div class="contact  page-width--narrow section-{{ section.id }}-padding ">
   <h2 class="text-[24px] mb-[36px] title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     CONTACT US 
@@ -106,6 +106,7 @@
                       name="contact[email]"
                       spellcheck="false"
                       autocapitalize="off"
+                      placeholder="Email"
                       value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
                       aria-required="true"
                       {% if form.errors contains 'email' %}
@@ -116,7 +117,7 @@
                     >
                     <label class="field__label" for="ContactForm-email">
                       {{- 'templates.contact.form.email' | t }}
-                      <span aria-hidden="true">*</span></label
+                      <span aria-hidden="true">Email</span></label
                     >
                     {%- if form.errors contains 'email' -%}
                       <small class="contact__field-error" id="ContactForm-email-error">
@@ -156,7 +157,7 @@
       </div>
     {%- endform -%}
   </div>
-  <div class="lg:ml-[50px] mx-auto">
+  <div class="lg:ml-[50px] mx-auto bg-[#FEF5EA]">
           <div class="text-[18px] my-[40px]">
             You can also call us or send us an Email.
           </div>

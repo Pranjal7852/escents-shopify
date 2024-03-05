@@ -1473,15 +1473,15 @@ summary::-webkit-details-marker {
   row-gap: var(--grid-mobile-vertical-spacing);
 }
 .my_grid_2{
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   margin-bottom: 2rem;
   padding: 0;
   list-style: none;
   -moz-column-gap: 20px;
        column-gap: 20px;
-  row-gap: var(--grid-mobile-vertical-spacing);
-
+  row-gap: 24px;
+  grid-template-columns: 48% 48%;
 }
 
 @media screen and (min-width: 750px) {
