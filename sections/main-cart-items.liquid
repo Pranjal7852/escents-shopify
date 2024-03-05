@@ -230,7 +230,7 @@
                           <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                             {{ 'products.product.quantity.label' | t }}
                           </label>
-                          <div class="quantity-popover-container{% if has_qty_rules or has_vol_pricing %} quantity-popover-container--hover{% endif %}">
+                          <div class="bg-[#FEF5EA] quantity-popover-container{% if has_qty_rules or has_vol_pricing %} quantity-popover-container--hover{% endif %}">
                             {%- if has_qty_rules or has_vol_pricing -%}
                               <button
                                 type="button"
@@ -240,7 +240,7 @@
                                 {% render 'icon-info' %}
                               </button>
                             {%- endif -%}
-                            <quantity-input class="quantity cart-quantity">
+                            <quantity-input class="bg-[#FEF5EA] quantity cart-quantity">
                               <button class="quantity__button no-js-hidden" name="minus" type="button">
                                 <span class="visually-hidden">
                                   {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
