@@ -39,14 +39,14 @@
   aria-hidden="true"
   class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70"
 >
-  <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center">
+  <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center  ">
     <!-- Modal content -->
-    <div class="relative bg-white rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
+    <div class="relative bg-[#FEF5EA] rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
       <!-- Modal header -->
       <div class="flex justify-center flex-col">
         <div class="flex justify-between">
           <div>
-            <button id="back_modal" class="flex m-8 w-fit invisible">
+            <button id="back_modal" class="flex m-8 w-fit invisible pointer-auto">
               <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M18.5001 7.99993C18.5001 8.19884 18.4211 8.38961 18.2804 8.53026C18.1398 8.67091 17.949 8.74993 17.7501 8.74993H3.06041L8.53073 14.2193C8.60041 14.289 8.65569 14.3717 8.6934 14.4628C8.73111 14.5538 8.75052 14.6514 8.75052 14.7499C8.75052 14.8485 8.73111 14.9461 8.6934 15.0371C8.65569 15.1281 8.60041 15.2109 8.53073 15.2806C8.46104 15.3502 8.37832 15.4055 8.28727 15.4432C8.19623 15.4809 8.09865 15.5003 8.0001 15.5003C7.90156 15.5003 7.80397 15.4809 7.71293 15.4432C7.62188 15.4055 7.53916 15.3502 7.46948 15.2806L0.719477 8.53055C0.649744 8.4609 0.594425 8.37818 0.556682 8.28713C0.518939 8.19609 0.499512 8.09849 0.499512 7.99993C0.499512 7.90137 0.518939 7.80377 0.556682 7.71272C0.594425 7.62168 0.649744 7.53896 0.719477 7.4693L7.46948 0.719304C7.61021 0.578573 7.80108 0.499512 8.0001 0.499512C8.19912 0.499512 8.39 0.578573 8.53073 0.719304C8.67146 0.860034 8.75052 1.05091 8.75052 1.24993C8.75052 1.44895 8.67146 1.63982 8.53073 1.78055L3.06041 7.24993H17.7501C17.949 7.24993 18.1398 7.32895 18.2804 7.4696C18.4211 7.61025 18.5001 7.80102 18.5001 7.99993Z"
@@ -55,7 +55,7 @@
             </button>
           </div>
           <div>
-            <button id="cross" class="flex m-8 w-fit" data-modal-hide="default-modal">
+            <button id="cross" class="flex m-8 w-fit cursor-auto" data-modal-hide="default-modal">
               {{ 'cross.svg' | asset_url | img_tag }}
             </button>
           </div>
@@ -83,19 +83,19 @@
             <div id="text_3" class="px-[20px]">
               <div
                 id="option_1"
-                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Dailywear
               </div>
               <div
                 id="option_2"
-                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Partywear
               </div>
               <div
                 id="option_3"
-                class="cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
                 Traditional/Occasional
               </div>
@@ -546,9 +546,9 @@ state=PAGE_3
     <div class="flex flex-col h-[95%]  justify-between">
       <div class="lg:mt-[32px]">
         <div class="lg:mx-[24px] mx-[16px] flex justify-between ">
-          <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] lg:ml-[24px]">///011</div>
+          <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">011</div>
           <div class="flex flex-col w-[150px] lg:w-fit">
-            <div class="font-[Manrope] font-bold lg:text-[18px] text-[12px] text-right lg:mr-[24px]">
+            <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px]">
               Accords: Fresh Spicy, Citrus, Woody, Marine
             </div>
           </div>

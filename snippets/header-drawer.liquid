@@ -5,6 +5,8 @@
   {% render 'header-drawer' %}
 {% endcomment %}
 
+
+
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
@@ -16,11 +18,18 @@
         {% render 'icon-close' %}
       </span>
     </summary>
-    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }} ">
+    <div id="menu-drawer" class="z-[-1] gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }} ">
       <div class="menu-drawer__inner-container">
-        <div class="menu-drawer__navigation-container">
+        <div class="menu-drawer__navigation-container bg-[#FEF5EA] flex flex-col">
+          
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu flex items-end flex-col" role="list">
+              <li class="HeaderDrawer-home font-[1.8rem] menu-drawer__menu-item"
+                      data-modal-target="default-modal"
+                      data-modal-toggle="default-modal"
+                      type="button"
+                      role="link" aria-disabled="true"
+              >Find my Escent</li>
               {%- for link in section.settings.menu.links -%}
                 <li>
                   {%- if link.links != blank -%}

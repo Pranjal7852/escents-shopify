@@ -1,3 +1,7 @@
+<script>
+  document.getElementById("judgeme_product_reviews").classList.add("mx-[8px]")
+</script>
+
 <section
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
@@ -100,7 +104,7 @@
                   </h2>
                 </a>
               </div>
-              
+              <hr class="h-[1px] bg-[#CED2D6]">
             {%- when 'price' -%}
               <div class="no-js-hidden lg:!mt-[48px]" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price',
@@ -424,7 +428,7 @@
             {%- when 'buy_buttons' -%}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
               
-              <div class="">
+              <div class="mt-[72px]">
                 <div class="text-center">Notes</div>
                 <img src ="{{  product.images.last.src | image_url }}" class="w-full"/>
                 <div class="font-bold">What are notes?</div>
