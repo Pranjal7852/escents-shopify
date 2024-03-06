@@ -1758,7 +1758,7 @@
       "name": "Product grid",
       "settings": {
         "products_per_page": {
-          "label": "Products per page"
+          "label": " "
         },
         "columns_desktop": {
           "label": "Number of columns on desktop"
