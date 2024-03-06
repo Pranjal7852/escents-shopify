@@ -109,7 +109,321 @@
     }
   }
 {%- endstyle -%}
-<script>
+
+<div
+  id="default-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70"
+>
+  <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center  ">
+    <!-- Modal content -->
+    <div class="relative bg-[#FEF5EA] rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
+      <!-- Modal header -->
+      <div class="flex justify-center flex-col">
+        <div class="flex justify-between">
+          <div>
+            <button id="back_modal" class="flex m-8 w-fit invisible pointer-auto">
+              <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.5001 7.99993C18.5001 8.19884 18.4211 8.38961 18.2804 8.53026C18.1398 8.67091 17.949 8.74993 17.7501 8.74993H3.06041L8.53073 14.2193C8.60041 14.289 8.65569 14.3717 8.6934 14.4628C8.73111 14.5538 8.75052 14.6514 8.75052 14.7499C8.75052 14.8485 8.73111 14.9461 8.6934 15.0371C8.65569 15.1281 8.60041 15.2109 8.53073 15.2806C8.46104 15.3502 8.37832 15.4055 8.28727 15.4432C8.19623 15.4809 8.09865 15.5003 8.0001 15.5003C7.90156 15.5003 7.80397 15.4809 7.71293 15.4432C7.62188 15.4055 7.53916 15.3502 7.46948 15.2806L0.719477 8.53055C0.649744 8.4609 0.594425 8.37818 0.556682 8.28713C0.518939 8.19609 0.499512 8.09849 0.499512 7.99993C0.499512 7.90137 0.518939 7.80377 0.556682 7.71272C0.594425 7.62168 0.649744 7.53896 0.719477 7.4693L7.46948 0.719304C7.61021 0.578573 7.80108 0.499512 8.0001 0.499512C8.19912 0.499512 8.39 0.578573 8.53073 0.719304C8.67146 0.860034 8.75052 1.05091 8.75052 1.24993C8.75052 1.44895 8.67146 1.63982 8.53073 1.78055L3.06041 7.24993H17.7501C17.949 7.24993 18.1398 7.32895 18.2804 7.4696C18.4211 7.61025 18.5001 7.80102 18.5001 7.99993Z"
+                  fill="black" />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <button id="cross" class="flex m-8 w-fit cursor-auto" data-modal-hide="default-modal">
+              {{ 'cross.svg' | asset_url | img_tag }}
+            </button>
+          </div>
+        </div>
+        <div class="font-[Manrope] text-[18px] text-center font-bold ">Find Your Escent</div>
+
+        <div class="flex my-4 mr-[11px] ml-[8px]">
+          <div class="flex flex-col justify-center w-[90%]">
+            <div
+              id="progress"
+              class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500"
+            >
+              <div class="h-2.5 rounded-full"></div>
+            </div>
+          </div>
+          <div id="progress_selector" class="">1/2</div>
+        </div>
+
+        <div id="page_1" class=" flex flex-col mt-[2px]">
+          <div id="to_hide" class=" pt-[16px]">
+            <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Occasion</div>
+            <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">
+              Please select your Occasion
+            </div>
+            <div id="text_3" class="px-[20px]">
+              <div
+                id="option_1"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+              >
+                Dailywear
+              </div>
+              <div
+                id="option_2"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+              >
+                Partywear
+              </div>
+              <div
+                id="option_3"
+                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
+              >
+                Traditional/Occasional
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+{%- if settings.cart_type == "drawer" -%}
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="icon-reset" class="icon icon-close"  fill="none" viewBox="0 0 18 18" stroke="currentColor">
+    <circle r="8.5" cy="9" cx="9" stroke-opacity="0.2"/>
+    <path d="M6.82972 6.82915L1.17193 1.17097" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
+    <path d="M1.22896 6.88502L6.77288 1.11523" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
+  </symbol>
+
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+  </symbol>
+</svg>
+
+{%- liquid
+  for block in section.blocks
+    if block.type == '@app'
+      assign has_app_block = true
+    endif
+  endfor
+-%}
+
+{% comment %} <sticky-header data_sticky-type="{{ section.settings.sticky_header_type }}" class="absolute header-wrapper ">
+  aa
+</sticky-header> {% endcomment %}
+
+<{% if section.settings.sticky_header_type != 'none' %}div data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="fixed top-0 w-[100%] backdrop-blur-xl bg-black/30 header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  {%- liquid
+    assign social_links = false
+    assign localization_forms = false
+
+    if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank
+      assign social_links = true
+    endif
+
+    if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
+      assign localization_forms = true
+    endif
+  -%}
+  <header class="z-30 flex flex-row-reverse lg:flex-row header justify-between header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} lg:mx-4 {% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
+    {%- liquid
+      if section.settings.menu != blank
+        render 'header-drawer'
+      endif
+
+      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+        render 'header-search', input_id: 'Search-In-Modal-1'
+      endif
+    -%}
+    <div class="flex justify-between w-[100%]">
+      {%- if section.settings.logo_position != 'middle-center' -%}
+        {%- if request.page_type == 'index' -%}
+          <h1 class="header__heading flex items-center">
+        {%- endif -%}
+            <a href="{{ routes.root_url }}" class="font-bold inline-flex align-center header__heading-link link link--text ">
+              {%- if settings.logo != blank -%}
+                <div class="header__heading-logo-wrapper">
+                  {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                  {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                  {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+                  {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                  {{ settings.logo | image_url: width: 600 | image_tag:
+                    class: 'header__heading-logo motion-reduce',
+                    widths: widths,
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt,
+                    sizes: sizes,
+                    preload: true
+                  }}
+                </div>
+              {%- else -%}
+                <span class="h2 text-white font-bold flex flex-col justify-center transform transition duration-100 ease-in-out hover:scale-110">{{ shop.name }}</span>
+              {%- endif -%}
+            </a>
+        {%- if request.page_type == 'index' -%}
+          </h1>
+        {%- endif -%}
+      {%- endif -%}
+    
+      <div class="flex ">
+        {%- liquid
+          if section.settings.menu != blank
+            if section.settings.menu_type_desktop == 'dropdown'
+              render 'header-dropdown-menu'
+            elsif section.settings.menu_type_desktop != 'drawer'
+              render 'header-mega-menu'
+            endif
+          endif
+        %}
+
+        {%- if section.settings.logo_position == 'middle-center' -%}
+          {%- if request.page_type == 'index' -%}
+            <h1 class="header__heading">
+          {%- endif -%}
+              <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
+                {%- if settings.logo != blank -%}
+                  <div class="header__heading-logo-wrapper">
+                    {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                    {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                    {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
+                    {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                    {{ settings.logo | image_url: width: 600 | image_tag:
+                      class: 'header__heading-logo',
+                      widths: widths,
+                      height: logo_height,
+                      width: settings.logo_width,
+                      alt: logo_alt,
+                      sizes: sizes,
+                      preload: true
+                    }}
+                  </div>
+                {%- else -%}
+                  <span class="h2">{{ shop.name }}</span>
+                {%- endif -%}
+              </a>
+          {%- if request.page_type == 'index' -%}
+            </h1>
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
+          <div class="desktop-localization-wrapper">
+            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+              <noscript class="small-hide medium-hide">
+                {%- form 'localization', id: 'HeaderCountryMobileFormNoScript', class: 'localization-form' -%}
+                  <div class="localization-form__select">
+                    <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScript">{{ 'localization.country_label' | t }}</h2>
+                    <select class="localization-selector link" name="country_code" aria-labelledby="HeaderCountryMobileLabelNoScript">
+                      {%- for country in localization.available_countries -%}
+                        <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                          {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon-caret' %}
+                  </div>
+                  <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
+                {%- endform -%}
+              </noscript>
+
+              <localization-form class="small-hide medium-hide no-js-hidden">
+                {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+                  <div>
+                    <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
+                    {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
+                  </div>
+                {%- endform -%}
+              </localization-form>
+            {% endif %}
+
+            {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+              <noscript class="small-hide medium-hide">
+                {%- form 'localization', id: 'HeaderLanguageMobileFormNoScript', class: 'localization-form' -%}
+                  <div class="localization-form__select">
+                    <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScript">{{ 'localization.language_label' | t }}</h2>
+                    <select class="localization-selector link" name="locale_code" aria-labelledby="HeaderLanguageMobileLabelNoScript">
+                      {%- for language in localization.available_languages -%}
+                        <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                          {{ language.endonym_name | capitalize }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon-caret' %}
+                  </div>
+                  <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
+                {%- endform -%}
+              </noscript>
+
+              <localization-form class="small-hide medium-hide no-js-hidden">
+                {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+                  <div>
+                    <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
+                    {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
+                  </div>
+                {%- endform -%}
+              </localization-form>
+            {%- endif -%}
+          </div>
+          {% render 'header-search', input_id: 'Search-In-Modal' %}
+
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
+              {% render 'icon-account' %}
+              <span class="visually-hidden">
+                {%- liquid
+                  if customer
+                    echo 'customer.account_fallback' | t
+                  else
+                    echo 'customer.log_in' | t
+                  endif
+                -%}
+              </span>
+            </a>
+          {%- endif -%}
+
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {% render block %}
+            {%- endcase -%}
+          {%- endfor -%}
+
+          <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset mr-1 ml-[24px]" id="cart-icon-bubble">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transform transition duration-100 ease-in-out hover:scale-110">
+                <path d="M20.25 6H16.5C16.5 4.80653 16.0259 3.66193 15.182 2.81802C14.3381 1.97411 13.1935 1.5 12 1.5C10.8065 1.5 9.66193 1.97411 8.81802 2.81802C7.97411 3.66193 7.5 4.80653 7.5 6H3.75C3.35218 6 2.97064 6.15804 2.68934 6.43934C2.40804 6.72064 2.25 7.10218 2.25 7.5V18.75C2.25 19.1478 2.40804 19.5294 2.68934 19.8107C2.97064 20.092 3.35218 20.25 3.75 20.25H20.25C20.6478 20.25 21.0294 20.092 21.3107 19.8107C21.592 19.5294 21.75 19.1478 21.75 18.75V7.5C21.75 7.10218 21.592 6.72064 21.3107 6.43934C21.0294 6.15804 20.6478 6 20.25 6ZM12 3C12.7956 3 13.5587 3.31607 14.1213 3.87868C14.6839 4.44129 15 5.20435 15 6H9C9 5.20435 9.31607 4.44129 9.87868 3.87868C10.4413 3.31607 11.2044 3 12 3ZM20.25 18.75H3.75V7.5H20.25V18.75Z" fill="#E5E7EA"/>
+            </svg>
+
+            <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+            {%- if cart != empty -%}
+            <div class="cart-count-bubble">
+                {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true">{{ cart.item_count }}</span>
+                {%- endif -%}
+                <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            </div>
+            {%- endif -%}
+        </a>
+
+        </div>
+      </div>
+    </div>
+  </header>
+</{% if section.settings.sticky_header_type != 'none' %}div{% else %}div{% endif %}>
+
+{%- if settings.cart_type == "notification" -%}
+  {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
+{%- endif -%}
+
+{% javascript %}
   const PAGE_1 = 'page_1';
   const PAGE_2 = 'page_2';
   const PAGE_3 = 'page_3';
@@ -441,320 +755,7 @@
 state=PAGE_3 
   }
   }
-</script>
-<div
-  id="default-modal"
-  tabindex="-1"
-  aria-hidden="true"
-  class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-70"
->
-  <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center  ">
-    <!-- Modal content -->
-    <div class="relative bg-[#FEF5EA] rounded-[16px] shadow w-[328px] h-[429px] shadow-2xl">
-      <!-- Modal header -->
-      <div class="flex justify-center flex-col">
-        <div class="flex justify-between">
-          <div>
-            <button id="back_modal" class="flex m-8 w-fit invisible pointer-auto">
-              <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M18.5001 7.99993C18.5001 8.19884 18.4211 8.38961 18.2804 8.53026C18.1398 8.67091 17.949 8.74993 17.7501 8.74993H3.06041L8.53073 14.2193C8.60041 14.289 8.65569 14.3717 8.6934 14.4628C8.73111 14.5538 8.75052 14.6514 8.75052 14.7499C8.75052 14.8485 8.73111 14.9461 8.6934 15.0371C8.65569 15.1281 8.60041 15.2109 8.53073 15.2806C8.46104 15.3502 8.37832 15.4055 8.28727 15.4432C8.19623 15.4809 8.09865 15.5003 8.0001 15.5003C7.90156 15.5003 7.80397 15.4809 7.71293 15.4432C7.62188 15.4055 7.53916 15.3502 7.46948 15.2806L0.719477 8.53055C0.649744 8.4609 0.594425 8.37818 0.556682 8.28713C0.518939 8.19609 0.499512 8.09849 0.499512 7.99993C0.499512 7.90137 0.518939 7.80377 0.556682 7.71272C0.594425 7.62168 0.649744 7.53896 0.719477 7.4693L7.46948 0.719304C7.61021 0.578573 7.80108 0.499512 8.0001 0.499512C8.19912 0.499512 8.39 0.578573 8.53073 0.719304C8.67146 0.860034 8.75052 1.05091 8.75052 1.24993C8.75052 1.44895 8.67146 1.63982 8.53073 1.78055L3.06041 7.24993H17.7501C17.949 7.24993 18.1398 7.32895 18.2804 7.4696C18.4211 7.61025 18.5001 7.80102 18.5001 7.99993Z"
-                  fill="black" />
-              </svg>
-            </button>
-          </div>
-          <div>
-            <button id="cross" class="flex m-8 w-fit cursor-auto" data-modal-hide="default-modal">
-              {{ 'cross.svg' | asset_url | img_tag }}
-            </button>
-          </div>
-        </div>
-        <div class="font-[Manrope] text-[18px] text-center font-bold ">Find Your Escent</div>
 
-        <div class="flex my-4 mr-[11px] ml-[8px]">
-          <div class="flex flex-col justify-center w-[90%]">
-            <div
-              id="progress"
-              class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500"
-            >
-              <div class="h-2.5 rounded-full"></div>
-            </div>
-          </div>
-          <div id="progress_selector" class="">1/2</div>
-        </div>
-
-        <div id="page_1" class=" flex flex-col mt-[2px]">
-          <div id="to_hide" class=" pt-[16px]">
-            <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Occasion</div>
-            <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center">
-              Please select your Occasion
-            </div>
-            <div id="text_3" class="px-[20px]">
-              <div
-                id="option_1"
-                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
-              >
-                Dailywear
-              </div>
-              <div
-                id="option_2"
-                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
-              >
-                Partywear
-              </div>
-              <div
-                id="option_3"
-                class="hover:text-white hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
-              >
-                Traditional/Occasional
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
-{%- if settings.cart_type == "drawer" -%}
-  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
-
-<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
-  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
-  </symbol>
-
-  <symbol id="icon-reset" class="icon icon-close"  fill="none" viewBox="0 0 18 18" stroke="currentColor">
-    <circle r="8.5" cy="9" cx="9" stroke-opacity="0.2"/>
-    <path d="M6.82972 6.82915L1.17193 1.17097" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
-    <path d="M1.22896 6.88502L6.77288 1.11523" stroke-linecap="round" stroke-linejoin="round" transform="translate(5 5)"/>
-  </symbol>
-
-  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
-    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
-  </symbol>
-</svg>
-
-{%- liquid
-  for block in section.blocks
-    if block.type == '@app'
-      assign has_app_block = true
-    endif
-  endfor
--%}
-
-{% comment %} <sticky-header data_sticky-type="{{ section.settings.sticky_header_type }}" class="absolute header-wrapper ">
-  aa
-</sticky-header> {% endcomment %}
-
-<{% if section.settings.sticky_header_type != 'none' %}div data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="fixed top-0 w-[100%] backdrop-blur-xl bg-black/30 header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  {%- liquid
-    assign social_links = false
-    assign localization_forms = false
-
-    if settings.social_twitter_link != blank or settings.social_facebook_link != blank or settings.social_pinterest_link != blank or settings.social_instagram_link != blank or settings.social_youtube_link != blank or settings.social_vimeo_link != blank or settings.social_tiktok_link != blank or settings.social_tumblr_link != blank or settings.social_snapchat_link != blank
-      assign social_links = true
-    endif
-
-    if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
-      assign localization_forms = true
-    endif
-  -%}
-  <header class="z-30 flex flex-row-reverse lg:flex-row header justify-between header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} lg:mx-4 {% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
-    {%- liquid
-      if section.settings.menu != blank
-        render 'header-drawer'
-      endif
-
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
-        render 'header-search', input_id: 'Search-In-Modal-1'
-      endif
-    -%}
-    <div class="flex justify-between w-[100%]">
-      {%- if section.settings.logo_position != 'middle-center' -%}
-        {%- if request.page_type == 'index' -%}
-          <h1 class="header__heading flex items-center">
-        {%- endif -%}
-            <a href="{{ routes.root_url }}" class="font-bold inline-flex align-center header__heading-link link link--text ">
-              {%- if settings.logo != blank -%}
-                <div class="header__heading-logo-wrapper">
-                  {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                  {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                  {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
-                  {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                  {{ settings.logo | image_url: width: 600 | image_tag:
-                    class: 'header__heading-logo motion-reduce',
-                    widths: widths,
-                    height: logo_height,
-                    width: settings.logo_width,
-                    alt: logo_alt,
-                    sizes: sizes,
-                    preload: true
-                  }}
-                </div>
-              {%- else -%}
-                <span class="h2 text-white font-bold flex flex-col justify-center transform transition duration-100 ease-in-out hover:scale-110">{{ shop.name }}</span>
-              {%- endif -%}
-            </a>
-        {%- if request.page_type == 'index' -%}
-          </h1>
-        {%- endif -%}
-      {%- endif -%}
-    
-      <div class="flex ">
-        {%- liquid
-          if section.settings.menu != blank
-            if section.settings.menu_type_desktop == 'dropdown'
-              render 'header-dropdown-menu'
-            elsif section.settings.menu_type_desktop != 'drawer'
-              render 'header-mega-menu'
-            endif
-          endif
-        %}
-
-        {%- if section.settings.logo_position == 'middle-center' -%}
-          {%- if request.page_type == 'index' -%}
-            <h1 class="header__heading">
-          {%- endif -%}
-              <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-                {%- if settings.logo != blank -%}
-                  <div class="header__heading-logo-wrapper">
-                    {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-                    {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
-                    {% capture sizes %}(min-width: 750px) {{ settings.logo_width }}px, 50vw{% endcapture %}
-                    {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
-                    {{ settings.logo | image_url: width: 600 | image_tag:
-                      class: 'header__heading-logo',
-                      widths: widths,
-                      height: logo_height,
-                      width: settings.logo_width,
-                      alt: logo_alt,
-                      sizes: sizes,
-                      preload: true
-                    }}
-                  </div>
-                {%- else -%}
-                  <span class="h2">{{ shop.name }}</span>
-                {%- endif -%}
-              </a>
-          {%- if request.page_type == 'index' -%}
-            </h1>
-          {%- endif -%}
-        {%- endif -%}
-
-        <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
-          <div class="desktop-localization-wrapper">
-            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-              <noscript class="small-hide medium-hide">
-                {%- form 'localization', id: 'HeaderCountryMobileFormNoScript', class: 'localization-form' -%}
-                  <div class="localization-form__select">
-                    <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScript">{{ 'localization.country_label' | t }}</h2>
-                    <select class="localization-selector link" name="country_code" aria-labelledby="HeaderCountryMobileLabelNoScript">
-                      {%- for country in localization.available_countries -%}
-                        <option value="{{ country.iso_code }}" {%- if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                          {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                    {% render 'icon-caret' %}
-                  </div>
-                  <button class="button button--tertiary">{{ 'localization.update_country' | t }}</button>
-                {%- endform -%}
-              </noscript>
-
-              <localization-form class="small-hide medium-hide no-js-hidden">
-                {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
-                  <div>
-                    <h2 class="visually-hidden" id="HeaderCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                    {%- render 'country-localization', localPosition: 'HeaderCountry' -%}
-                  </div>
-                {%- endform -%}
-              </localization-form>
-            {% endif %}
-
-            {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-              <noscript class="small-hide medium-hide">
-                {%- form 'localization', id: 'HeaderLanguageMobileFormNoScript', class: 'localization-form' -%}
-                  <div class="localization-form__select">
-                    <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScript">{{ 'localization.language_label' | t }}</h2>
-                    <select class="localization-selector link" name="locale_code" aria-labelledby="HeaderLanguageMobileLabelNoScript">
-                      {%- for language in localization.available_languages -%}
-                        <option value="{{ language.iso_code }}" lang="{{ language.iso_code }}" {%- if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                          {{ language.endonym_name | capitalize }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                    {% render 'icon-caret' %}
-                  </div>
-                  <button class="button button--tertiary">{{ 'localization.update_language' | t }}</button>
-                {%- endform -%}
-              </noscript>
-
-              <localization-form class="small-hide medium-hide no-js-hidden">
-                {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
-                  <div>
-                    <h2 class="visually-hidden" id="HeaderLanguageLabel">{{ 'localization.language_label' | t }}</h2>
-                    {%- render 'language-localization', localPosition: 'HeaderLanguage' -%}
-                  </div>
-                {%- endform -%}
-              </localization-form>
-            {%- endif -%}
-          </div>
-          {% render 'header-search', input_id: 'Search-In-Modal' %}
-
-          {%- if shop.customer_accounts_enabled -%}
-            <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-              {% render 'icon-account' %}
-              <span class="visually-hidden">
-                {%- liquid
-                  if customer
-                    echo 'customer.account_fallback' | t
-                  else
-                    echo 'customer.log_in' | t
-                  endif
-                -%}
-              </span>
-            </a>
-          {%- endif -%}
-
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when '@app' -%}
-                {% render block %}
-            {%- endcase -%}
-          {%- endfor -%}
-
-          <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset mr-1 ml-[24px]" id="cart-icon-bubble">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="transform transition duration-100 ease-in-out hover:scale-110">
-                <path d="M20.25 6H16.5C16.5 4.80653 16.0259 3.66193 15.182 2.81802C14.3381 1.97411 13.1935 1.5 12 1.5C10.8065 1.5 9.66193 1.97411 8.81802 2.81802C7.97411 3.66193 7.5 4.80653 7.5 6H3.75C3.35218 6 2.97064 6.15804 2.68934 6.43934C2.40804 6.72064 2.25 7.10218 2.25 7.5V18.75C2.25 19.1478 2.40804 19.5294 2.68934 19.8107C2.97064 20.092 3.35218 20.25 3.75 20.25H20.25C20.6478 20.25 21.0294 20.092 21.3107 19.8107C21.592 19.5294 21.75 19.1478 21.75 18.75V7.5C21.75 7.10218 21.592 6.72064 21.3107 6.43934C21.0294 6.15804 20.6478 6 20.25 6ZM12 3C12.7956 3 13.5587 3.31607 14.1213 3.87868C14.6839 4.44129 15 5.20435 15 6H9C9 5.20435 9.31607 4.44129 9.87868 3.87868C10.4413 3.31607 11.2044 3 12 3ZM20.25 18.75H3.75V7.5H20.25V18.75Z" fill="#E5E7EA"/>
-            </svg>
-
-            <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-            {%- if cart != empty -%}
-            <div class="cart-count-bubble">
-                {%- if cart.item_count < 100 -%}
-                <span aria-hidden="true">{{ cart.item_count }}</span>
-                {%- endif -%}
-                <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-            </div>
-            {%- endif -%}
-        </a>
-
-        </div>
-      </div>
-    </div>
-  </header>
-</{% if section.settings.sticky_header_type != 'none' %}div{% else %}div{% endif %}>
-
-{%- if settings.cart_type == "notification" -%}
-  {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
-{%- endif -%}
-
-{% javascript %}
   class StickyHeader extends HTMLElement {
     constructor() {
       super();
