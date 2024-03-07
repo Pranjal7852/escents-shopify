@@ -531,36 +531,36 @@
   // name,image_url,product page
   let m = {
   Dailywear: {
-  Fresh: [['Crest', 'https://source.unsplash.com/random', 'https://escents.in/products/crest']],
-  Floral: [['Mirage', 'https://source.unsplash.com/random', '']],
-  Woody: [['Eclipse', 'https://source.unsplash.com/random', '']],
+  Fresh: [['Crest', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_5.jpg?v=1709751400', 'https://escents.in/products/crest']],
+  Floral: [['Mirage', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_2.jpg?v=1709751715', 'https://escents.in/products/mirage']],
+  Woody: [['Eclipse', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_8.jpg?v=1709751561', 'https://escents.in/products/eclipse']],
   },
   Partywear: {
   Fresh: [
-  ['Crest', 'https://source.unsplash.com/random', 'https://escents.in/products/crest'],
-  ['Elixer', '', ''],
+  ['Crest', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_5.jpg?v=1709751400', 'https://escents.in/products/crest'],
+  ['Elixer', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_8.jpg?v=1709751561', 'https://escents.in/products/elixir'],
   ],
   Floral: [
-  ['Aura', 'https://source.unsplash.com/random', ''],
-  ['Elixer', '', ''],
+  ['Aura', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_3.jpg?v=1709751212', 'https://escents.in/products/aura'],
+  ['Elixer', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR4.jpg?v=1709751645', 'https://escents.in/products/elixir'],
   ],
   Woody: [
-  ['Tuxedo', 'https://source.unsplash.com/random', ''],
-  ['Elixer', '', ''],
+  ['Tuxedo', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR5_6044a27f-75d4-4fca-8df1-ee3b80913217.jpg?v=1709755217', 'https://escents.in/products/tuxedo'],
+  ['Elixer', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR4.jpg?v=1709751645', 'https://escents.in/products/elixir'],
   ],
   },
   'Traditional/Occasional': {
   Fresh: [
-  ['Serenade', '', ''],
-  ['Auram', '', ''],
+  ['Vigor', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_12.jpg?v=1709751783', 'https://escents.in/products/vigor'],
+  ['Auram', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
   ],
   Floral: [
-  ['Aura', '', ''],
-  ['Auram', '', ''],
+  ['Aura', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_3.jpg?v=1709751212', 'https://escents.in/products/aura'],
+  ['Auram', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
   ],
   Woody: [
-  ['Tuxedo', 'https://source.unsplash.com/random', ''],
-  ['Auram', 'https://source.unsplash.com/random', ''],
+  ['Tuxedo', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR5_6044a27f-75d4-4fca-8df1-ee3b80913217.jpg?v=1709755217', 'https://escents.in/products/tuxedo'],
+  ['Auram', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
   ],
   },
   };
@@ -603,7 +603,7 @@
   selectedPage1option +
   ' perfume, ' +
   name +
-  '! Your scent journey just got a golden touch. 🌲✨';
+  '! Your scent journey just got a golden touch. 🌲✨ ';
 
   let child = document.createElement('div');
   child.id = 'text_prompt';
@@ -616,7 +616,8 @@
   document.getElementById('page_1').appendChild(child);
 
   let image_container = document.createElement('img');
-  image_container.src = product_url;
+  image_container.src = image_url;
+  console.log(image_container)
   image_container.id = 'image_container';
   image_container.classList.add('w-[200px]');
   image_container.classList.add('h-[200px]');
