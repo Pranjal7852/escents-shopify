@@ -1415,11 +1415,9 @@ a.product__text {
 }
 
 .product-media-container .media {
-  padding-top: var(--ratio-percent);
 }
 
 .product-media-container.constrain-height .media {
-  padding-top: min(var(--constrained-height), var(--ratio-percent));
 }
 
 @media screen and (max-width: 749px) {
@@ -1452,7 +1450,7 @@ a.product__text {
   .product-media-container.media-fit-cover,
   .product-media-container.media-fit-cover .product__modal-opener,
   .product-media-container.media-fit-cover .media {
-    height: 100%;
+   
   }
 
   .product-media-container.media-fit-cover .deferred-media__poster img {

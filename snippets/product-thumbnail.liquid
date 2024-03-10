@@ -91,12 +91,10 @@
       -%}
     </span>
     {%- render 'loading-spinner' -%}
-    <div class="rounded-[20px] product__media media media--transparent">
-      {{ media.preview_image | image_url: width: 1946 | image_tag:
-        loading: lazy,
-        sizes: sizes
-      }}
-    </div>
+      <div class="rounded-[20px] product__media media media--transparent flex justify-center flex-col ">
+        <img src="{{ media.preview_image | image_url}}" class="aspect-[4/5] md:h-[70vh] h-[45vh]"/>
+      </div>
+    
     <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
       <span class="visually-hidden">
         {{ 'products.product.media.open_media' | t: index: position }}
