@@ -7,6 +7,7 @@
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
+    
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
@@ -99,5 +100,22 @@
         {%- endif -%}
       </li>
     {%- endfor -%}
+
+    <li>
+      <button
+            id="HeaderMenu-find-my-escent"
+            class="transform transition duration-100 ease-in-out hover:scale-110 header__menu-item list-menu__item link link--text uppercase mr-[48px]"
+            data-modal-target="default-modal"
+            data-modal-toggle="default-modal"
+          >
+            <span
+              {%- if link.current %}
+                class="text-white header__active-menu-item"
+              {% endif %}
+            >
+              Find My Escent
+            </span>
+        </button>
+    </li>
   </ul>
 </nav>
