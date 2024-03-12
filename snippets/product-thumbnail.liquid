@@ -92,7 +92,7 @@
     </span>
     {%- render 'loading-spinner' -%}
       <div class="rounded-[20px] product__media media media--transparent flex justify-center flex-col ">
-        <img src="{{ media.preview_image | image_url}}" class="aspect-[4/5] md:h-[70vh] h-[45vh]"/>
+        <img src="{{ media.preview_image | image_url}}" class="aspect-[4/5] md:w-[28vw]"/>
       </div>
     
     <button class="product__media-toggle quick-add-hidden product__media-zoom-{{ section.settings.image_zoom }}" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
