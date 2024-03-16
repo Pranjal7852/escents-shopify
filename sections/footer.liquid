@@ -38,37 +38,37 @@
 <footer class="mt-[100px] bg-[#FEF5EA]">
   <div class="flex  bg-[#FEF5EA]">
      
-    <div class="bg-black h-[506px] lg:h-[324px] w-[100%]">
+    <div class="bg-black h-[506px] lg:h-[345px] w-[100%]">
       <div class="flex lg:flex-row flex-col items-center justify-around h-[100%] py-[30px]">
-        <div class="lg:h-full h-[70%]">
+        <div class="lg:h-full mb-[45px] lg:mb-0">
           <div class="font-[Manrope] lg:text-[48px] text-[24px] text-white font-bold m-[12px] lg:mb-[0px] text-center lg:text-left" >
             ESCENTS
           </div>
           <div class="flex items-center flex-col my-[10px]">
-            <div class="text-[#596066] font-[Manrope] text-[14px]">© Copyright 2024. Escents.</div>
+            <div class="text-[#596066] font-[Manrope] text-[14px]">© Escents. All Rights Reserved.</div>
           </div>
-      </div>
+        </div>
         <div class="h-full ">
-          <div class="flex lg:my-[10px] justify-between">
+          <div class="flex mb-[16px] justify-between ">
             <!-- Footer menu -->
-            <div>
+            <div class="mr-[48px]">
               {% for link in linklists['main-menu'].links -%}
-                <div class="text-white my-[16px] font-[Manrope] uppercase text-[14px]">
+                <div class="text-white my-[26px] font-[Manrope] uppercase text-[14px]">
                   {{ link.title | link_to: link.url }}
                 </div>
               {%- endfor %}
             </div>
             <div>
               {% for link in linklists['footer-menu'].links -%}
-                <div class="text-white my-[16px] font-[Manrope] uppercase text-[14px]">
+                <div class="text-white my-[26px] font-[Manrope] uppercase text-[14px]">
                   {{ link.title | link_to: link.url }}
                 </div>
               {%- endfor %}
             </div>
-          </div>
-          <div class="flex flex-col items-center ">
-            <div class="flex mb-6">
-              <a class="text-white m-2 pr-[25px]" href="https://instagram.com/escents.in?igshid=YmMyMTA2M2Y=" target="_blank">
+        </div>
+          <div class="flex flex-col items-normal ">
+            <div class="flex mb-6 justify-between">
+              <a class="text-white " href="https://instagram.com/escents.in?igshid=YmMyMTA2M2Y=" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                 <g clip-path="url(#clip0_474_310)">
                 <path d="M22.967 0H10.033C4.77647 0 0.5 4.27647 0.5 9.53297V22.467C0.5 27.7235 4.77647 32 10.033 32H22.967C28.2235 32 32.5 27.7235 32.5 22.467V9.53297C32.4999 4.27647 28.2235 0 22.967 0ZM29.2808 22.467C29.2808 25.954 26.454 28.7808 22.967 28.7808H10.033C6.546 28.7808 3.7192 25.954 3.7192 22.467V9.53297C3.7192 6.04594 6.546 3.2192 10.033 3.2192H22.967C26.454 3.2192 29.2808 6.04594 29.2808 9.53297V22.467Z" fill="#D9D9D9"/>
@@ -82,7 +82,7 @@
                 </defs>
                 </svg>
               </a>
-              <a class="text-white m-2 pr-[25px]"  target="_blank" href="https://www.facebook.com/profile.php?id=100089192964406">
+              <a class="text-white "  target="_blank" href="https://www.facebook.com/profile.php?id=100089192964406">
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                 <g clip-path="url(#clip0_474_315)">
                 <path d="M28.5 0H4.5C2.294 0 0.5 1.794 0.5 4V28C0.5 30.206 2.294 32 4.5 32H28.5C30.706 32 32.5 30.206 32.5 28V4C32.5 1.794 30.706 0 28.5 0Z" fill="white"/>
@@ -95,7 +95,7 @@
                 </defs>
                 </svg>
                 </a>
-              <a class="text-white m-2 pr-[25px]" href="https://www.linkedin.com/company/escents-india/?miniCompanyUrn=urn%3Ali%3Afs_miniCompany%3A92849067&lipi=urn%3Ali%3Apage%3Ad_flagship3_company_admin%3BnO5%2BImGmQ1WqgVobLnj4lg%3D%3D" target="_blank">
+              <a class="text-white " href="https://www.linkedin.com/company/escents-india/?miniCompanyUrn=urn%3Ali%3Afs_miniCompany%3A92849067&lipi=urn%3Ali%3Apage%3Ad_flagship3_company_admin%3BnO5%2BImGmQ1WqgVobLnj4lg%3D%3D" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                 <g clip-path="url(#clip0_474_319)">
                 <path d="M28.1364 0H4.86364C2.45367 0 0.5 1.95367 0.5 4.36364V27.6364C0.5 30.0463 2.45367 32 4.86364 32H28.1364C30.5463 32 32.5 30.0463 32.5 27.6364V4.36364C32.5 1.95367 30.5463 0 28.1364 0Z" fill="white"/>
@@ -108,7 +108,7 @@
                 </defs>
                 </svg>
               </a>
-              <a class="text-white flex flex-col justify-center m-2 pr-[25px]" href="https://www.youtube.com/channel/UCZ_owEMVuFdGFizTftCjqaA" target="_blank">
+              <a class="text-white flex flex-col justify-center " href="https://www.youtube.com/channel/UCZ_owEMVuFdGFizTftCjqaA" target="_blank">
                 {% comment %} youtube {% endcomment %}
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="24" viewBox="0 0 33 24" fill="none">
                 <path d="M25.854 0.678223H7.14599C3.47551 0.678223 0.5 3.65373 0.5 7.32421V16.6762C0.5 20.3467 3.47551 23.3222 7.14599 23.3222H25.854C29.5245 23.3222 32.5 20.3467 32.5 16.6762V7.32421C32.5 3.65373 29.5245 0.678223 25.854 0.678223ZM21.3594 12.4552L12.609 16.6286C12.3759 16.7398 12.1065 16.5698 12.1065 16.3115V7.70391C12.1065 7.44194 12.3829 7.27215 12.6166 7.39057L21.3669 11.8248C21.6271 11.9566 21.6226 12.3297 21.3594 12.4552Z" fill="white"/>
