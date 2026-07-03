@@ -20,18 +20,10 @@
             "text": "Free Shipping on orders above Rs 995.",
             "link": ""
           }
-        },
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
         }
       },
       "block_order": [
-        "announcement_jAqCmJ",
-        "announcement-bar-0"
+        "announcement_jAqCmJ"
       ],
       "settings": {
         "color_scheme": "accent-1",
