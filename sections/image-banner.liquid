@@ -136,38 +136,47 @@
     </div>
   </div>
 
-  <div class="my-hero-3" style="background-image: url(https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ChatGPT_Image_Jan_1_2026_10_19_19_PM_488073c8-ccde-44df-a31a-779f66981c76.png?v=1767287116&width=1600&crop=top); background-size: cover; background-position: center 15%; background-repeat: no-repeat;">
-      <div class="lg:mt-[32px]">
-        <div class="lg:mx-[24px] mx-[16px] flex justify-between ">
-          <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">016</div>
-          <div class="flex flex-col w-[150px] lg:w-fit">
-            <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px] text-black">
-              Accords: Pistachio, Gelato, Hazelnut, Sweet Rum
-            </div>
+  <div class="my-hero-3" style="position: relative; width: 100%; overflow: hidden;">
+  
+  <!-- Image drives the container's height — never cropped, scales on any screen -->
+  <img
+    src="https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ChatGPT_Image_Jan_1_2026_10_19_19_PM_488073c8-ccde-44df-a31a-779f66981c76.png?v=1767287116"
+    alt="This Month's Scent - Pistache"
+    class="w-full h-auto block"
+  />
+
+  <!-- Overlay content sits on top of the image, doesn't affect its size -->
+  <div class="absolute inset-0 flex flex-col justify-between">
+
+    <div class="lg:mt-[32px] mt-[16px]">
+      <div class="lg:mx-[24px] mx-[16px] flex justify-between">
+        <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">016</div>
+        <div class="flex flex-col w-[150px] lg:w-fit">
+          <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px] text-black">
+            Accords: Pistachio, Gelato, Hazelnut, Sweet Rum
           </div>
-        </div>
-        <div class="text-center mt-[32px] lg:mt-0">
-          <div class="text-black text-[24px]">This Month’s Escent is Pistache.</div>
-          <div class="text-black font-bold text-[14px]">Click on Shop Now to Know More.</div>
         </div>
       </div>
-      <div class="flex flex-col ">
-        <div class="flex justify-center">
-          <div class="">
-            <button
-              class="font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] w-[154px] text-black bg-white mb-[8px] text-[14px]"
-              onclick= "location.href='collections/all'"
-              
-            >
-              Shop Now
-            </button>
-          </div>
-        </div>
-        <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px] ">
-          All Rights Reserved.
-        </div>
+      <div class="text-center mt-[16px] lg:mt-[8px]">
+        <div class="text-black text-[24px]">This Month's Escent is Pistache.</div>
+        <div class="text-black font-bold text-[14px]">Click on Shop Now to Know More.</div>
       </div>
     </div>
+
+    <!-- Bottom bar with a soft white backdrop so the button never merges into the image -->
+    <div class="flex flex-col items-center pb-[16px] pt-[24px]" 
+         style="background: linear-gradient(to top, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 100%);">
+      <button
+        class="font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] text-black bg-white mb-[8px] text-[14px] shadow-md"
+        onclick="location.href='/collections/all'"
+      >
+        Shop Now
+      </button>
+      <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px]">
+        All Rights Reserved.
+      </div>
+    </div>
+
   </div>
 </div>
 
