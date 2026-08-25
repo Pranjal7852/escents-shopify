@@ -141,63 +141,84 @@
     object-cover, text/button overlaid on top of it) -- confirmed working.
 
     On desktop, overlaying text on a full-bleed crop of a portrait bottle
-    photo kept colliding with it no matter which crop/zoom was used, because
-    the text and button always claim the same top/bottom pixels regardless
-    of where the bottle happens to sit in whatever gets uploaded. So desktop
-    uses a "reserved band" layout instead: the header text and the Shop Now
-    button each take exactly the height their own content needs
-    (.my-hero-3__top / .my-hero-3__bottom, order 1 and 3), and the image is
-    squeezed into whatever vertical space is left between them
-    (.my-hero-3__image-wrap, flex: 1, order 2). Because that middle band is
-    now fully isolated from the heading and button -- separate boxes, not
-    shared overlay space -- it's structurally impossible for the bottle to
-    reach either one, no matter how the image inside that band is cropped.
-
-    That band is much wider than it is tall, so object-fit: cover (fill the
-    band, crop the rest) only ever shows a horizontal slice through the
-    source photo. object-position: center bottom anchors that slice to the
-    BOTTOM of the photo -- the base/label area is never cropped, all the
-    cropping happens off the top (the cap) instead. If a future photo's
-    label sits higher up the bottle, adjust the vertical value below
-    (0%=top of photo, 100%=bottom, current: bottom) to re-aim the crop.
+    photo kept colliding with it no matter which crop/zoom was used, and
+    filling the width with a short crop band left the bottle's cap/base cut
+    off. So desktop drops the overlay entirely and switches to a side-by-
+    side layout: the image sits in its own column sized to its own natural
+    4:5 aspect ratio (so it renders with zero crop and zero dead space --
+    the column shape IS the photo's shape), and the heading/copy/button sit
+    in a separate column beside it instead of stacked on top of it. Neither
+    column can ever encroach on the other, so there's no overlap risk
+    regardless of the source photo's content.
   {%- endcomment -%}
   {%- style -%}
     {%- comment -%}
-      object-fit/object-position are set here directly (not via a Tailwind
-      utility class) so this rule doesn't have to out-race the Tailwind CDN
-      script's own dynamically-injected stylesheet on specificity/ordering.
+      object-fit is set here directly (not via a Tailwind utility class) so
+      this rule doesn't have to out-race the Tailwind CDN script's own
+      dynamically-injected stylesheet on specificity/ordering.
     {%- endcomment -%}
+    .my-hero-3 {
+      aspect-ratio: 4 / 5;
+    }
     .my-hero-3__image {
       object-fit: cover;
-      object-position: center bottom;
+      object-position: center;
+    }
+    .my-hero-3__bottom {
+      background: linear-gradient(to top, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 100%);
     }
 
-    @media screen and (min-width: 990px) {
+    {%- comment -%}
+      1024px, not this theme's usual 990px "desktop" cutoff -- matches
+      Tailwind CDN's default `lg:` breakpoint exactly, since the elements
+      below rely on several `lg:` classes (spacing, font sizes) that this
+      rule needs to stay in sync with rather than kicking in 34px early.
+    {%- endcomment -%}
+    @media screen and (min-width: 1024px) {
       .my-hero-3 {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        aspect-ratio: auto;
+        height: auto;
+      }
+      .my-hero-3__image-wrap {
+        position: static;
+        width: 38%;
+        flex: 0 0 auto;
+        aspect-ratio: 4 / 5;
       }
       .my-hero-3__overlay {
         position: static;
-        display: contents;
+        width: 62%;
+        justify-content: center;
+        gap: 32px;
+        padding: 0 48px;
       }
       .my-hero-3__top {
-        order: 1;
-        position: static;
+        margin-top: 0;
       }
-      .my-hero-3__image-wrap {
-        order: 2;
-        position: static;
-        flex: 1 1 0%;
-        min-height: 0;
+      .my-hero-3__meta {
+        margin: 0;
+      }
+      .my-hero-3__heading {
+        text-align: left;
+        margin-top: 16px;
+      }
+      .my-hero-3__heading > div:first-child {
+        font-size: 32px;
       }
       .my-hero-3__bottom {
-        order: 3;
-        position: static;
+        align-items: flex-start;
+        padding: 0;
+        background: none;
+      }
+      .my-hero-3__legal {
+        margin-right: 0;
       }
     }
   {%- endstyle -%}
-  <div class="my-hero-3 relative w-full overflow-hidden bg-[#FEF5EA] aspect-[4/5] lg:aspect-[16/9]">
+  <div class="my-hero-3 relative w-full overflow-hidden bg-[#FEF5EA]">
 
     <div class="my-hero-3__image-wrap absolute inset-0 overflow-hidden">
       <img
@@ -208,13 +229,12 @@
     </div>
 
     <!-- Overlay content: on mobile this sits absolutely on top of the image
-         (unchanged); on desktop it becomes `display: contents` above, so
-         .my-hero-3__top and .my-hero-3__bottom act as direct flex items of
-         .my-hero-3 instead. -->
+         (unchanged); on desktop .my-hero-3 becomes a row and this becomes
+         the content column beside the image instead. -->
     <div class="my-hero-3__overlay absolute inset-0 flex flex-col justify-between">
 
       <div class="my-hero-3__top lg:mt-[32px] mt-[16px]">
-        <div class="lg:mx-[24px] mx-[16px] flex justify-between">
+        <div class="my-hero-3__meta lg:mx-[24px] mx-[16px] flex justify-between">
           <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">016</div>
           <div class="flex flex-col w-[150px] lg:w-fit">
             <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px] text-black">
@@ -222,22 +242,23 @@
             </div>
           </div>
         </div>
-        <div class="text-center mt-[16px] lg:mt-[8px]">
+        <div class="my-hero-3__heading text-center mt-[16px] lg:mt-[8px]">
           <div class="text-black text-[24px]">This Month's Escent is Pistache.</div>
           <div class="text-black font-bold text-[14px]">Click on Shop Now to Know More.</div>
         </div>
       </div>
 
-      <!-- Bottom bar with a soft white backdrop so the button never merges into the image -->
-      <div class="my-hero-3__bottom flex flex-col items-center pb-[16px] pt-[24px]"
-           style="background: linear-gradient(to top, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 100%);">
+      <!-- Bottom bar with a soft white backdrop so the button never merges
+           into the image on mobile; on desktop there's no image behind it
+           to blend into, so the gradient is switched off there instead. -->
+      <div class="my-hero-3__bottom flex flex-col items-center pb-[16px] pt-[24px]">
         <button
-          class="font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] text-black bg-white mb-[8px] text-[14px] shadow-md"
+          class="my-hero-3__cta font-[Manrope] w-[154px] font-bold rounded-[40px] py-[12px] px-[14px] text-black bg-white mb-[8px] text-[14px] shadow-md"
           onclick="location.href='/collections/all'"
         >
           Shop Now
         </button>
-        <div class="font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px]">
+        <div class="my-hero-3__legal font-bold text-[18px] text-right mb-[4px] font-[Array] hidden lg:block mr-[200px]">
           All Rights Reserved.
         </div>
       </div>
