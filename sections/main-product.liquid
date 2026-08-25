@@ -1,6 +1,4 @@
-<script>
-  document.getElementById("judgeme_product_reviews").classList.add("mx-[8px]")
-</script>
+
 
 <section
   id="MainProduct-{{ section.id }}"
@@ -458,7 +456,7 @@
                       {{ product.metafields.reviews.rating.value.scale_max -}}
                     </span>
                   </p>
-                  <p class="rating-count caption">
+                                    <p class="rating-count caption">
                     <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
                     <span class="visually-hidden">
                       {{- product.metafields.reviews.rating_count }}
@@ -466,6 +464,21 @@
                     </span>
                   </p>
                 {%- endif -%}
+                {%- comment -%}
+                  FIX (revamp): this is the container Judge.me's app-embed
+                  script scans the page for and fills with the full review
+                  list/photos/write-a-review form via their API. Previously
+                  there was only a dangling `document.getElementById(
+                  "judgeme_product_reviews")` call at the very top of this
+                  file with no matching element anywhere — it threw a
+                  console error on every page load and Judge.me had nothing
+                  to render into even once the app embed was enabled.
+                {%- endcomment -%}
+                <div
+                  id="judgeme_product_reviews"
+                  class="jdgm-widget jdgm-review-widget mx-[8px]"
+                  data-id="{{ product.id }}"
+                ></div>
               {%- when 'complementary' -%}
                 <product-recommendations class="complementary-products quick-add-hidden no-js-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">
                   {%- if recommendations.performed and recommendations.products_count > 0 -%}
