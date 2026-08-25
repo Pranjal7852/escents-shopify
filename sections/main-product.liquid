@@ -83,10 +83,10 @@
             {%- case block.type -%}
               {%- when '@app' -%}
                 {% render block %}
-              {%- when 'title' -%}
+                            {%- when 'title' -%}
                 <div class="product__title" {{ block.shopify_attributes }}>
                   <div class="flex items-center justify-between">
-                    <div class="text-[18px] font-bold">{{ product.title | escape }}</div>
+                    <h1 class="text-[18px] font-bold">{{ product.title | escape }}</h1>
                     <div>
                         {% render 'share-button',
                         block: block,
@@ -97,12 +97,6 @@
                   <div>50ml Eau De Parfum</div>
                   <div> {% assign desc = product.description | split: "|||||" %}
                     {{ desc.first }} </div>
-                  <div></div>
-                  <a href="{{ product.url }}" class="product__title">
-                    <h2 class="h1">
-                      {{ product.title | escape }}
-                    </h2>
-                  </a>
                 </div>
                 <hr class="h-[1px] bg-[#CED2D6]">
               {%- when 'price' -%}
@@ -689,8 +683,49 @@
             "price" : {{ variant.price | divided_by: 100.00 | json }},
             "priceCurrency" : {{ cart.currency.iso_code | json }},
             "url" : {{ request.origin | append: variant.url | json }}
-          }{% unless forloop.last %},{% endunless %}
+                    }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
+      ]
+    }
+  </script>
+
+  {%- comment -%}
+    FIX (revamp): BreadcrumbList schema was missing (Product schema above and
+    Organization/WebSite in header.liquid already existed). Falls back to the
+    product's first collection when the page wasn't reached via a collection
+    URL, so the breadcrumb trail still has 3 levels either way.
+  {%- endcomment -%}
+  {%- liquid
+    assign breadcrumb_collection = collection
+    if breadcrumb_collection == blank
+      assign breadcrumb_collection = product.collections.first
+    endif
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ shop.name | json }},
+          "item": {{ request.origin | json }}
+        }
+        {%- if breadcrumb_collection != blank -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ breadcrumb_collection.title | json }},
+          "item": {{ request.origin | append: breadcrumb_collection.url | json }}
+        }
+        {%- endif -%}
+        ,{
+          "@type": "ListItem",
+          "position": {% if breadcrumb_collection != blank %}3{% else %}2{% endif %},
+          "name": {{ product.title | json }},
+          "item": {{ request.origin | append: product.url | json }}
+        }
       ]
     }
   </script>
