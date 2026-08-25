@@ -192,26 +192,59 @@
         position: static;
         width: 62%;
         justify-content: center;
-        gap: 32px;
-        padding: 0 48px;
+        gap: 28px;
+        padding: 0 56px;
+        border-left: 1px solid rgba(0, 0, 0, 0.08);
       }
+
+      {%- comment -%}
+        FIX (revamp): .my-hero-3__badge/.my-hero-3__meta/.my-hero-3__accords
+        still carried lg:ml-[24px]/lg:mr-[24px]/lg:mx-[24px] margins tuned
+        for the old full-width overlay (a small badge pinned to a wide
+        banner's corners) -- inside this new, narrower content column they
+        pushed "016" out of alignment with the heading and button below it
+        by 24px. Zeroed here and restyled as a small uppercase "eyebrow"
+        label instead, which reads better at this width than plain body
+        text anyway.
+      {%- endcomment -%}
       .my-hero-3__top {
         margin-top: 0;
       }
       .my-hero-3__meta {
         margin: 0;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       }
+      .my-hero-3__badge,
+      .my-hero-3__accords {
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: rgba(0, 0, 0, 0.55);
+      }
+
       .my-hero-3__heading {
         text-align: left;
-        margin-top: 16px;
+        margin-top: 24px;
       }
-      .my-hero-3__heading > div:first-child {
-        font-size: 32px;
+      .my-hero-3__heading-title {
+        font-size: 34px;
+        line-height: 1.2;
+        margin-bottom: 8px;
       }
+      .my-hero-3__heading-sub {
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.65);
+      }
+
       .my-hero-3__bottom {
         align-items: flex-start;
         padding: 0;
         background: none;
+      }
+      .my-hero-3__cta {
+        width: 180px;
+        padding: 14px 20px;
       }
       .my-hero-3__legal {
         margin-right: 0;
@@ -223,7 +256,7 @@
     <div class="my-hero-3__image-wrap absolute inset-0 overflow-hidden">
       <img
         src="https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ChatGPT_Image_Jan_1_2026_10_19_19_PM_488073c8-ccde-44df-a31a-779f66981c76.png?v=1767287116"
-        alt="This Month's Scent - Director's Cut"
+        alt="This Month's Scent - Pistache"
         class="my-hero-3__image w-full h-full block"
       />
     </div>
@@ -235,16 +268,16 @@
 
       <div class="my-hero-3__top lg:mt-[32px] mt-[16px]">
         <div class="my-hero-3__meta lg:mx-[24px] mx-[16px] flex justify-between">
-          <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">016</div>
+          <div class="my-hero-3__badge font-[Manrope] font-bold lg:text-[14px] text-[12px] lg:ml-[24px]">016</div>
           <div class="flex flex-col w-[150px] lg:w-fit">
-            <div class="font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px] text-black">
-              Accords: Woody, Oud, Warm Spicy, Somky Amber
+            <div class="my-hero-3__accords font-[Manrope] font-bold lg:text-[14px] text-[12px] text-right lg:mr-[24px] text-black">
+              Accords: Pistachio, Gelato, Hazelnut, Sweet Rum
             </div>
           </div>
         </div>
         <div class="my-hero-3__heading text-center mt-[16px] lg:mt-[8px]">
-          <div class="text-black text-[24px]">This Month's Escent is Director's Cut.</div>
-          <div class="text-black font-bold text-[14px]">Click on Shop Now to Know More.</div>
+          <div class="my-hero-3__heading-title text-black text-[24px]">This Month's Escent is Pistache.</div>
+          <div class="my-hero-3__heading-sub text-black font-bold text-[14px]">Click on Shop Now to Know More.</div>
         </div>
       </div>
 
