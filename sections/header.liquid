@@ -161,19 +161,19 @@
                 id="option_1"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Fresh
+                Citrus &amp; Fresh
               </div>
               <div
                 id="option_2"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Floral
+                Gourmand &amp; Floral
               </div>
               <div
                 id="option_3"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Woody
+                Woody &amp; Oud
               </div>
             </div>
           </div>
@@ -604,13 +604,13 @@
   : { woody: [], citrus: [], floral: [] };
 
   document.getElementById('option_1').addEventListener('click', () => {
-  showFindMyEscentResults('citrus', 'Fresh');
+  showFindMyEscentResults('citrus', 'Citrus & Fresh');
   });
   document.getElementById('option_2').addEventListener('click', () => {
-  showFindMyEscentResults('floral', 'Floral');
+  showFindMyEscentResults('floral', 'Gourmand & Floral');
   });
   document.getElementById('option_3').addEventListener('click', () => {
-  showFindMyEscentResults('woody', 'Woody');
+  showFindMyEscentResults('woody', 'Woody & Oud');
   });
   document.getElementById('cross').addEventListener('click', resetFindMyEscent);
   document.getElementById('back_modal').addEventListener('click', resetFindMyEscent);
