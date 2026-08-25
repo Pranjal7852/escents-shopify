@@ -6,14 +6,11 @@
   product. This closes the "give Find My Escent a real indexable URL"
   audit item, since the modal alone is not crawlable by search engines.
 
-  Family membership rules (kept in sync with the JSON block in
-  sections/header.liquid):
-    Woody & Oud      -> tags contain 'woody' or 'oud'
-    Citrus & Fresh   -> tags contain 'citrus' or 'fresh'
-    Gourmand & Floral -> tags contain 'floral', 'gourmand', 'sweet',
-                          'fruity', or 'oudh'
-  A product can appear under more than one family if it genuinely has tags
-  in both (e.g. a woody citrus scent) -- this is intentional, not a bug.
+  Families are mutually exclusive (priority order Woody & Oud > Gourmand &
+  Floral > Citrus & Fresh), kept in sync with the JSON block in
+  sections/header.liquid -- each product appears in exactly one family, the
+  highest-priority one it qualifies for, so a woody citrus scent like Elixir
+  doesn't show up twice and pad out every result list.
 {%- endcomment -%}
 
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
@@ -83,7 +80,7 @@
     <div class="rte">{{ page.content }}</div>
   {%- endif -%}
 
-  {%- comment -%} Woody & Oud {%- endcomment -%}
+  {%- comment -%} Woody & Oud (top priority -- no exclusions) {%- endcomment -%}
   <div class="find-my-escent-family">
     <h2>Woody &amp; Oud</h2>
     <div class="find-my-escent-grid">
@@ -117,70 +114,82 @@
     {%- endif -%}
   </div>
 
-  {%- comment -%} Citrus & Fresh {%- endcomment -%}
-  <div class="find-my-escent-family">
-    <h2>Citrus &amp; Fresh</h2>
-    <div class="find-my-escent-grid">
-      {%- assign citrus_count = 0 -%}
-      {%- for product in collections.all.products -%}
-        {%- if product.available -%}
-          {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
-            {%- assign citrus_count = citrus_count | plus: 1 -%}
-            <a href="{{ product.url }}" class="find-my-escent-card">
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-              <p>{{ product.title }}</p>
-            </a>
-          {%- endif -%}
-        {%- endif -%}
-      {%- endfor -%}
-      {%- for product in collections.all.products -%}
-        {%- unless product.available -%}
-          {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
-            {%- assign citrus_count = citrus_count | plus: 1 -%}
-            <a href="{{ product.url }}" class="find-my-escent-card is-sold-out">
-              <span class="find-my-escent-badge">{{ 'products.product.sold_out' | t }}</span>
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-              <p>{{ product.title }}</p>
-            </a>
-          {%- endif -%}
-        {%- endunless -%}
-      {%- endfor -%}
-    </div>
-    {%- if citrus_count == 0 -%}
-      <p>Nothing in this family right now — check back soon!</p>
-    {%- endif -%}
-  </div>
-
-  {%- comment -%} Gourmand & Floral {%- endcomment -%}
+  {%- comment -%} Gourmand & Floral (excludes anything already in Woody & Oud) {%- endcomment -%}
   <div class="find-my-escent-family">
     <h2>Gourmand &amp; Floral</h2>
     <div class="find-my-escent-grid">
       {%- assign floral_count = 0 -%}
       {%- for product in collections.all.products -%}
         {%- if product.available -%}
-          {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-            {%- assign floral_count = floral_count | plus: 1 -%}
-            <a href="{{ product.url }}" class="find-my-escent-card">
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-              <p>{{ product.title }}</p>
-            </a>
-          {%- endif -%}
+          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+              {%- assign floral_count = floral_count | plus: 1 -%}
+              <a href="{{ product.url }}" class="find-my-escent-card">
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                <p>{{ product.title }}</p>
+              </a>
+            {%- endif -%}
+          {%- endunless -%}
         {%- endif -%}
       {%- endfor -%}
       {%- for product in collections.all.products -%}
         {%- unless product.available -%}
-          {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-            {%- assign floral_count = floral_count | plus: 1 -%}
-            <a href="{{ product.url }}" class="find-my-escent-card is-sold-out">
-              <span class="find-my-escent-badge">{{ 'products.product.sold_out' | t }}</span>
-              <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
-              <p>{{ product.title }}</p>
-            </a>
-          {%- endif -%}
+          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+              {%- assign floral_count = floral_count | plus: 1 -%}
+              <a href="{{ product.url }}" class="find-my-escent-card is-sold-out">
+                <span class="find-my-escent-badge">{{ 'products.product.sold_out' | t }}</span>
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                <p>{{ product.title }}</p>
+              </a>
+            {%- endif -%}
+          {%- endunless -%}
         {%- endunless -%}
       {%- endfor -%}
     </div>
     {%- if floral_count == 0 -%}
+      <p>Nothing in this family right now — check back soon!</p>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} Citrus & Fresh (excludes anything already in Woody & Oud or Gourmand & Floral) {%- endcomment -%}
+  <div class="find-my-escent-family">
+    <h2>Citrus &amp; Fresh</h2>
+    <div class="find-my-escent-grid">
+      {%- assign citrus_count = 0 -%}
+      {%- for product in collections.all.products -%}
+        {%- if product.available -%}
+          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- unless product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+              {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+                {%- assign citrus_count = citrus_count | plus: 1 -%}
+                <a href="{{ product.url }}" class="find-my-escent-card">
+                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                  <p>{{ product.title }}</p>
+                </a>
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for product in collections.all.products -%}
+        {%- unless product.available -%}
+          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- unless product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+              {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+                {%- assign citrus_count = citrus_count | plus: 1 -%}
+                <a href="{{ product.url }}" class="find-my-escent-card is-sold-out">
+                  <span class="find-my-escent-badge">{{ 'products.product.sold_out' | t }}</span>
+                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" loading="lazy">
+                  <p>{{ product.title }}</p>
+                </a>
+              {%- endif -%}
+            {%- endunless -%}
+          {%- endunless -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+    {%- if citrus_count == 0 -%}
       <p>Nothing in this family right now — check back soon!</p>
     {%- endif -%}
   </div>
