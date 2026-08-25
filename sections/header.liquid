@@ -115,8 +115,9 @@
      below; it defaults to 0px so the header still sits at the very top when
      no announcement bar is present. */
   .header-wrapper {
-    top: var(--announcement-bar-height, 0px);
-  }
+  top: var(--announcement-bar-height, 0px);
+  transition: top 0.2s ease;
+}
 {%- endstyle -%}
 
 <div
@@ -432,21 +433,33 @@
 
 <script>
   // FIX (revamp): keeps the fixed header offset below the announcement bar
-  // instead of overlapping it. Re-measures on load/resize and whenever the
-  // announcement bar's own size changes (e.g. slider height, text wrapping).
+  // instead of overlapping it. The announcement bar itself is a normal,
+  // non-fixed element, so it scrolls away with the page — once it's out of
+  // view the header must snap back to top: 0, otherwise it's left hovering
+  // over an empty gap where the bar used to be. So this tracks both the
+  // bar's real height (for layout/resize) and scroll position (to decide
+  // whether the bar is still visible), independently.
   (function () {
     var announcementBar = document.querySelector('.announcement-bar-section');
+    var announcementBarHeight = 0;
 
-    function setAnnouncementBarHeight() {
-      var height = announcementBar ? announcementBar.getBoundingClientRect().height : 0;
-      document.documentElement.style.setProperty('--announcement-bar-height', height + 'px');
+    function measureAnnouncementBarHeight() {
+      announcementBarHeight = announcementBar ? announcementBar.getBoundingClientRect().height : 0;
+      updateOffset();
     }
 
-    setAnnouncementBarHeight();
-    window.addEventListener('resize', setAnnouncementBarHeight);
+    function updateOffset() {
+      var pastAnnouncementBar = window.scrollY >= announcementBarHeight;
+      var offset = pastAnnouncementBar ? 0 : announcementBarHeight;
+      document.documentElement.style.setProperty('--announcement-bar-height', offset + 'px');
+    }
+
+    measureAnnouncementBarHeight();
+    window.addEventListener('resize', measureAnnouncementBarHeight);
+    window.addEventListener('scroll', updateOffset, { passive: true });
 
     if (announcementBar && window.ResizeObserver) {
-      new ResizeObserver(setAnnouncementBarHeight).observe(announcementBar);
+      new ResizeObserver(measureAnnouncementBarHeight).observe(announcementBar);
     }
   })();
 </script>
