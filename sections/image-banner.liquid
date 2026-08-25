@@ -155,11 +155,11 @@
 
     That band is much wider than it is tall, so object-fit: cover (fill the
     band, crop the rest) only ever shows a horizontal slice through the
-    vertical middle of the source photo -- cropping off the cap and base,
-    but reliably keeping whatever sits at the photo's vertical center (i.e.
-    the label/fragrance name, on a typically-centered bottle shot) in view.
-    If a future photo's label isn't centered, adjust object-position's
-    vertical value below (0%=top of photo, 100%=bottom) to re-aim the crop.
+    source photo. object-position: center bottom anchors that slice to the
+    BOTTOM of the photo -- the base/label area is never cropped, all the
+    cropping happens off the top (the cap) instead. If a future photo's
+    label sits higher up the bottle, adjust the vertical value below
+    (0%=top of photo, 100%=bottom, current: bottom) to re-aim the crop.
   {%- endcomment -%}
   {%- style -%}
     {%- comment -%}
@@ -169,7 +169,7 @@
     {%- endcomment -%}
     .my-hero-3__image {
       object-fit: cover;
-      object-position: center;
+      object-position: center bottom;
     }
 
     @media screen and (min-width: 990px) {
