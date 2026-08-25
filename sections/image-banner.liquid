@@ -136,13 +136,24 @@
     </div>
   </div>
 
-  <div class="my-hero-3" style="position: relative; width: 100%; overflow: hidden;">
-  
-  <!-- Image drives the container's height — never cropped, scales on any screen -->
+  {%- comment -%}
+    FIX (revamp): this box previously let the uploaded image dictate its own
+    height (`h-auto`, no crop) -- so an inconsistently-framed upload could
+    stretch the whole section to a huge height with the bottle barely in
+    frame, or leave a large blank gap above/below it. A fixed aspect ratio
+    per breakpoint (portrait on mobile, landscape on desktop) plus
+    object-cover keeps the box shape predictable regardless of what gets
+    uploaded next month. For best results, crop the source photo to
+    roughly the same ratio with the bottle centered and some breathing room
+    on all sides (e.g. ~1200x1500px), so the "cover" crop only trims a
+    little at the edges instead of guessing.
+  {%- endcomment -%}
+  <div class="my-hero-3 relative w-full overflow-hidden aspect-[4/5] lg:aspect-[16/9]">
+
   <img
     src="https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ChatGPT_Image_Jan_1_2026_10_19_19_PM_488073c8-ccde-44df-a31a-779f66981c76.png?v=1767287116"
     alt="This Month's Scent - Pistache"
-    class="w-full h-auto block"
+    class="w-full h-full object-cover object-center block"
   />
 
   <!-- Overlay content sits on top of the image, doesn't affect its size -->
