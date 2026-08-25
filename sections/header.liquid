@@ -113,11 +113,12 @@
      top: 0 regardless of the announcement bar rendered above it, covering it.
      --announcement-bar-height is measured and kept in sync by the script
      below; it defaults to 0px so the header still sits at the very top when
-     no announcement bar is present. */
+     no announcement bar is present. The transition smooths the snap-to-top
+     that happens once the (non-fixed) announcement bar scrolls out of view. */
   .header-wrapper {
-  top: var(--announcement-bar-height, 0px);
-  transition: top 0.2s ease;
-}
+    top: var(--announcement-bar-height, 0px);
+    transition: top 0.2s ease;
+  }
 {%- endstyle -%}
 
 <div
@@ -128,7 +129,7 @@
 >
   <div class="relative p-4 w-full max-w-2xl max-h-full flex justify-center  ">
     <!-- Modal content -->
-    <div class="relative bg-[#FEF5EA] rounded-[16px] shadow w-[328px] h-[440px] shadow-2xl">
+    <div class="relative bg-[#FEF5EA] rounded-[16px] shadow w-[328px] max-h-[80vh] overflow-y-auto shadow-2xl">
       <!-- Modal header -->
       <div class="flex justify-center flex-col">
         <div class="flex justify-between">
@@ -149,42 +150,30 @@
         </div>
         <div class="font-[Manrope] text-[18px] text-center font-bold my-[2px]">Find Your Escent</div>
 
-        <div class="flex my-4 mr-[11px] ml-[8px]">
-          <div class="flex flex-col justify-center w-[90%]">
-            <div
-              id="progress"
-              class="w-[5%] bg-black rounded-full h-2.5 mx-6 flex flex-col content-center transition-width duration-500"
-            >
-              <div class="h-2.5 rounded-full"></div>
-            </div>
-          </div>
-          <div id="progress_selector" class="">1/2</div>
-        </div>
-
         <div id="page_1" class=" flex flex-col mt-[8px]">
           <div id="to_hide" class=" pt-[16px]">
-            <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Occasion</div>
+            <div id="text_1" class="text-[14px] font-[Manrope] text-[14px] font-bold text-center">Vibe</div>
             <div id="text_2" class="text-[14px] font-[Manrope] text-[14px] text-center mb-[12px]">
-              Please select your Occasion
+              Please select your Vibe
             </div>
             <div id="text_3" class="px-[20px]">
               <div
                 id="option_1"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Dailywear
+                Fresh
               </div>
               <div
                 id="option_2"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Partywear
+                Floral
               </div>
               <div
                 id="option_3"
                 class="lg:hover:text-white lg:hover:bg-black cursor-default px-[10px] py-[14px] text-black text-center rounded-[24px] border-[2px] border-black font-[Manrope] mt-6"
               >
-                Traditional/Occasional
+                Woody
               </div>
             </div>
           </div>
@@ -193,6 +182,92 @@
     </div>
   </div>
 </div>
+
+{%- comment -%}
+  FIX (revamp): this JSON replaces the hardcoded product/image/URL lists that
+  used to live inside the quiz's JS (which pointed at two archived products,
+  Mirage and Vigor, with no way to notice when a product went stale). Built
+  live from real product tags every time the page renders, so a product only
+  ever appears here if it's currently active, and disappears on its own if
+  it's archived, retagged, or renamed — no code change needed when the
+  catalog changes. See sections/find-my-escent.liquid for the same data
+  rendered as a real, indexable page.
+{%- endcomment -%}
+{%- comment -%}
+  Two passes per family (available products first, then sold-out ones) so
+  in-stock recommendations always show before sold-out ones in the JSON
+  array, without needing a sort filter. `available`/`tags` checks are kept
+  as separate nested {% if %}s rather than one and/or expression, since
+  Liquid's and/or has no operator precedence and left-to-right evaluation
+  of a mixed and/or chain would silently group wrong.
+{%- endcomment -%}
+<script type="application/json" id="find-my-escent-data">
+  {
+    "woody": [
+      {%- assign first = true -%}
+      {%- for product in collections.all.products -%}
+        {%- if product.available -%}
+          {%- if product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for product in collections.all.products -%}
+        {%- unless product.available -%}
+          {%- if product.tags contains 'woody' or product.tags contains 'oud' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    ],
+    "citrus": [
+      {%- assign first = true -%}
+      {%- for product in collections.all.products -%}
+        {%- if product.available -%}
+          {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for product in collections.all.products -%}
+        {%- unless product.available -%}
+          {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    ],
+    "floral": [
+      {%- assign first = true -%}
+      {%- for product in collections.all.products -%}
+        {%- if product.available -%}
+          {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for product in collections.all.products -%}
+        {%- unless product.available -%}
+          {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- endif -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+</script>
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
@@ -469,284 +544,93 @@
 {%- endif -%}
 
 {% javascript %}
-  const PAGE_1 = 'page_1';
-  const PAGE_2 = 'page_2';
-  const PAGE_3 = 'page_3';
-  let selectedPage1option = null;
-  let state = PAGE_1;
-  document.getElementById('option_1').addEventListener('click', (e) => {
-  loadPage2(e);
+  // FIX (revamp): replaces the old hardcoded Occasion->Vibe product map
+  // (which pointed at two archived products, Mirage and Vigor) with data
+  // read from find-my-escent-data, which is rebuilt from live product tags
+  // on every page render. Also drops the "Occasion" step entirely, since it
+  // never had any real data behind it -- Vibe is now the whole quiz.
+  const findMyEscentDataEl = document.getElementById('find-my-escent-data');
+  const findMyEscentMatches = findMyEscentDataEl
+  ? JSON.parse(findMyEscentDataEl.textContent)
+  : { woody: [], citrus: [], floral: [] };
+
+  document.getElementById('option_1').addEventListener('click', () => {
+  showFindMyEscentResults('citrus', 'Fresh');
   });
-  document.getElementById('option_2').addEventListener('click', (e) => {
-  loadPage2(e);
+  document.getElementById('option_2').addEventListener('click', () => {
+  showFindMyEscentResults('floral', 'Floral');
   });
-  document.getElementById('option_3').addEventListener('click', (e) => {
-  loadPage2(e);
+  document.getElementById('option_3').addEventListener('click', () => {
+  showFindMyEscentResults('woody', 'Woody');
   });
-  document.getElementById('cross').addEventListener('click', (e) => {
-  reset(e);
-  });
-  document.getElementById('back_modal').addEventListener('click', (e) => {
-  onBackPressed(e);
-  });
+  document.getElementById('cross').addEventListener('click', resetFindMyEscent);
+  document.getElementById('back_modal').addEventListener('click', resetFindMyEscent);
 
-  function onBackPressed(e) {
-  console.log(state);
-  if(state==PAGE_2){
-  document.getElementById('option_1').innerHTML = 'Dailywear';
-  document.getElementById('option_2').innerHTML = 'Partywear';
-  document.getElementById('option_3').innerHTML = 'Traditional/Occasional';
-  document.getElementById('text_1').innerHTML = 'Occasion';
-  document.getElementById('text_2').innerHTML = 'Please Select Your Occasion';
-  document.getElementById('progress').style.width = '5%';
-  document.getElementById('back_modal').classList.add('invisible')
-    document.getElementById('progress_selector').innerHTML = '0/2';
-
-  state=PAGE_1
-
-  }
-  if(state==PAGE_3){
-    //go back to page 2 with same selected option as on page 1
-     document.getElementById('option_1').innerHTML = 'Fresh';
-    document.getElementById('option_2').innerHTML = 'Floral';
-    document.getElementById('option_3').innerHTML = 'Woody';
-    document.getElementById('text_1').innerHTML = 'Vibe';
-    document.getElementById('text_2').innerHTML = 'Please Select your Vibe';
-    document.getElementById('progress').style.width = '50%';
-    document.getElementById('progress_selector').innerHTML = '1/2';
-    document.getElementById('progress').classList.remove('hidden');
-    document.getElementById('progress_selector').classList.remove('hidden');
-    document.getElementById('to_hide').classList.remove('hidden');
-
-    //delete page 3 depending opon how many items are recommended
-    if(document.getElementById("text_prompt")!=null){
-      document.getElementById("text_prompt").remove()
-    }
-    if(document.getElementById("image_container")!=null){
-      document.getElementById("image_container").remove()
-    }
-    if(document.getElementById("buy_now_button")!=null){
-      document.getElementById("buy_now_button").remove()
-    }
-    if(document.getElementById("childarray")!=null){
-      document.getElementById("childarray").remove()
-    }
-    state=PAGE_2 
-
-    
-
-  }
-  }
-  function reset(e) {
-  state = PAGE_1;
-  console.log('reset');
-  document.getElementById('option_1').innerHTML = 'Dailywear';
-  document.getElementById('option_2').innerHTML = 'Partywear';
-  document.getElementById('option_3').innerHTML = 'Traditional/Occasional';
-  document.getElementById('text_1').innerHTML = 'Occasion';
-  document.getElementById('text_2').innerHTML = 'Please Select your Occasion';
-  document.getElementById('progress').style.width = '5%';
-  document.getElementById('progress_selector').innerHTML = '0/2';
-  document.getElementById('progress').classList.remove('hidden');
-  document.getElementById('progress_selector').classList.remove('hidden');
-  document.getElementById('back_modal').classList.add('invisible')
-  
-
-
-  if (document.getElementById('buy_now_button') != null) {
-  document.getElementById('buy_now_button').remove();
-  }
-  if (document.getElementById('image_container') != null) {
-  document.getElementById('image_container').remove();
-  }
-  if (document.getElementById('text_prompt') != null) {
-  document.getElementById('text_prompt').remove();
-  }
-
-  let childarray = document.getElementById('childarray');
-  if (childarray != null) {
-  document.getElementById('page_1').removeChild(childarray);
-  }
+  function resetFindMyEscent() {
+  document.getElementById('back_modal').classList.add('invisible');
   document.getElementById('to_hide').classList.remove('hidden');
-  selectedPage1option = null;
+  const existingResults = document.getElementById('find_my_escent_results');
+  if (existingResults != null) {
+  existingResults.remove();
+  }
   }
 
-  function loadPage2(e) {
-
-  // name,image_url,product page
-  let m = {
-  Dailywear: {
-  Fresh: [['Crest', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_5.jpg?v=1709751400', 'https://escents.in/products/crest']],
-  Floral: [['Mirage', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_2.jpg?v=1709751715', 'https://escents.in/products/mirage']],
-  Woody: [['Eclipse', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_8.jpg?v=1709751561', 'https://escents.in/products/eclipse']],
-  },
-  Partywear: {
-  Fresh: [
-  ['Crest', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_5.jpg?v=1709751400', 'https://escents.in/products/crest'],
-  ['Elixir', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_8.jpg?v=1709751561', 'https://escents.in/products/elixir'],
-  ],
-  Floral: [
-  ['Aura', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_3.jpg?v=1709751212', 'https://escents.in/products/aura'],
-  ['Elixir', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR4.jpg?v=1709751645', 'https://escents.in/products/elixir'],
-  ],
-  Woody: [
-  ['Tuxedo', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/4.5.jpg?v=1709920262', 'https://escents.in/products/tuxedo'],
-  ['Elixir', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/ELIXIR4.jpg?v=1709751645', 'https://escents.in/products/elixir'],
-  ],
-  },
-  'Traditional/Occasional': {
-  Fresh: [
-  ['Vigor', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_12.jpg?v=1709751783', 'https://escents.in/products/vigor'],
-  ['Aurum', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
-  ],
-  Floral: [
-  ['Aura', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_3.jpg?v=1709751212', 'https://escents.in/products/aura'],
-  ['Aurum', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
-  ],
-  Woody: [
-  ['Tuxedo', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/4.5.jpg?v=1709920262', 'https://escents.in/products/tuxedo'],
-  ['Aurum', 'https://cdn.shopify.com/s/files/1/0731/0914/3874/files/1_4.jpg?v=1709751317', 'https://escents.in/products/aurum'],
-  ],
-  },
-  };
-  let recomendation_array = null;
-
-  if (state == PAGE_1) {
-  // on page 1, go to page 2
-  selectedPage1option = e.srcElement.innerText;
-  console.log(selectedPage1option)
-  document.getElementById('option_1').innerHTML = 'Fresh';
-  document.getElementById('option_2').innerHTML = 'Floral';
-  document.getElementById('option_3').innerHTML = 'Woody';
-  document.getElementById('text_1').innerHTML = 'Vibe';
-  document.getElementById('text_2').innerHTML = 'Please Select Your Vibe';
-  document.getElementById('progress_selector').innerHTML = '1/2';
-  document.getElementById('progress').style.width = '50%';
-  document.getElementById("back_modal").classList.remove("invisible")
-  state=PAGE_2
-  } else if (state == PAGE_2) {
-  // page 2 recoment final
-  console.log(selectedPage1option,e.srcElement.innerText)
-  recomendation_array = m[selectedPage1option][e.srcElement.innerText];
-  document.getElementById('progress').style.width = '90%';
-  }
-
-  if (recomendation_array != null) {
-  console.log(recomendation_array);
-
-  document.getElementById('progress').classList.add('hidden');
-  document.getElementById('progress_selector').classList.add('hidden');
+  function showFindMyEscentResults(familyKey, label) {
   document.getElementById('to_hide').classList.add('hidden');
+  document.getElementById('back_modal').classList.remove('invisible');
 
-  // logic if one or two products are present in end
-  if (recomendation_array.length == 1) {
-  let name = recomendation_array[0][0];
-  let product_url = recomendation_array[0][2];
-  let image_url = recomendation_array[0][1];
-  let t =
-  'Kudos for selecting ' +
-  selectedPage1option +
-  ' perfume, <b>' +
-  name +
-  '!</b> Your scent journey just got a golden touch. 🌲✨ ';
+  const existingResults = document.getElementById('find_my_escent_results');
+  if (existingResults != null) {
+  existingResults.remove();
+  }
 
-  let child = document.createElement('div');
-  child.id = 'text_prompt';
-  child.innerHTML = t;
-  child.classList.add('text-center');
-  child.classList.add('text-black');
-  child.classList.add('font-[Manrope]');
-  child.classList.add('text-[14px]');
-  child.classList.add('mx-[8px]');
-  document.getElementById('page_1').appendChild(child);
+  const products = findMyEscentMatches[familyKey] || [];
 
-  let image_container = document.createElement('img');
-  image_container.src = image_url;
-  console.log(image_container)
-  image_container.id = 'image_container';
-  image_container.classList.add('aspect-[4/5]');
-  image_container.classList.add('h-[185px]');
-  image_container.classList.add('object-fit');
-  image_container.classList.add('mx-auto');
-  image_container.classList.add('my-4');
-  image_container.classList.add('rounded-[16px]');
-  image_container.classList.add('mt-[10px]','mb-[12px]');
-  document.getElementById('page_1').appendChild(image_container);
+  const results = document.createElement('div');
+  results.id = 'find_my_escent_results';
+  results.classList.add('flex', 'flex-col', 'justify-center');
 
-  let buy_button = document.createElement('button');
-  buy_button.textContent = 'Buy Now';
-  buy_button.id = 'buy_now_button';
-  buy_button.classList.add('font-[Manrope]');
-  buy_button.classList.add('text-[14px]');
-  buy_button.classList.add('rounded-[40px]');
-  buy_button.classList.add('py-[12px]');
-  buy_button.classList.add('px-[14px]');
-  buy_button.classList.add('text-center');
-  buy_button.classList.add('text-white');
-  buy_button.classList.add('bg-black');
-  buy_button.classList.add('w-[154px]');
-  buy_button.classList.add('mx-auto');
-  document.getElementById('page_1').appendChild(buy_button);
-  buy_button.addEventListener('click', () => {
-  window.open(product_url);
-  });
-  } else {
-  let name_one = recomendation_array[0][0];
-  let product_url_one = recomendation_array[0][2];
-  let image_url_one = recomendation_array[0][1];
+  const heading = document.createElement('div');
+  heading.classList.add('text-center', 'text-black', 'font-[Manrope]', 'text-[14px]', 'mx-[8px]', 'mt-[8px]');
+  heading.innerHTML = products.length
+  ? 'Here\'s what suits your <b>' + label + '</b> vibe. 🌲✨'
+  : 'Nothing in the <b>' + label + '</b> family right now — check back soon!';
+  results.appendChild(heading);
 
-  let name_two = recomendation_array[1][0];
-  let product_url_two = recomendation_array[1][2];
-  let image_url_two = recomendation_array[1][1];
-
-  let t =
-  'Kudos for selecting ' +
-  selectedPage1option +
-  ' perfume, <b>' +
-  name_one +
-  '</b> and <b>' +
-  name_two +
-  '!</b> Your scent journey just got a golden touch. 🌲✨';
-
-  let child = document.createElement('div');
-  child.id = 'text_prompt';
-  child.innerHTML = t;
-  child.classList.add('text-center');
-  child.classList.add('text-black');
-  child.classList.add('font-[Manrope]');
-  child.classList.add('text-[14px]');
-  child.classList.add('mx-[8px]');
-  document.getElementById('page_1').appendChild(child);
-
-  let childarray = document.createElement('div');
-  childarray.id = 'childarray';
-  childarray.classList.add('flex', 'flex-col', 'justify-center');
-
-  // one perfume logic
-  let perfume_one = document.createElement('div');
-  perfume_one.classList.add(
-  'text-[14px]',
-  'text-center',
-  'flex',
-  'justify-between',
-  'rounded-[16px]',
-  'border',
-  'border-black',
-  'p-6',
-  'm-4'
+  products.forEach((product) => {
+  const row = document.createElement('div');
+  row.classList.add(
+  'text-[14px]', 'text-center', 'flex', 'items-center', 'justify-between',
+  'rounded-[16px]', 'border', 'border-black', 'p-6', 'm-4', 'cursor-pointer'
   );
-  p_image_one = document.createElement('img');
-  p_image_one.src = image_url_one;
-  p_image_one.id = 'p_image_one';
-  p_image_one.classList.add('h-[77px]', 'aspect-[4/5]', 'rounded-[16px]');
-  perfume_one.appendChild(p_image_one);
-  let text_one_container = document.createElement('div');
-  text_one_container.innerHTML = name_one;
-  text_one_container.classList.add('flex', 'items-center');
-  perfume_one.appendChild(text_one_container);
-  perfume_one.addEventListener('click', () => {
-  window.open(product_url_one);
-  });
+  if (!product.available) {
+  row.classList.add('opacity-60');
+  }
+
+  const imageWrap = document.createElement('div');
+  imageWrap.classList.add('relative');
+
+  const image = document.createElement('img');
+  image.src = product.image;
+  image.alt = product.title;
+  image.classList.add('h-[77px]', 'aspect-[4/5]', 'rounded-[16px]');
+  imageWrap.appendChild(image);
+
+  if (!product.available) {
+  const soldOutBadge = document.createElement('span');
+  soldOutBadge.textContent = 'Sold out';
+  soldOutBadge.classList.add(
+  'absolute', 'top-0', 'left-0', 'bg-black', 'text-white',
+  'text-[10px]', 'px-2', 'py-0.5', 'rounded-[8px]'
+  );
+  imageWrap.appendChild(soldOutBadge);
+  }
+  row.appendChild(imageWrap);
+
+  const name = document.createElement('div');
+  name.textContent = product.title;
+  name.classList.add('flex', 'items-center');
+  row.appendChild(name);
 
   const iconSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   const iconPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
@@ -756,51 +640,22 @@
   iconSvg.setAttribute('viewBox', '0 0 10 17');
   iconSvg.appendChild(iconPath);
   iconSvg.classList.add('w-[20px]', 'h-[20px]', 'flex', 'items-center', 'my-auto');
-  perfume_one.appendChild(iconSvg);
-  childarray.appendChild(perfume_one);
+  row.appendChild(iconSvg);
 
-  // perfume 2
-  let perfume_two = document.createElement('div');
-  perfume_two.classList.add(
-  'text-[14px]',
-  'text-center',
-  'flex',
-  'justify-between',
-  'rounded-[16px]',
-  'border',
-  'border-black',
-  'p-6',
-  'm-4'
-  );
-  p_image_two = document.createElement('img');
-  p_image_two.src = image_url_two;
-  p_image_two.id = 'p_image_two';
-  p_image_two.classList.add('h-[77px]', 'aspect-[4/5]', 'rounded-[16px]');
-  perfume_two.appendChild(p_image_two);
-  let text_two_container = document.createElement('div');
-  text_two_container.innerHTML = name_two;
-  text_two_container.classList.add('flex', 'items-center');
-  perfume_two.appendChild(text_two_container);
-  perfume_two.addEventListener('click', () => {
-  window.open(product_url_two);
+  row.addEventListener('click', () => {
+  window.location.href = product.url;
   });
 
-  const iconSvg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  const iconPath1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  iconPath1.setAttribute(
-  'd','M9.03055 9.03063L1.53055 16.5306C1.46087 16.6003 1.37815 16.6556 1.2871 16.6933C1.19606 16.731 1.09847 16.7504 0.999929 16.7504C0.901383 16.7504 0.803801 16.731 0.712756 16.6933C0.621712 16.6556 0.538986 16.6003 0.469303 16.5306C0.399621 16.4609 0.344345 16.3782 0.306633 16.2872C0.268921 16.1961 0.249512 16.0986 0.249512 16C0.249512 15.9015 0.268921 15.8039 0.306633 15.7128C0.344345 15.6218 0.399621 15.5391 0.469303 15.4694L7.43962 8.5L0.469303 1.53063C0.328573 1.3899 0.249512 1.19903 0.249512 1.00001C0.249512 0.800982 0.328573 0.610111 0.469303 0.46938C0.610034 0.32865 0.800906 0.249588 0.999929 0.249588C1.19895 0.249588 1.38982 0.32865 1.53055 0.46938L9.03055 7.96938C9.10029 8.03903 9.15561 8.12175 9.19335 8.2128C9.23109 8.30385 9.25052 8.40144 9.25052 8.5C9.25052 8.59857 9.23109 8.69616 9.19335 8.78721C9.15561 8.87826 9.10029 8.96098 9.03055 9.03063Z'
-  
-  );
-  iconSvg1.setAttribute('viewBox', '0 0 10 17');
-  iconSvg1.appendChild(iconPath1);
-  iconSvg1.classList.add('w-[20px]', 'h-[20px]', 'flex', 'items-center', 'my-auto');
-  perfume_two.appendChild(iconSvg1);
-  childarray.appendChild(perfume_two);
+  results.appendChild(row);
+  });
 
-  document.getElementById('page_1').appendChild(childarray);
-  }
-state=PAGE_3 
-  }
+  const viewAllLink = document.createElement('a');
+  viewAllLink.href = '/pages/find-my-escent';
+  viewAllLink.textContent = 'View all recommendations';
+  viewAllLink.classList.add('block', 'text-center', 'text-[12px]', 'underline', 'my-4');
+  results.appendChild(viewAllLink);
+
+  document.getElementById('page_1').appendChild(results);
   }
 
   class StickyHeader extends HTMLElement {
