@@ -194,20 +194,24 @@
   rendered as a real, indexable page.
 {%- endcomment -%}
 {%- comment -%}
-  FIX (revamp): families are now mutually exclusive (priority order Woody &
-  Oud > Gourmand & Floral > Citrus & Fresh) instead of "any tag matches",
-  which previously let a product like Aurum or Eclipse show up under both
-  Woody and Fresh at once -- confusing, and it defeated the point of
-  narrowing down. Each product now appears in exactly one family: the
-  highest-priority one it qualifies for.
+  FIX (revamp): families are mutually exclusive. Each product is assigned by
+  the first rule it matches, checked in this order:
+    1. An explicit `vibe-woody` / `vibe-floral` / `vibe-citrus` tag, if the
+       merchant has set one -- this always wins, with no code change needed
+       to add/move a product between families (Shopify admin > product >
+       tags). This is the recommended way to manage membership going
+       forward, since it doesn't touch the note tags shown on the PDP.
+    2. If no vibe-* tag is set, falls back to the descriptive scent-note
+       tags (woody/oud, then floral/gourmand/sweet/fruity/oudh, then
+       citrus/fresh) so a product isn't invisible just because nobody's
+       tagged it yet.
+  Every {% if %}/{% elsif %} chain below only ever combines same-type `or`
+  conditions per branch (never mixed with `and`), since Liquid's and/or has
+  no operator precedence and a mixed chain would silently group wrong.
 
   Two passes per family (available products first, then sold-out ones) so
   in-stock recommendations always show before sold-out ones in the JSON
-  array, without needing a sort filter. `available`/`tags` checks are kept
-  as separate nested {% if %}/{% unless %}s rather than one and/or
-  expression, since Liquid's and/or has no operator precedence and
-  left-to-right evaluation of a mixed and/or chain would silently group
-  wrong.
+  array, without needing a sort filter.
 {%- endcomment -%}
 <script type="application/json" id="find-my-escent-data">
   {
@@ -215,7 +219,13 @@
       {%- assign first = true -%}
       {%- for product in collections.all.products -%}
         {%- if product.available -%}
-          {%- if product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- if product.tags contains 'vibe-woody' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- elsif product.tags contains 'vibe-floral' or product.tags contains 'vibe-citrus' -%}
+            {%- comment -%} explicitly assigned to a different family {%- endcomment -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
             {%- unless first %},{% endunless -%}
             {%- assign first = false -%}
             {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
@@ -224,7 +234,12 @@
       {%- endfor -%}
       {%- for product in collections.all.products -%}
         {%- unless product.available -%}
-          {%- if product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- if product.tags contains 'vibe-woody' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- elsif product.tags contains 'vibe-floral' or product.tags contains 'vibe-citrus' -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
             {%- unless first %},{% endunless -%}
             {%- assign first = false -%}
             {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
@@ -236,24 +251,32 @@
       {%- assign first = true -%}
       {%- for product in collections.all.products -%}
         {%- if product.available -%}
-          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
-            {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-              {%- unless first %},{% endunless -%}
-              {%- assign first = false -%}
-              {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
-            {%- endif -%}
-          {%- endunless -%}
+          {%- if product.tags contains 'vibe-floral' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- elsif product.tags contains 'vibe-woody' or product.tags contains 'vibe-citrus' -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- elsif product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
       {%- for product in collections.all.products -%}
         {%- unless product.available -%}
-          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
-            {%- if product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-              {%- unless first %},{% endunless -%}
-              {%- assign first = false -%}
-              {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
-            {%- endif -%}
-          {%- endunless -%}
+          {%- if product.tags contains 'vibe-floral' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- elsif product.tags contains 'vibe-woody' or product.tags contains 'vibe-citrus' -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- elsif product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- endif -%}
         {%- endunless -%}
       {%- endfor -%}
     ],
@@ -261,28 +284,34 @@
       {%- assign first = true -%}
       {%- for product in collections.all.products -%}
         {%- if product.available -%}
-          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
-            {%- unless product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-              {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
-                {%- unless first %},{% endunless -%}
-                {%- assign first = false -%}
-                {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
-              {%- endif -%}
-            {%- endunless -%}
-          {%- endunless -%}
+          {%- if product.tags contains 'vibe-citrus' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- elsif product.tags contains 'vibe-woody' or product.tags contains 'vibe-floral' -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- elsif product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+          {%- elsif product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": true}
+          {%- endif -%}
         {%- endif -%}
       {%- endfor -%}
       {%- for product in collections.all.products -%}
         {%- unless product.available -%}
-          {%- unless product.tags contains 'woody' or product.tags contains 'oud' -%}
-            {%- unless product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
-              {%- if product.tags contains 'citrus' or product.tags contains 'fresh' -%}
-                {%- unless first %},{% endunless -%}
-                {%- assign first = false -%}
-                {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
-              {%- endif -%}
-            {%- endunless -%}
-          {%- endunless -%}
+          {%- if product.tags contains 'vibe-citrus' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- elsif product.tags contains 'vibe-woody' or product.tags contains 'vibe-floral' -%}
+          {%- elsif product.tags contains 'woody' or product.tags contains 'oud' -%}
+          {%- elsif product.tags contains 'floral' or product.tags contains 'gourmand' or product.tags contains 'sweet' or product.tags contains 'fruity' or product.tags contains 'oudh' -%}
+          {%- elsif product.tags contains 'citrus' or product.tags contains 'fresh' -%}
+            {%- unless first %},{% endunless -%}
+            {%- assign first = false -%}
+            {"title": {{ product.title | json }}, "url": {{ product.url | json }}, "image": {{ product.featured_image | image_url: width: 200 | json }}, "available": false}
+          {%- endif -%}
         {%- endunless -%}
       {%- endfor -%}
     ]
