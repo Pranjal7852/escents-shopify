@@ -108,6 +108,15 @@
       padding-bottom: 10px;
     }
   }
+
+  /* FIX (revamp): .header-wrapper is `position: fixed`, so it was pinned to
+     top: 0 regardless of the announcement bar rendered above it, covering it.
+     --announcement-bar-height is measured and kept in sync by the script
+     below; it defaults to 0px so the header still sits at the very top when
+     no announcement bar is present. */
+  .header-wrapper {
+    top: var(--announcement-bar-height, 0px);
+  }
 {%- endstyle -%}
 
 <div
@@ -220,7 +229,7 @@
   aa
 </sticky-header> {% endcomment %}
 
-<{% if section.settings.sticky_header_type != 'none' %}div data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="fixed top-0 w-[100%] backdrop-blur-xl bg-black/30 header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<{% if section.settings.sticky_header_type != 'none' %}div data-sticky-type="{{ section.settings.sticky_header_type }}"{% else %}div{% endif %} class="fixed w-[100%] backdrop-blur-xl bg-black/30 header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
   {%- liquid
     assign social_links = false
     assign localization_forms = false
@@ -420,6 +429,27 @@
     </div>
   </header>
 </{% if section.settings.sticky_header_type != 'none' %}div{% else %}div{% endif %}>
+
+<script>
+  // FIX (revamp): keeps the fixed header offset below the announcement bar
+  // instead of overlapping it. Re-measures on load/resize and whenever the
+  // announcement bar's own size changes (e.g. slider height, text wrapping).
+  (function () {
+    var announcementBar = document.querySelector('.announcement-bar-section');
+
+    function setAnnouncementBarHeight() {
+      var height = announcementBar ? announcementBar.getBoundingClientRect().height : 0;
+      document.documentElement.style.setProperty('--announcement-bar-height', height + 'px');
+    }
+
+    setAnnouncementBarHeight();
+    window.addEventListener('resize', setAnnouncementBarHeight);
+
+    if (announcementBar && window.ResizeObserver) {
+      new ResizeObserver(setAnnouncementBarHeight).observe(announcementBar);
+    }
+  })();
+</script>
 
 {%- if settings.cart_type == "notification" -%}
   {%- render 'cart-notification', color_scheme: section.settings.color_scheme, desktop_menu_type: section.settings.menu_type_desktop -%}
